@@ -7,58 +7,19 @@
  * future release.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package   WP-Members
  * @author    Chad Butler 
- * @copyright 2006-2017
+ * @copyright 2006-2019
  */
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
-
-if ( ! function_exists( 'wpmem_block' ) ):
-/**
- * Determines if content is blocked.
- *
- * @since 2.6.0
- * @since 3.0.0 Now a wrapper for $wpmem->is_blocked().
- * @deprecated 3.1.1 Use wpmem_is_blocked() instead.
- *
- * @global object $wpmem The WP-Members object class.
- *
- * @return bool $block true if content is blocked, false otherwise.
- */
-function wpmem_block() {
-	wpmem_write_log( "wpmem_block() is deprecated as of WP-Members 3.1.1, use wpmem_is_blocked() instead" );
-	global $wpmem;
-	return $wpmem->is_blocked();
-}
-endif;
-
-if ( ! function_exists( 'wpmem_inc_sidebar' ) ):
-/**
- * Displays the sidebar.
- *
- * This function is a wrapper for wpmem_do_sidebar().
- *
- * @since 2.0.0
- * @deprecated Unknown
- */
-function wpmem_inc_sidebar() {
-	wpmem_write_log( "WP-Members function wpmem_inc_sidebar() is deprecated. No alternative function exists" );
-	/**
-	 * Load the sidebar functions.
-	 */
-	include_once( WPMEM_PATH . 'inc/sidebar.php' );
-	// Render the sidebar.
-	wpmem_do_sidebar();
-}
-endif;
 
 if ( ! function_exists( 'wpmem_selected' ) ):
 /**
@@ -67,7 +28,7 @@ if ( ! function_exists( 'wpmem_selected' ) ):
  * @since 0.1.0
  * @deprecated 3.1.0 Use selected() or checked() instead.
  *
- * @param  string $value
+ * @param  string $value 
  * @param  string $valtochk
  * @param  string $type
  * @return string $issame
@@ -76,30 +37,6 @@ function wpmem_selected( $value, $valtochk, $type = null ) {
 	wpmem_write_log( "wpmem_selected() is deprecated as of WP-Members 3.1.0. Use selected() or checked() instead" );
 	$issame = ( $type == 'select' ) ? ' selected' : ' checked';
 	return ( $value == $valtochk ) ? $issame : '';
-}
-endif;
-
-if ( ! function_exists( 'wpmem_chk_qstr' ) ):
-/**
- * Checks querystrings.
- *
- * @since 2.0.0
- * @deprecated 3.1.0 Use add_query_arg() instead.
- *
- * @param  string $url
- * @return string $return_url
- */
-function wpmem_chk_qstr( $url = null ) {
-	wpmem_write_log( "wpmem_chk_qstr() is deprecated as of WP-Members 3.1.0. Use add_query_arg() instead" );
-	$permalink = get_option( 'permalink_structure' );
-	if ( ! $permalink ) {
-		$url = ( ! $url ) ? get_option( 'home' ) . "/?" . $_SERVER['QUERY_STRING'] : $url;
-		$return_url = $url . "&";
-	} else {
-		$url = ( ! $url ) ? get_permalink() : $url;
-		$return_url = $url . "?";
-	}
-	return $return_url;
 }
 endif;
 
@@ -134,7 +71,7 @@ if ( ! function_exists( 'wpmem_shortcode' ) ):
 function wpmem_shortcode( $attr, $content = null, $tag = 'wp-members' ) {
 	
 	$error = "wpmem_shortcode() is deprecated as of WP-Members 3.1.2. The [wp-members] shortcode tag should be replaced. ";
-	$error.= 'See replacement shortcodes: http://rkt.bz/logsc ';
+	$error.= 'See replacement shortcodes: https://rocketgeek.com/shortcodes/list-of-replacement-shortcodes/';
 	$error.= "post ID: " . get_the_ID() . " ";
 	$error.= "page url: " . wpmem_current_url();
 	wpmem_write_log( $error );
@@ -191,7 +128,6 @@ function wpmem_shortcode( $attr, $content = null, $tag = 'wp-members' ) {
 }
 endif;
 
-
 if ( ! function_exists( 'wpmem_do_sc_pages' ) ):
 /**
  * Builds the shortcode pages (login, register, user-profile, user-edit, password).
@@ -219,6 +155,11 @@ if ( ! function_exists( 'wpmem_do_sc_pages' ) ):
  * @return string $content
  */
 function wpmem_do_sc_pages( $atts, $content, $tag ) {
+	
+	$error = "wpmem_do_sc_pages() is deprecated as of WP-Members 3.1.8. ";
+	$error.= "post ID: " . get_the_ID() . " ";
+	$error.= "page url: " . wpmem_current_url();
+	wpmem_write_log( $error );
 	
 	$page = ( isset( $atts['page'] ) ) ? $atts['page'] : $tag; 
 	$redirect_to = ( isset( $atts['redirect_to'] ) ) ? $atts['redirect_to'] : null;
@@ -351,12 +292,15 @@ endif;
  * Add WP-Members fields to the WP user profile screen.
  *
  * @since 2.1
+ * @deprecated 3.1.9
  *
  * @global array $current_screen The WordPress screen object
  * @global int   $user_ID The user ID
  */
 function wpmem_admin_fields() {
 
+	wpmem_write_log( "wpmem_admin_fields() is deprecated. No alternative function exists." );
+	
 	global $current_screen, $user_ID, $wpmem;
 	$user_id = ( $current_screen->id == 'profile' ) ? $user_ID : $_REQUEST['user_id']; ?>
 
@@ -522,10 +466,13 @@ function wpmem_admin_fields() {
  * Updates WP-Members fields from the WP user profile screen.
  *
  * @since 2.1
+ * @deprecated 3.1.9
  *
  * @global object $wpmem
  */
 function wpmem_admin_update() {
+	
+	wpmem_write_log( "wpmem_admin_update() is deprecated. No alternative function exists." );
 
 	$user_id = wpmem_get( 'user_id', false, 'request' ); //$_REQUEST['user_id'];
 	
@@ -623,10 +570,13 @@ if ( ! function_exists( 'wpmem_user_profile' ) ):
  * add WP-Members fields to the WP user profile screen.
  *
  * @since 2.6.5
+ * @deprecated 3.1.9
  *
  * @global int $user_id
  */
 function wpmem_user_profile() {
+	
+	wpmem_write_log( "wpmem_user_profile() is deprecated. No alternative function exists." );
 
 	global $wpmem, $user_id, $current_screen;
 	/**
@@ -766,10 +716,13 @@ endif;
  * updates WP-Members fields from the WP user profile screen.
  *
  * @since 2.6.5
+ * @deprecated 3.1.9
  *
  * @global int $user_id
  */
 function wpmem_profile_update() {
+	
+	wpmem_write_log( "wpmem_profile_update() is deprecated. No alternative function exists." );
 
 	global $wpmem, $user_id;
 	// Get the fields.
@@ -814,22 +767,468 @@ function wpmem_profile_update() {
 	}	
 }
 
+if ( ! function_exists( 'wpmem_inc_status' ) ):
 /**
- * Sets user profile update to multipart form data.
+ * Generate users login status if logged in and gives logout link.
  *
- * If the fields array has a file or image field, this will echo the 
- * necessary "multipart/form-data" enctype for the form tag.
+ * @since 1.8
+ * @deprecated 3.2.0
  *
- * @since 3.1.8
+ * @global        $user_login
+ * @global object $wpmem
+ * @return string $status
  */
-function wpmem_user_profile_multipart() {
+function wpmem_inc_status() {
+	
+	wpmem_write_log( "wpmem_inc_status() is deprecated in WP-Members 3.2.0. Use wpmem_login_status() instead." );
+	
+	global $user_login, $wpmem;
+	
+	/** This filter is documented in wp-members/inc/dialogs.php */
+	$logout = apply_filters( 'wpmem_logout_link', $url . '/?a=logout' );
+
+	$status = '<p>' . sprintf( $wpmem->get_text( 'sb_login_status' ), $user_login )
+		. ' | <a href="' . $logout . '">' . $wpmem->get_text( 'sb_logout_link' ) . '</a></p>';
+
+	return $status;
+}
+endif;
+
+if ( ! function_exists( 'wpmem_do_sidebar' ) ):
+/**
+ * Creates the sidebar login form and status.
+ *
+ * This function determines if the user is logged in and displays either
+ * a login form, or the user's login status. Typically used for a sidebar.		
+ * You can call this directly, or with the widget.
+ *
+ * @since 2.4.0
+ * @since 3.0.0 Added $post_to argument.
+ * @since 3.1.0 Changed $post_to to $redirect_to.
+ * @deprecated 3.2.0 Use widget_wpmemwidget::do_sidebar() instead.
+ *
+ * @param  string $redirect_to  A URL to redirect to upon login, default null.
+ * @global string $wpmem_regchk
+ * @global string $user_login
+ */
+function wpmem_do_sidebar( $redirect_to = null ) {
+	wpmem_write_log( "wpmem_do_sidebar() is deprecated in WP-Members 3.2.0. Use wpmem_login_status() instead." );
+	widget_wpmemwidget::do_sidebar( $redirect_to );
+}
+endif;
+
+if ( ! function_exists( 'wpmem_create_formfield' ) ):
+/**
+ * Creates form fields
+ *
+ * Creates various form fields and returns them as a string.
+ *
+ * @since 1.8.0
+ * @since 3.1.0 Converted to wrapper for create_form_field() in utlities object.
+ * @deprecated 3.2.0 Use wpmem_form_field() instead.
+ *
+ * @global object $wpmem    The WP_Members object class.
+ * @param  string $name     The name of the field.
+ * @param  string $type     The field type.
+ * @param  string $value    The default value for the field.
+ * @param  string $valtochk Optional for comparing the default value of the field.
+ * @param  string $class    Optional for setting a specific CSS class for the field.
+ * @return string $str      The field returned as a string.
+ */
+function wpmem_create_formfield( $name, $type, $value, $valtochk=null, $class='textbox' ) {
 	global $wpmem;
-	$has_file = false;
-	foreach ( wpmem_fields() as $field ) {
-		if ( $field['type'] == 'file' || $field['type'] == 'image' ) {
-			$has_file = true;
-			break;
-		}
+	$args = array(
+		'name'     => $name,
+		'type'     => $type,
+		'value'    => $value,
+		'compare'  => $valtochk,
+		'class'    => $class,
+	);
+	return $wpmem->forms->create_form_field( $args );
+}
+endif;
+
+/**
+ * Adds the successful registration message on the login page if reg_nonce validates.
+ *
+ * @since 3.1.7
+ * @deprecated 3.2.0 Use $wpmem->reg_securify() instead.
+ *
+ * @param  string $content
+ * @return string $content
+ */
+function wpmem_reg_securify( $content ) {
+	global $wpmem, $wpmem_themsg;
+	$nonce = wpmem_get( 'reg_nonce', false, 'get' );
+	if ( $nonce && wp_verify_nonce( $nonce, 'register_redirect' ) ) {
+		$content = wpmem_inc_regmessage( 'success', $wpmem_themsg );
+		$content = $content . wpmem_inc_login();
 	}
-	echo ( $has_file ) ? " enctype=\"multipart/form-data\"" : '';
+	return $content;
+}
+
+/**
+ * Enqueues the admin javascript and css files.
+ *
+ * Replaces wpmem_admin_enqueue_scripts().
+ * Only loads the js and css on admin screens that use them.
+ *
+ * @since 3.1.7
+ * @deprecated 3.2.0 Use $wpmem->admin->dashboard_enqueue_script() instead.
+ *
+ * @param str $hook The admin screen hook being loaded.
+ */
+function wpmem_dashboard_enqueue_scripts( $hook ) {
+	if ( $hook == 'edit.php' || $hook == 'settings_page_wpmem-settings' ) {
+		wp_enqueue_style( 'wpmem-admin', WPMEM_DIR . 'admin/css/admin.css', '', WPMEM_VERSION );
+	}
+	if ( $hook == 'settings_page_wpmem-settings' ) {
+		wp_enqueue_script( 'wpmem-admin', WPMEM_DIR . 'admin/js/admin.js', '', WPMEM_VERSION );
+	}
+}
+
+/**
+ * Function for forms called by shortcode.
+ *
+ * @since 3.0.0
+ * @since 3.1.3 Added forgot_username shortcode.
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::forms()
+ *
+ * @global object $wpmem The WP_Members object.
+ *
+ * @param  array  $attr
+ * @param  string $content
+ * @param  string $tag
+ * @return string $content
+ */
+function wpmem_sc_forms( $atts, $content = null, $tag = 'wpmem_form' ) {
+	global $wpmem;
+	return $wpmem->shortcodes->forms( $atts, $content, $tag );
+}
+
+/**
+ * Handles the logged in status shortcodes.
+ *
+ * There are two shortcodes to display content based on a user being logged
+ * in - [wp-members status=in] and [wpmem_logged_in] (status=in is a legacy
+ * shortcode, but will still function). There are several attributes that
+ * can be used with the shortcode: in|out, sub for subscription only info,
+ * id, and role. IDs and roles can be comma separated values for multiple
+ * users and roles. Additionally, status=out can be used to display content
+ * only to logged out users or visitors.
+ *
+ * @since 3.0.0
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::forms()
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string $status
+ *     @type int    $id
+ *     @type string $role
+ *     @type string $sub
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @return string $content
+ */
+function wpmem_sc_logged_in( $atts, $content = null, $tag = 'wpmem_logged_in' ) {
+	global $wpmem;
+	return $wpmem->shortcodes->logged_in( $atts, $content, $tag );
+}
+
+/**
+ * Handles the [wpmem_logged_out] shortcode.
+ *
+ * @since 3.0.0
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::logged_out()
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts
+ * @param  string $content
+ * @param  string $tag
+ * @return string $content
+ */
+function wpmem_sc_logged_out( $atts, $content = null, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->logged_out( $atts, $content, $tag );
+}
+
+/**
+ * User count shortcode [wpmem_show_count].
+ *
+ * User count displays a total user count or a count of users by specific
+ * role (role="some_role").  It also accepts attributes for counting users
+ * by a meta field (key="meta_key" value="meta_value").  A label can be 
+ * displayed using the attribute label (label="Some label:").
+ *
+ * @since 3.0.0
+ * @since 3.1.5 Added total user count features.
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::user_count()
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  string $content The shortcode content.
+ * @return string $content
+ */
+function wpmem_sc_user_count( $atts, $content = null ) {
+	global $wpmem;
+	return $wpmem->shortcodes->user_count( $atts, $content, $tag );
+}
+
+/**
+ * Creates the user profile dashboard area [wpmem_profile].
+ *
+ * @since 3.1.0
+ * @since 3.1.2 Added function arguments.
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::user_profile()
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  string $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string $redirect_to
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @return string $content
+ */
+function wpmem_sc_user_profile( $atts, $content, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->user_profile( $atts, $content, $tag );
+}
+
+/**
+ * Log in/out shortcode [wpmem_loginout].
+ *
+ * @since 3.1.1
+ * @since 3.1.6 Uses wpmem_loginout().
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::loginout()
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string  $login_redirect_to  The url to redirect to after login (optional).
+ *     @type string  $logout_redirect_to The url to redirect to after logout (optional).
+ *     @type string  $login_text         Text for the login link (optional).
+ *     @type string  $logout_text        Text for the logout link (optional).
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @return string $content
+ */
+function wpmem_sc_loginout( $atts, $content, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->loginout( $atts, $content, $tag );
+}
+
+/**
+ * Function to handle field shortcodes [wpmem_field].
+ *
+ * Shortcode to display the data for a given user field. Requires
+ * that a field meta key be passed as an attribute.  Can either of
+ * the following:
+ * - [wpmem_field field="meta_key"]
+ * - [wpmem_field meta_key] 
+ *
+ * Other attributes:
+ *
+ * - id (numeric user ID or "get" to retrieve uid from query string.
+ * - underscores="true" strips underscores from the displayed value.
+ * - display="raw" displays the stored value for dropdowns, radios, files.
+ * - size(thumbnail|medium|large|full|w,h): image field only.
+ *
+ * @since 3.1.2
+ * @since 3.1.4 Changed to display value rather than stored value for dropdown/multicheck/radio.
+ * @since 3.1.5 Added display attribute, meta key as a direct attribute, and image/file display.
+ * @since 3.2.0 Now a wrapper for WP_Members_Shortcodes::fields()
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string {meta_key}
+ *     @type string $field
+ *     @type int    $id
+ *     @type string $underscores
+ *     @type string $display
+ *     @type string size
+ * }
+ * @param  string $content Any content passed with the shortcode (default:null).
+ * @param  string $tag     The shortcode tag (wpmem_form).
+ * @return string $content Content to return.
+ */
+function wpmem_sc_fields( $atts, $content = null, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->fields( $atts, $content, $tag );
+}
+
+/**
+ * Logout link shortcode [wpmem_logout].
+ *
+ * @since 3.1.2
+ * @deprecated 3.2.0 Use WP_Members_Shortcodes::logout() instead.
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string $url
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @retrun string $content
+ */
+function wpmem_sc_logout( $atts, $content, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->logout( $atts, $content, $tag );
+}
+
+/**
+ * TOS shortcode [wpmem_tos].
+ *
+ * @since 3.1.2
+ * @deprecated 3.2.0 Use WP_Members_Shortcodes::tos() instead.
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string $url
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @retrun string $content
+ */
+function wpmem_sc_tos( $atts, $content, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->tos( $atts, $content, $tag );
+}
+
+/**
+ * Display user avatar.
+ *
+ * @since 3.1.7
+ * @deprecated 3.2.0 Use WP_Members_Shortcodes::avatar() instead.
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ *
+ *     @type string $id   The user email or id.
+ *     @type int    $size Avatar size (square) in pixels.
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @retrun string $content
+ */
+function wpmem_sc_avatar( $atts, $content, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->avatar( $atts, $content, $tag );
+}
+
+/**
+ * Generates a login link with a return url.
+ *
+ * @since 3.1.7
+ * @deprecated 3.2.0 Use WP_Members_Shortcodes::login_link() instead.
+ *
+ * @global object $wpmem The WP_Members object.
+ * @param  array  $atts {
+ *     The shortcode attributes.
+ * }
+ * @param  string $content
+ * @param  string $tag
+ * @retrun string $content
+ */
+function wpmem_sc_link( $atts, $content, $tag ) {
+	global $wpmem;
+	return $wpmem->shortcodes->login_link( $atts, $content, $tag );
+}
+
+if ( ! function_exists( 'wpmem_inc_regemail' ) ):
+/**
+ * Builds emails for the user.
+ *
+ * @since 1.8.0
+ * @since 2.7.4 Added wpmem_email_headers and individual body/subject filters.
+ * @since 2.9.7 Major overhaul, added wpmem_email_filter filter.
+ * @since 3.1.0 Can filter in custom shortcodes with wpmem_email_shortcodes.
+ * @since 3.1.1 Added $custom argument for custom emails.
+ * @deprecated 3.2.0 Use WP_Members_Email::to_user() instead.
+ *
+ * @global object $wpmem                The WP_Members object.
+ * @global string $wpmem_mail_from      The email from address.
+ * @global string $wpmem_mail_from_name The email from name.
+ * @param  int    $user_ID              The User's ID.
+ * @param  string $password             Password from the registration process.
+ * @param  string $toggle               Toggle indicating the email being sent (newreg|newmod|appmod|repass|getuser).
+ * @param  array  $wpmem_fields         Array of the WP-Members fields (defaults to null).
+ * @param  array  $fields               Array of the registration data (defaults to null).
+ * @param  array  $custom               Array of custom email information (defaults to null).
+ */
+function wpmem_inc_regemail( $user_id, $password, $toggle, $wpmem_fields = null, $field_data = null, $custom = null ) {
+	global $wpmem;
+	wpmem_write_log( "wpmem_inc_regemail() is deprecated since WP-Members 3.2.0. Use $ wpmem->email->to_user() instead" );
+	$wpmem->email->to_user( $user_id, $password, $toggle, $wpmem_fields, $field_data, $custom );
+	return;
+}
+endif;
+
+if ( ! function_exists( 'wpmem_check_activated' ) ):
+/**
+ * Checks if a user is activated.
+ *
+ * @since 2.7.1
+ * @deprecated 3.2.2 Use wpmem_is_user_activated() instead.
+ *
+ * @param  object $user     The WordPress User object.
+ * @param  string $username The user's username (user_login).
+ * @param  string $password The user's password.
+ * @return object $user     The WordPress User object.
+ */ 
+function wpmem_check_activated( $user, $username, $password ) {
+	wpmem_write_log( "wpmem_check_activated() is deprecated since WP-Members 3.2.2. Use wpmem_is_user_activated() instead" );
+	global $wpmem;
+	$user = $wpmem->user->check_activated( $user, $username, $password );
+	return $user;
+}
+endif;
+
+/**
+ * Activates a user.
+ *
+ * If registration is moderated, sets the activated flag 
+ * in the usermeta. Flag prevents login when $wpmem->mod_reg
+ * is true (1). Function is fired from bulk user edit or
+ * user profile update.
+ *
+ * @since 2.4
+ * @since 3.1.6 Dependencies now loaded by object.
+ * @deprecated 3.2.4 Use wpmem_activate_user().
+ *
+ * @param int   $user_id
+ * @param bool  $chk_pass
+ * @uses  $wpdb WordPress Database object.
+ */
+function wpmem_a_activate_user( $user_id, $chk_pass = false ) {
+	wpmem_write_log( "wpmem_a_activate_user() is deprecated as of WP-Members 3.2.4. Use wpmem_activate_user instead" );
+	wpmem_activate_user( $user_id, $chk_pass );
+}
+
+/**
+ * Deactivates a user.
+ *
+ * Reverses the active flag from the activation process
+ * preventing login when registration is moderated.
+ *
+ * @since 2.7.1
+ * @depreacted 3.2.4 Use wpmem_deactivate_user().
+ *
+ * @param int $user_id
+ */
+function wpmem_a_deactivate_user( $user_id ) {
+	wpmem_write_log( "wpmem_a_deactivate_user() is deprecated as of WP-Members 3.2.4. Use wpmem_deactivate_user instead" );
+	wpmem_deactivate_user( $user_id );
 }

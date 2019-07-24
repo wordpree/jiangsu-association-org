@@ -11,8 +11,8 @@
      */
     init : function(ed, url) {
       
-	function showDialog() {
-		var win = ed.windowManager.open({
+		function showDialog() {
+			var win = ed.windowManager.open({
 				title: "Source code",
 				body: {
 					type: 'textbox',
@@ -58,7 +58,7 @@
 			onclick: showDialog
 		});
 
-    },
+    }
   });
 
   // Register plugin

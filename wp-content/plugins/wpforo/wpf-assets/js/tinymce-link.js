@@ -399,7 +399,7 @@
 		});
 
       
-    },
+    }
   });
 
   // Register plugin

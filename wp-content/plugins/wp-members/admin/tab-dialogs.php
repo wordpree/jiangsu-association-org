@@ -5,13 +5,13 @@
  * Functions to manage the dialogs tab.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions included:
  * - wpmem_a_build_dialogs
@@ -21,6 +21,23 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
+}
+
+/**
+ * Creates the tab.
+ *
+ * @since 3.2.0
+ *
+ * @param  string      $tab The admin tab being displayed.
+ * @return string|bool      The tab html, otherwise false.
+ */
+function wpmem_a_dialogs_tab( $tab ) {
+	if ( $tab == 'dialogs' || ! $tab ) {
+		// Render the tab.
+		return wpmem_a_build_dialogs();
+	} else {
+		return false;
+	}
 }
 
 /**
@@ -39,7 +56,7 @@ function wpmem_a_build_dialogs() {
 			<div class="postbox">
 				<h3><span><?php _e( 'Need help?', 'wp-members' ); ?></span></h3>
 				<div class="inside">
-					<strong><i>See the <a href="http://rocketgeek.com/plugins/wp-members/users-guide/plugin-settings/dialogs/" target="_blank">Users Guide on dialogs</a>.</i></strong>
+					<strong><i>See the <a href="https://rocketgeek.com/plugins/wp-members/users-guide/plugin-settings/dialogs/" target="_blank">Users Guide on dialogs</a>.</i></strong>
 				</div>
 			</div>
 		</div> <!-- .inner-sidebar -->
@@ -50,7 +67,7 @@ function wpmem_a_build_dialogs() {
 					<h3><span>WP-Members <?php _e( 'Dialogs and Error Messages', 'wp-members' ); ?></span></h3>
 					<div class="inside">
 						<p><?php printf( __( 'You can customize the text for dialogs and error messages. Simple HTML is allowed %s etc.', 'wp-members' ), '- &lt;p&gt;, &lt;b&gt;, &lt;i&gt;,' ); ?></p>
-						<form name="updatedialogform" id="updatedialogform" method="post" action="<?php echo wpmem_admin_form_post_url(); ?>"> 
+						<form name="updatedialogform" id="updatedialogform" method="post" action="<?php echo esc_url( wpmem_admin_form_post_url() ); ?>"> 
 						<?php wp_nonce_field( 'wpmem-update-dialogs' ); ?>
 							<table class="form-table">
 							<?php if ( ! empty ( $wpmem->admin->dialogs ) ) {	
@@ -61,7 +78,7 @@ function wpmem_a_build_dialogs() {
 							<?php $wpmem_tos = stripslashes( get_option( 'wpmembers_tos' ) ); ?>
 								<tr valign="top"> 
 									<th scope="row"><?php _e( 'Terms of Service (TOS)', 'wp-members' ); ?></th> 
-									<td><textarea name="dialogs_tos" rows="3" cols="50" id="" class="large-text code"><?php echo $wpmem_tos; ?></textarea></td> 
+									<td><textarea name="dialogs_tos" rows="3" cols="50" id="" class="large-text code"><?php echo esc_textarea( $wpmem_tos ); ?></textarea></td> 
 								</tr>
 								<tr valign="top">
 									<th scope="row">&nbsp;</th>
@@ -101,7 +118,7 @@ function wpmem_update_dialogs() {
 	}
 
 	// Terms of Service.
-	update_option( 'wpmembers_tos', $_POST['dialogs_tos'] );
+	update_option( 'wpmembers_tos', wp_kses( $_POST['dialogs_tos'], 'post' ) );
 
 	return __( 'WP-Members dialogs were updated', 'wp-members' );
 }

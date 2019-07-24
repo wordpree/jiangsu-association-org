@@ -26,9 +26,9 @@
 .wpforo-widget-wrap .wpforo-widget-content li{padding:8px 0px!important; margin:0px; list-style:none; border:none;}
 .wpforo-widget-wrap .wpforo-widget-content .avatar{border-radius: 50%;}
 .wpforo-widget-wrap .wpforo-widget-content .wpf-widget-note{ font-size:13px; line-height:18px;}
-.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-left{float:left; width:14%;}
-.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-left img{ width:3vw; height:vw; max-width:100%!important;}
-.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-right{float:right; width:84%;}
+.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-left{float:left; width:16%;}
+.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-left img{ width:3vw; height:3vw; max-width:100%!important;}
+.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-right{float:right; width:80%;}
 #wpforo-wrap .wpforo-widget-wrap .wpforo-widget-content li:last-child{border:none;}
 #wpf-widget-recent-replies .wpforo-list-item-right p.posttitle{font-size:14px; padding:0px; margin:0px; line-height:18px; font-weight:normal;}
 #wpf-widget-recent-replies .wpforo-list-item-right p.posttext{font-size:13px!important; padding:0px; margin:5px 0px 0px; line-height:17px;}
@@ -43,6 +43,19 @@
 #wpf-widget-forums .wpforo-widget-content dl{ display:block; padding:0px; margin:0px;}
 #wpf-widget-forums .wpforo-widget-content dd{ display:block; margin-left:15px;}
 #wpf-widget-forums .wpforo-widget-content dd.wpf-dl-current a{ font-size:16px;}
+.wpforo-widget-wrap ul.wpf-widget-tags{display: flex;flex-flow: row wrap;justify-content:start;}
+.wpforo-widget-wrap .wpf-widget-tags li{list-style: none!important;display: inline-block!important;padding: 0px!important;margin: 0px 10px 8px 0px!important;font-family:Merriweather, Georgia, Verdana!important;}
+.wpforo-widget-wrap .wpf-widget-tags li a{display:inline-block!important;padding: 1px 8px!important;line-height: 18px!important;vertical-align: baseline!important;font-size: 11px!important;border-width: 1px!important;border-style: solid!important;border-right-style: dotted!important;border-right-width: 2px!important;}
+.wpforo-widget-wrap .wpf-widget-tags li span{display:inline-block!important;margin: 0px !important;padding: 1px 6px!important;line-height: 18px!important;text-align: center!important;vertical-align: baseline!important;font-size: 11px!important;min-width: 22px;}
+.wpforo-widget-wrap .wpforo-widget-content .wpf-all-tags{padding-top: 10px!important;}
+/******************************************************/
+/********************* Addons Widgets *****************/
+/******************************************************/
+#wpf-widget-recent-polls .wpforo-widget-content .wpforo-list-item i.fa-chart-bar{ font-size:20px;}
+#wpf-widget-recent-polls .wpforo-widget-content .wpforo-list-item-right{ width:calc(100% - 30px);}
+#wpf-widget-recent-polls .wpforo-widget-content .wpforo-list-item-right .polldate{font-size:12px; color:#888888;}
+#wpf-widget-recent-polls .wpforo-widget-content .wpforo-list-item-right .pollvotes{font-size:12px; color:#888888; line-height:16px;}
+
 @media screen and (max-width:800px) {
 	.wpforo-widget-wrap .wpforo-widget-content .wpforo-list-item-left img{ width:99%; height:99%;}
 }

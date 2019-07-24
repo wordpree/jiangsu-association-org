@@ -1,7 +1,7 @@
 <?php
 	// Exit if accessed directly
 	if( !defined( 'ABSPATH' ) ) exit;
-	if( !current_user_can('administrator') ) exit;
+	if( !WPF()->perm->usergroup_can('ms') ) exit;
 ?>
 
 

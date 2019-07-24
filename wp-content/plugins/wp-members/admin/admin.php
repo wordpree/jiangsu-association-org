@@ -5,83 +5,26 @@
  * Functions to manage administration.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions included:
- * - wpmem_a_do_field_reorder
- * - wpmem_admin_plugin_links
- * - wpmem_a_captcha_tab
- * - wpmem_add_captcha_tab
  * - wpmem_admin
  * - wpmem_admin_do_tab
  * - wpmem_admin_tabs
  * - wpmem_admin_action
  * - wpmem_admin_add_new_user
- * - wpmem_admin_enqueue_scripts
  */
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
-
-/**
- * Filter to add link to settings from plugin panel.
- *
- * @since 2.4.0
- *
- * @param  array  $links
- * @param  string $file
- * @return array  $links
- */
-function wpmem_admin_plugin_links( $links, $file ) {
-	static $wpmem_plugin;
-	if ( ! $wpmem_plugin ) {
-		$wpmem_plugin = plugin_basename( WPMEM_PATH . '/wp-members.php' );
-	}
-	if ( $file == $wpmem_plugin ) {
-		$settings_link = '<a href="' . add_query_arg( 'page', 'wpmem-settings', 'options-general.php' ) . '">' . __( 'Settings', 'wp-members' ) . '</a>';
-		$links = array_merge( array( $settings_link ), $links );
-	}
-	return $links;
-}
-
-
-/**
- * Creates the captcha tab.
- *
- * @since 2.8.0
- *
- * @param  string      $tab The admin tab being displayed.
- * @return string|bool      The captcha options tab, otherwise false.
- */
-function wpmem_a_captcha_tab( $tab ) {
-	if ( $tab == 'captcha' ) {
-		return wpmem_a_build_captcha_options();
-	} else {
-		return false;
-	}
-}
-
-
-/**
- * Adds the captcha tab.
- *
- * @since 2.8.0
- *
- * @param  array $tabs The array of tabs for the admin panel.
- * @return array       The updated array of tabs for the admin panel.
- */
-function wpmem_add_captcha_tab( $tabs ) {
-	return array_merge( $tabs, array( 'captcha' => 'Captcha' ) );
-}
-
 
 /**
  * Primary admin function.
@@ -93,7 +36,7 @@ function wpmem_add_captcha_tab( $tabs ) {
  */
 function wpmem_admin() {
 
-	$did_update = ( isset( $_POST['wpmem_admin_a'] ) ) ? wpmem_admin_action( $_POST['wpmem_admin_a'] ) : false;
+	$did_update = ( isset( $_POST['wpmem_admin_a'] ) ) ? wpmem_admin_action( sanitize_text_field( $_POST['wpmem_admin_a'] ) ) : false;
 
 	global $wpmem;
 
@@ -107,10 +50,8 @@ function wpmem_admin() {
 	} ?>
 
 	<div class="wrap">
-		<?php screen_icon( 'options-general' ); ?>
-		<!--<h2>WP-Members <?php _e('Settings', 'wp-members'); ?></h2>-->
 		<?php 
-		$tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'options';
+		$tab = sanitize_text_field( wpmem_get( 'tab', 'options', 'get' ) );
 
 		// Render the tab being displayed.
 		$wpmem->admin->do_tabs( $tab );
@@ -134,52 +75,6 @@ function wpmem_admin() {
 	</div><!-- .wrap --><?php
 
 	return;
-}
-
-
-/**
- * Displays the content for default tabs.
- *
- * While this function displays only the default tabs (options, fields, emails
- * and dialogs), custom tabs can be added via the action hook wpmem_admin_do_tab
- * in the wpmem_admin() function.
- * 
- * @since 2.8.0
- *
- * @param string $tab The tab that we are on and displaying.
- */
-function wpmem_admin_do_tab( $tab ) {
-
-	switch ( $tab ) {
-
-	case 'options' :
-		wpmem_a_build_options();
-		break;
-	case 'dialogs' :
-		wpmem_a_build_dialogs();
-		break;
-	case 'emails' :
-		wpmem_a_build_emails();
-		break;
-	}
-}
-
-
-/**
- * Assemble the tabs for the admin panel.
- *
- * Creates the defaults tabs array (options, fields, dialogs, emails) that
- * can be extended for custom admin tabs with the wpmem_admin_tabs filter.
- *
- * @since 2.8.0
- * @since 3.1.0 Wrapper for API admin_tabs().
- *
- * @global object $wpmem   The WP_Members object class.
- * @param  string $current he tab that we are on.
- */
-function wpmem_admin_tabs( $current = 'options' ) {
-	global $wpmem;
-	$wpmem->admin->do_tabs( $current );
 }
 
 
@@ -227,27 +122,6 @@ function wpmem_admin_add_new_user() {
 	// Output the custom registration fields.
 	echo wpmem_do_wp_newuser_form();
 	return;
-}
-
-
-/**
- * Enqueues the admin javascript and css files.
- *
- * Only loads the js and css on admin screens that use them.
- *
- * @since 3.0.6
- * @deprecated 3.1.7 Use wpmem_dashboard_enqueue_scripts() instead.
- *
- * @param str $hook The admin screen hook being loaded.
- */
-function wpmem_admin_enqueue_scripts( $hook ) {
-	wpmem_write_log( "wpmem_admin_enqueue_scripts() is deprecated as of WP-Members 3.1.7. Use wpmem_dashboard_enqueue_scripts() instead" );
-	if ( $hook == 'edit.php' || $hook == 'settings_page_wpmem-settings' ) {
-		wp_enqueue_style( 'wpmem-admin', WPMEM_DIR . 'admin/css/admin.css', '', WPMEM_VERSION );
-	}
-	if ( $hook == 'settings_page_wpmem-settings' ) {
-		wp_enqueue_script( 'wpmem-admin', WPMEM_DIR . 'admin/js/admin.js', '', WPMEM_VERSION );
-	}
 }
 
 // End of File.

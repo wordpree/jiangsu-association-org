@@ -13,47 +13,41 @@ class wpForoNotices{
 	 * @return void
 	 */
  	private function init(){
-		if(!$this->is_session_started()) session_start();
-	}
- 	
-	/**
-	* @return bool
-	*/
-	private function is_session_started(){
-	    if ( php_sapi_name() !== 'cli' ) {
-	        if ( version_compare(phpversion(), '5.4.0', '>=') ) {
-	            return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-	        } else {
-	            return session_id() === '' ? FALSE : TRUE;
-	        }
-	    }
-	    return FALSE;
+		if( !wpforo_is_session_started() && ( !is_admin() || (!empty($_GET['page']) && strpos($_GET['page'], 'wpforo-') !== false )  || (wpforo_is_ajax() && !empty($_POST['action']) && false !== strpos($_POST['action'], 'wpforo'))  )) session_start();
 	}
  	
  	/**
 	 * 
-	 * @param mixed $args
+	 * @param string|array $args
 	 * @param string $type (e.g. success|error)
+     * @param string|array $s
 	 * 
 	 * @return bool
 	 */
-	public function add( $args, $type = '', $s = array() ){
+	public function add( $args, $type = 'neutral', $s = array() ){
 		if(!$args) return FALSE;
-		if(!is_array($args)) $args = array($args);
-		
-		if( $this->is_session_started() ){
-			$_SESSION['wpforo_notice_type'] = $type;
-			if( !empty($_SESSION['wpforo_notices']) ){
-				foreach($args as $arg) $_SESSION['wpforo_notices'][] = $arg;
-			}else{
-				if( !empty($s) ){ 
-					foreach($args as $key => $arg){ 
-						if( isset($s[$key]) ) $args[$key] = sprintf( wpforo_phrase($arg, FALSE), $s[$key] ); 
-					}
-				}
-				$_SESSION['wpforo_notices'] = $args;
-			}
-			$_SESSION['wpforo_notices'] = array_unique($_SESSION['wpforo_notices']);
+        $args = (array) $args;
+        if( $s && count($args) == 1 && is_array($s) && isset($s[0]) && !is_array($s[0]) ){
+            $s = array($s);
+        }else{
+            $s = (array) $s;
+        }
+
+        if( wpforo_is_session_started() ){
+            $type = strtolower($type);
+            if( !isset($_SESSION['wpforo_notices']) ) $_SESSION['wpforo_notices'] = array();
+            if( !isset($_SESSION['wpforo_notices'][$type]) ) $_SESSION['wpforo_notices'][$type] = array();
+
+            foreach($args as $key => $arg){
+                if( $s && isset($s[$key]) ){
+                    $args[$key] = wpforo_sprintf_array( wpforo_phrase($arg, FALSE), $s[$key] );
+                }else{
+                    $args[$key] = wpforo_phrase($arg, FALSE);
+                }
+            }
+
+            $_SESSION['wpforo_notices'][$type] = array_merge( (array) $_SESSION['wpforo_notices'][$type], (array) $args);
+            $_SESSION['wpforo_notices'][$type] = array_unique($_SESSION['wpforo_notices'][$type]);
 			return TRUE;
 		}
 		
@@ -66,8 +60,8 @@ class wpForoNotices{
 	* 
 	*/
 	public function clear(){
-		if( $this->is_session_started() ){
-			unset($_SESSION['wpforo_notice_type'], $_SESSION['wpforo_notices']);
+		if( wpforo_is_session_started() ){
+            $_SESSION['wpforo_notices'] = array();
 			return TRUE;
 		}
 		
@@ -75,27 +69,26 @@ class wpForoNotices{
 	}
 	
 	/**
-	* get notices $notices['type'], $notices['text']
+	* <p class="success">success msg text</p><p class="error">error msg text</p>
 	* 
-	* @return array
+	* @return string
 	*/
 	public function get_notices(){
-		if(!isset($_SESSION['wpforo_notices'])) return array( 'type' => '', 'text' => '' );
-		if($_SESSION['wpforo_notice_type'] == 'success'){
-			$class = 'success';
-		}elseif($_SESSION['wpforo_notice_type'] == 'error'){
-			$class = 'error';
-		}else{
-			$class = '';
-		}
-		
-		$notices = array();
-		$notices['type'] = $class;
-		$notices['text'] = '';
-		foreach($_SESSION['wpforo_notices'] as $notice) if( !is_array($notice) ) $notices['text'] .= wpforo_phrase($notice, FALSE) . '<br/>';
+	    $inner = '';
+		if(empty($_SESSION['wpforo_notices'])) return $inner;
+
+        foreach($_SESSION['wpforo_notices'] as $type => $notice){
+            $notice = (array) $notice;
+            foreach ($notice as $msg){
+                if( !is_array($msg) ){
+                    $msg = trim($msg);
+                    if($msg) $inner .= sprintf('<p class="%s">%s</p>', sanitize_html_class($type), $msg);
+                }
+            }
+        }
 		
 		$this->clear();
-		return $notices;
+		return $inner;
 	}
 	
 	/**
@@ -105,68 +98,79 @@ class wpForoNotices{
 	* @return void
 	*/
 	public function show( $frontend = TRUE ){
-		if(!isset($_SESSION['wpforo_notices'])) return;
-		if($_SESSION['wpforo_notice_type'] == 'success'){
-			$class = 'success';
-		}elseif($_SESSION['wpforo_notice_type'] == 'error'){
-			$class = 'error';
-		}else{
-			$class = '';
-		}
+		if(empty($_SESSION['wpforo_notices'])) return;
 		$inner = '';
-		foreach($_SESSION['wpforo_notices'] as $notice) if( !is_array($notice) ) $inner .= wpforo_phrase($notice, FALSE) . '<br/><br/>';
-		$inner = preg_replace('#(<br\s*/?\s*>)*$#is', '', $inner);
-		?>
-		<?php if($frontend) : ?>
-			<script type="text/javascript">
+		$backend_inner = '';
+		foreach($_SESSION['wpforo_notices'] as $type => $notice){
+            $notice = (array) $notice;
+            foreach ($notice as $msg){
+                if( !is_array($msg) ){
+                    $msg = trim($msg);
+                    if($msg) {
+                        $inner .= sprintf('<p class="%s">%s</p>', sanitize_html_class($type), $msg);
+                        $backend_inner .= sprintf(
+                    '<div class="notice is-dismissible notice-%s">
+                                <p>%s</p>
+                                <button type="button" class="notice-dismiss">
+                                    <span class="screen-reader-text">%s</span>
+                                </button>
+                            </div>',
+                        sanitize_html_class($type), wpforo_kses($msg), __('Dismiss this notice.', 'wpforo'));
+                    }
+                }
+            }
+        }
+        if($frontend) : ?>
+            <script type="text/javascript">
 	    		jQuery(document).ready(function($){
-	    			<?php if($class) : ?>
-	    				$("#wpf-msg-box p.wpf-msg-box-triangle-right").removeClass("success").removeClass("error").addClass("<?php echo  sanitize_html_class($class) ?>");
-					<?php endif ?>
-					$("#wpf-msg-box p.wpf-msg-box-triangle-right").html("<span><?php echo addslashes(wpforo_kses($inner)) ?></span>");
-					$("#wpf-msg-box").show(150).delay(1000);
-					<?php if($class) : ?>
-						setTimeout(function(){ $("#wpf-msg-box").hide(); }, <?php echo ($class == 'error' ? 6000 : 3000 ) ?>);
-					<?php endif ?>
+	    		    var msg_box = $("#wpf-msg-box");
+                    msg_box.html("<?php echo addslashes(wpforo_kses($inner)) ?>");
+                    msg_box.show(150).delay(1000);
+                    setTimeout(function(){ $("#wpf-msg-box > p.error").remove(); }, 6500);
+                    setTimeout(function(){ $("#wpf-msg-box > p.success").remove(); }, 3000);
 				});
 			</script>
-		<?php else : ?>
-			<div class="notice is-dismissible<?php if($class) echo ' notice-' . sanitize_html_class($class) ?>">
-				<p><?php echo wpforo_kses($inner) ?></p>
-				<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php _e('Dismiss this notice.', 'wpforo') ?></span></button>
-			</div>
-		<?php endif ?>
-		<?php
+		<?php else :
+            echo $backend_inner;
+        endif;
+
 		$this->clear();
 	}
 	
 	
 	public function addonNote() {
-		global $wpforo;
         $lastHash = get_option('wpforo-addon-note-dismissed');
-        $lastHashArray = explode(',', $lastHash);
-        $currentHash = $this->addonHash();
-        if ($lastHash != $currentHash) {
-            ?>
-            <div class="updated notice wpforo_addon_note is-dismissible" style="margin-top:10px;">
-                <p style="font-weight:normal; font-size:15px; border-bottom:1px dotted #DCDCDC; padding-bottom:10px; width:95%;"><strong><?php _e('New Addons for Your Forum!', 'wpforo'); ?></strong><br><span style="font-size:14px;"><?php _e('Extend your forum with wpForo addons', 'wpforo'); ?></span></p>
-                <div style="font-size:14px;">
-                    <?php
-                    foreach ($wpforo->addons as $key => $addon) {
-                        if (in_array($addon['title'], $lastHashArray))
-                            continue;
-                        ?>
-                        <div style="display:inline-block; min-width:27%; padding-right:10px; margin-bottom:1px;border-bottom:1px dotted #DCDCDC; border-right:1px dotted #DCDCDC; padding-bottom:10px;"><img src="<?php echo $addon['thumb'] ?>" style="height:40px; width:auto; vertical-align:middle; margin:0px 10px; text-decoration:none;" />  <a href="<?php echo $addon['url'] ?>" style="text-decoration:none;" target="_blank">wpForo <?php echo $addon['title']; ?></a></div>
-                        <?php
-                    }
-                    ?>
-                    <div style="clear:both;"></div>
-                </div>
-                <p>&nbsp;&nbsp;&nbsp;<a href="<?php echo admin_url('admin.php?page=wpforo-addons') ?>"><?php _e('View all Addons', 'wpforo'); ?> &raquo;</a></p>
-            </div>
-            <script>jQuery(document).on( 'click', '.wpforo_addon_note .notice-dismiss', function() {jQuery.ajax({url: ajaxurl, data: { action: 'dismiss_wpforo_addon_note'}})})</script>
-            <?php
-        }
+		$first = get_option('wpforo-addon-note-first');
+		if( !$lastHash ){
+			$hash = $this->addonHash();
+        	update_option('wpforo-addon-note-dismissed', $hash);
+			update_option('wpforo-addon-note-first', 'true');
+		}
+		elseif( $lastHash || $first == 'false' ){
+			$lastHashArray = explode(',', $lastHash);
+			$currentHash = $this->addonHash();
+			if ($lastHash != $currentHash) {
+				?>
+				<div class="updated notice wpforo_addon_note is-dismissible" style="margin-top:10px;">
+					<p style="font-weight:normal; font-size:15px; border-bottom:1px dotted #DCDCDC; padding-bottom:10px; width:95%;"><strong><?php _e('New Addons for Your Forum!', 'wpforo'); ?></strong><br><span style="font-size:14px;"><?php _e('Extend your forum with wpForo addons', 'wpforo'); ?></span></p>
+					<div style="font-size:14px;">
+						<?php
+						foreach (WPF()->addons as $key => $addon) {
+							if (in_array($addon['title'], $lastHashArray))
+								continue;
+							?>
+							<div style="display:inline-block; min-width:27%; padding-right:10px; margin-bottom:1px;border-bottom:1px dotted #DCDCDC; border-right:1px dotted #DCDCDC; padding-bottom:10px;"><img src="<?php echo $addon['thumb'] ?>" style="height:40px; width:auto; vertical-align:middle; margin:0 10px; text-decoration:none;" />  <a href="<?php echo $addon['url'] ?>" style="text-decoration:none;" target="_blank">wpForo <?php echo $addon['title']; ?></a></div>
+							<?php
+						}
+						?>
+						<div style="clear:both;"></div>
+					</div>
+					<p>&nbsp;&nbsp;&nbsp;<a href="<?php echo admin_url('admin.php?page=wpforo-addons') ?>"><?php _e('View all Addons', 'wpforo'); ?> &raquo;</a></p>
+				</div>
+				<script>jQuery(document).on( 'click', '.wpforo_addon_note .notice-dismiss', function() {jQuery.ajax({url: ajaxurl, data: { action: 'dismiss_wpforo_addon_note'}})})</script>
+				<?php
+			}
+		}
     }
 
     public function dismissAddonNote() {
@@ -181,8 +185,8 @@ class wpForoNotices{
     }
 
     public function addonHash() {
-        global $wpforo; $viewed = '';
-        foreach ($wpforo->addons as $key => $addon) {
+        $viewed = '';
+        foreach (WPF()->addons as $key => $addon) {
             $viewed .= $addon['title'] . ',';
         }
         $hash = $viewed;
@@ -200,9 +204,4 @@ class wpForoNotices{
             <?php
         }
     }
-	
-	
-	
 }
-
-?>

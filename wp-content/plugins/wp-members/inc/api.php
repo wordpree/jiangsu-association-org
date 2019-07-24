@@ -3,14 +3,14 @@
  * WP-Members API Functions
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @subpackage WP-Members API Functions
  * @author Chad Butler 
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions included:
  * - wpmem_redirect_to_login
@@ -19,21 +19,18 @@
  * - wpmem_register_url
  * - wpmem_profile_url
  * - wpmem_current_url
- * - wpmem_form_field
- * - wpmem_form_label
- * - wpmem_fields
  * - wpmem_gettext
  * - wpmem_use_custom_dialog
- * - wpmem_user_has_role
  * - wpmem_create_membership_number
  * - wpmem_login_status
  * - wpmem_get
  * - wpmem_is_reg_page
- * - wpmem_load_dropins
  * - wpmem_loginout
- * - wpmem_array_insert
  * - wpmem_is_user_activated
  * - wpmem_current_post_id
+ * - wpmem_user_data
+ * - wpmem_update_user_role
+ * - wpmem_display_message
  */
 
 // Exit if accessed directly.
@@ -56,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function wpmem_redirect_to_login( $redirect_to = false ) {
 	if ( ! is_user_logged_in() ) {
 		$redirect_to = ( $redirect_to ) ? $redirect_to : wpmem_current_url();
-		wp_redirect( wpmem_login_url( $redirect_to ) );
+		wp_safe_redirect( wpmem_login_url( $redirect_to ) );
 		exit();
 	}
 	return;
@@ -166,83 +163,14 @@ function wpmem_current_url( $slash = true, $getq = true ) {
 }
 
 /**
- * Wrapper for $wpmem->create_form_field().
- *
- * @since 3.1.2
- *
- * @param array  $args {
- *     @type string  $name        (required) The field meta key.
- *     @type string  $type        (required) The field HTML type (url, email, image, file, checkbox, text, textarea, password, hidden, select, multiselect, multicheckbox, radio).
- *     @type string  $value       (required) The field's value (can be a null value).
- *     @type string  $compare     (required) Compare value.
- *     @type string  $class       (optional) Class identifier for the field.
- *     @type boolean $required    (optional) If a value is required default: true).
- *     @type string  $delimiter   (optional) The field delimiter (pipe or comma, default: | ).
- *     @type string  $placeholder (optional) Defines the placeholder attribute.
- *     @type string  $pattern     (optional) Adds a regex pattern to the field (HTML5).
- *     @type string  $title       (optional) Defines the title attribute.
- *     @type string  $min         (optional) Adds a min attribute (HTML5).
- *     @type string  $max         (optional) Adds a max attribute (HTML5).
- * }
- * @return string The HTML of the form field.
- */
-function wpmem_form_field( $args ) {
-	global $wpmem;
-	return $wpmem->forms->create_form_field( $args );
-}
-
-/**
- * Wrapper for $wpmem->create_form_label().
+ * Gets post ID of current URL.
  *
  * @since 3.1.7
  *
- * @global object $wpmem
- * @param array  $args {
- *     @type string $meta_key
- *     @type string $label_text
- *     @type string $type
- *     @type string $class      (optional)
- *     @type string $required   (optional)
- *     @type string $req_mark   (optional)
- * }
- * @return string The HTML of the form label.
+ * @return int Post ID.
  */
-function wpmem_form_label( $args ) {
-	global $wpmem;
-	return $wpmem->forms->create_form_label( $args );
-}
-
-/**
- * Wrapper to get form fields.
- *
- * @since 3.1.1
- * @since 3.1.5 Checks if fields array is set or empty before returning.
- * @since 3.1.7 Added wpmem_form_fields filter.
- *
- * @global object $wpmem  The WP_Members object.
- * @param  string $tag    The action being used (default: null).
- * @param  string $form   The form being generated.
- * @return array  $fields The form fields.
- */
-function wpmem_fields( $tag = '', $form = 'default' ) {
-	global $wpmem;
-	// Load fields if none are loaded.
-	if ( ! isset( $wpmem->fields ) || empty( $wpmem->fields ) ) {
-		$wpmem->load_fields( $form );
-	}
-	
-	// @todo Convert tag.
-	$tag = wpmem_convert_tag( $tag );
-	
-	/**
-	 * Filters the fields array.
-	 *
-	 * @since 3.1.7
-	 *
-	 * @param  array  $wpmem->fields
-	 * @param  string $tag (optional)
-	 */
-	return apply_filters( 'wpmem_fields', $wpmem->fields, $tag );
+function wpmem_current_post_id() {
+	return url_to_postid( wpmem_current_url() );
 }
 
 /**
@@ -281,91 +209,6 @@ function wpmem_use_custom_dialog( $defaults, $tag, $dialogs ) {
 }
 
 /**
- * Checks if user has a particular role.
- *
- * Utility function to check if a given user has a specific role. Users can
- * have multiple roles assigned, so it checks the role array rather than using
- * the incorrect method of current_user_can( 'role_name' ). The function can
- * check the role of the current user (default) or a specific user (if $user_id
- * is passed).
- *
- * @since 3.1.1
- * @since 3.1.6 Include accepting an array of roles to check.
- * @since 3.1.9 Return false if user is not logged in.
- *
- * @global object        $current_user Current user object.
- * @global object        $wpmem        WP_Members object.
- * @param  string|array  $role         Slug or array of slugs of the role being checked.
- * @param  int           $user_id      ID of the user being checked (optional).
- * @return boolean       $has_role     True if user has the role, otherwise false.
- */
-function wpmem_user_has_role( $role, $user_id = false ) {
-	if ( ! is_user_logged_in() ) {
-		return false;
-	}
-	global $current_user, $wpmem;
-	$has_role = false;
-	if ( $user_id ) {
-		$user = get_userdata( $user_id );
-	}
-	if ( is_user_logged_in() && ! $user_id ) {
-		$user = ( isset( $current_user ) ) ? $current_user : wp_get_current_user();
-	}
-	if ( is_array( $role ) ) {
-		foreach ( $role as $r ) {
-			if ( in_array( $r, $user->roles ) ) {
-				return true;
-			}
-		}
-	} else {
-		return ( in_array( $role, $user->roles ) ) ? true : $has_role;
-	}
-}
-
-/**
- * Checks if a user has a given meta value.
- *
- * @since 3.1.8
- *
- * @global object  $wpmem     WP_Members object.
- * @param  string  $meta      Meta key being checked.
- * @param  string  $value     Value the meta key should have (optional).
- * @param  int     $user_id   ID of the user being checked (optional).
- * @return boolean $has_meta  True if user has the meta value, otherwise false.
- */
-function wpmem_user_has_meta( $meta, $value = false, $user_id = false ) {
-	global $wpmem;
-	$user_id = ( $user_id ) ? $user_id : get_current_user_id();
-	$has_meta = false;
-	$user_value = get_user_meta( $user_id, $meta, true );
-	if ( $value ) {
-		$has_meta = ( $user_value == $value ) ? true : $has_meta;
-	} else {
-		$has_meta = ( $value ) ? true : $has_meta;
-	}
-	return $has_meta;
-}
-
-/**
- * Creates a membership number.
- *
- * @since 3.1.1
- *
- * @param  array  $args {
- *     @type string $option
- *     @type string $meta_key
- *     @type int    $start     (optional, default 0)
- *     @type int    $increment (optional, default 1)
- *     @type int    $lead
- * }
- * @return string $membersip_number
- */
-function wpmem_create_membership_number( $args ) {
-	global $wpmem;
-	return $wpmem->api->generate_membership_number( $args );
-}
-
-/**
  * Returns or displays the user's login status.
  *
  * @since 2.0.0
@@ -388,6 +231,9 @@ function wpmem_login_status( $echo = true ) {
 
 /**
  * Utility function to validate $_POST, $_GET, and $_REQUEST.
+ *
+ * While this function retrieves data, remember that the data should generally be
+ * sanitized or escaped depending on how it is used.
  *
  * @since 3.1.3
  *
@@ -436,18 +282,6 @@ function wpmem_is_reg_page( $check = false ) {
 }
 
 /**
- * Wrapper for load_dropins()
- *
- * @since 3.1.4
- *
- * @global object $wpmem The WP_Members object.
- */
-function wpmem_load_dropins() {
-	global $wpmem;
-	$wpmem->load_dropins();
-}
-
-/**
  * Creates a login/logout link.
  *
  * @since 3.1.6
@@ -484,50 +318,18 @@ function wpmem_loginout( $args = array(), $echo = false ) {
 }
 
 /**
- * Inserts array items at a specific point in an array.
+ * Dispalays requested dialog.
  *
- * @since 3.1.6
+ * @since 3.2.0
  *
- * @param  array  $array Original array.
- * @param  array  $new   Array of new items to insert into $array.
- * @param  string $key   Array key to insert new items before or after.
- * @param  string $loc   Location to insert relative to $key (before|after) default:after.
- * @return array         Original array with new items inserted.
+ * @todo Needs testing and finalization before release.
  */
-function wpmem_array_insert( array $array, array $new, $key, $loc = 'after' ) {
-	$keys = array_keys( $array );
-	if ( 'before' == $loc ) {
-		$pos = (int) array_search( $key, $keys );
+function wpmem_display_message( $tag, $echo = true ) {
+	if ( $echo ) {
+		echo wpmem_inc_regmessage( $tag );
 	} else {
-		$index = array_search( $key, $keys );
-		$pos = ( false === $index ) ? count( $array ) : $index + 1;
+		return wpmem_inc_regmessage( $tag );
 	}
-	return array_merge( array_slice( $array, 0, $pos ), $new, array_slice( $array, $pos ) );
-}
-
-/**
- * Checks if a user is activated.
- *
- * @since 3.1.7
- *
- * @param  int  $user_id
- * @return bool
- */
-function wpmem_is_user_activated( $user_id = false ) {
-	$user_id = ( ! $user_id ) ? get_current_user_id() : $user_id;
-	$active  = get_user_meta( $user_id, 'active', true );
-	return ( $active != 1 ) ? false : true;
-}
-
-/**
- * Gets post ID of current URL.
- *
- * @since 3.1.7
- *
- * @return int Post ID.
- */
-function wpmem_current_post_id() {
-	return url_to_postid( wpmem_current_url() );
 }
 
 // End of file.

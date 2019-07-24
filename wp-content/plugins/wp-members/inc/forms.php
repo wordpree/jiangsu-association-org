@@ -5,14 +5,14 @@
  * Handles functions that build the various forms.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017 Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019 Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @subpackage WP-Members Form Building Functions
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions Included:
  * - wpmem_inc_login
@@ -38,6 +38,7 @@ if ( ! function_exists( 'wpmem_inc_login' ) ):
  *
  * @since 1.8
  * @since 3.1.4 Global $wpmem_regchk no longer needed.
+ * @since 3.2.0 Now a wrapper for $wpmem->forms->do_login_form()
  *
  * @global object $post         The WordPress Post object.
  * @global object $wpmem        The WP_Members object.
@@ -47,83 +48,8 @@ if ( ! function_exists( 'wpmem_inc_login' ) ):
  * @return string $str          The generated html for the login form.
  */
 function wpmem_inc_login( $page = "page", $redirect_to = null, $show = 'show' ) {
- 	
-	global $post, $wpmem;
-
-	$str = '';
-
-	if ( $page == "page" ) {
-
-	     if ( $wpmem->regchk != "success" ) {
-
-			$dialogs = get_option( 'wpmembers_dialogs' );
-			
-			// This shown above blocked content.
-			$msg = $wpmem->get_text( 'restricted_msg' );
-			$msg = ( $dialogs['restricted_msg'] == $msg ) ? $msg : __( stripslashes( $dialogs['restricted_msg'] ), 'wp-members' );
-			$str = '<div id="wpmem_restricted_msg"><p>' . $msg . '</p></div>';
-			
-			/**
-			 * Filter the post restricted message.
-			 *
-			 * @since 2.7.3
-			 *
-			 * @param string $str The post restricted message.
-		 	 */
-			$str = apply_filters( 'wpmem_restricted_msg', $str );
-
-		} 	
-	} 
-	
-	// Create the default inputs.
-	$default_inputs = array(
-		array(
-			'name'   => $wpmem->get_text( 'login_username' ), 
-			'type'   => 'text', 
-			'tag'    => 'log',
-			'class'  => 'username',
-			'div'    => 'div_text',
-		),
-		array( 
-			'name'   => $wpmem->get_text( 'login_password' ), 
-			'type'   => 'password', 
-			'tag'    => 'pwd', 
-			'class'  => 'password',
-			'div'    => 'div_text',
-		),
-	);
-	
-	/**
-	 * Filter the array of login form fields.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $default_inputs An array matching the elements used by default.
- 	 */
-	$default_inputs = apply_filters( 'wpmem_inc_login_inputs', $default_inputs );
-	
-	$defaults = array( 
-		'heading'      => $wpmem->get_text( 'login_heading' ), 
-		'action'       => 'login', 
-		'button_text'  => $wpmem->get_text( 'login_button' ),
-		'inputs'       => $default_inputs,
-		'redirect_to'  => $redirect_to,
-	);	
-
-	/**
-	 * Filter the arguments to override login form defaults.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $args An array of arguments to use. Default null.
- 	 */
-	$args = apply_filters( 'wpmem_inc_login_args', '' );
-
-	$arr  = wp_parse_args( $args, $defaults );
-	
-	$str  = ( $show == 'show' ) ? $str . wpmem_login_form( $page, $arr ) : $str;
-	
-	return $str;
+	global $wpmem;
+	return $wpmem->forms->do_login_form( $page, $redirect_to, $show );
 }
 endif;
 
@@ -135,62 +61,14 @@ if ( ! function_exists( 'wpmem_inc_changepassword' ) ):
  * Loads the form for changing password.
  *
  * @since 2.0.0
+ * @since 3.2.0 Now a wrapper for $wpmem->forms->do_changepassword_form()
  *
  * @global object $wpmem The WP_Members object.
  * @return string $str   The generated html for the change password form.
  */
 function wpmem_inc_changepassword() {
-	
 	global $wpmem;
-
-	// create the default inputs
-	$default_inputs = array(
-		array(
-			'name'   => $wpmem->get_text( 'pwdchg_password1' ), 
-			'type'   => 'password',
-			'tag'    => 'pass1',
-			'class'  => 'password',
-			'div'    => 'div_text',
-		),
-		array( 
-			'name'   => $wpmem->get_text( 'pwdchg_password2' ), 
-			'type'   => 'password', 
-			'tag'    => 'pass2',
-			'class'  => 'password',
-			'div'    => 'div_text',
-		),
-	);
-
-	/**
-	 * Filter the array of change password form fields.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $default_inputs An array matching the elements used by default.
- 	 */	
-	$default_inputs = apply_filters( 'wpmem_inc_changepassword_inputs', $default_inputs );
-	
-	$defaults = array(
-		'heading'      => $wpmem->get_text( 'pwdchg_heading' ), 
-		'action'       => 'pwdchange', 
-		'button_text'  => $wpmem->get_text( 'pwdchg_button' ), 
-		'inputs'       => $default_inputs,
-	);
-
-	/**
-	 * Filter the arguments to override change password form defaults.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $args An array of arguments to use. Default null.
- 	 */
-	$args = apply_filters( 'wpmem_inc_changepassword_args', '' );
-
-	$arr  = wp_parse_args( $args, $defaults );
-
-    $str  = wpmem_login_form( 'page', $arr );
-	
-	return $str;
+	return $wpmem->forms->do_changepassword_form();
 }
 endif;
 
@@ -202,62 +80,14 @@ if ( ! function_exists( 'wpmem_inc_resetpassword' ) ):
  * Loads the form for resetting password.
  *
  * @since 2.1.0
+ * @since 3.2.0 Now a wrapper for $wpmem->forms->do_resetpassword_form()
  *
  * @global object $wpmem The WP_Members object.
  * @return string $str   The generated html fo the reset password form.
  */
 function wpmem_inc_resetpassword() { 
-
 	global $wpmem;
-
-	// Create the default inputs.
-	$default_inputs = array(
-		array(
-			'name'   => $wpmem->get_text( 'pwdreset_username' ), 
-			'type'   => 'text',
-			'tag'    => 'user', 
-			'class'  => 'username',
-			'div'    => 'div_text',
-		),
-		array( 
-			'name'   => $wpmem->get_text( 'pwdreset_email' ), 
-			'type'   => 'text', 
-			'tag'    => 'email', 
-			'class'  => 'password',
-			'div'    => 'div_text',
-		),
-	);
-
-	/**
-	 * Filter the array of reset password form fields.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $default_inputs An array matching the elements used by default.
- 	 */	
-	$default_inputs = apply_filters( 'wpmem_inc_resetpassword_inputs', $default_inputs );
-	
-	$defaults = array(
-		'heading'      => $wpmem->get_text( 'pwdreset_heading' ),
-		'action'       => 'pwdreset', 
-		'button_text'  => $wpmem->get_text( 'pwdreset_button' ), 
-		'inputs'       => $default_inputs,
-	);
-
-	/**
-	 * Filter the arguments to override reset password form defaults.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $args An array of arguments to use. Default null.
- 	 */
-	$args = apply_filters( 'wpmem_inc_resetpassword_args', '' );
-
-	$arr  = wp_parse_args( $args, $defaults );
-
-    $str  = wpmem_login_form( 'page', $arr );
-	
-	return $str;
+	return $wpmem->forms->do_resetpassword_form();
 }
 endif;
 
@@ -296,9 +126,27 @@ if ( ! function_exists( 'wpmem_login_form' ) ):
  */
 function wpmem_login_form( $page, $arr ) {
 	global $wpmem;
-	return $wpmem->forms->login_form( $page, $arr );
+	$args = $arr;
+	$args['page'] = $page;
+	return $wpmem->forms->login_form( $args );
 }
 endif;
+
+/**
+ * Forgot Username Form.
+ *
+ * Loads the form for retrieving a username.
+ *
+ * @since 3.0.8
+ * @since 3.2.0 Moved to forms.php.
+ *
+ * @global object $wpmem The WP_Members object class.
+ * @return string $str   The generated html for the forgot username form.
+ */
+function wpmem_inc_forgotusername() {
+	global $wpmem;
+	return $wpmem->forms->do_forgotusername_form();
+}
 
 
 if ( ! function_exists( 'wpmem_inc_registration' ) ):
@@ -309,6 +157,7 @@ if ( ! function_exists( 'wpmem_inc_registration' ) ):
  *
  * @since 2.5.1
  * @since 3.1.7 Now a wrapper for $wpmem->forms->register_form()
+ * @since 3.2.0 Preparing for deprecation, use wpmem_register_form() instead.
  *
  * @global object $wpmem        The WP_Members object.
  * @param  string $tag          (optional) Toggles between new registration ('new') and user profile edit ('edit').
@@ -316,8 +165,9 @@ if ( ! function_exists( 'wpmem_inc_registration' ) ):
  * @return string $form         The HTML for the entire form as a string.
  */
 function wpmem_inc_registration( $tag = 'new', $heading = '', $redirect_to = null ) {
-	global $wpmem; 
-	return $wpmem->forms->register_form( $tag, $heading, $redirect_to );
+	global $wpmem;
+	$args = array( 'tag' => $tag, 'heading' => $heading, 'redirect_to' => $redirect_to );
+	return $wpmem->forms->register_form( $args );
 } // End wpmem_inc_registration.
 endif;
 
@@ -345,19 +195,7 @@ function wpmem_inc_recaptcha( $arr ) {
 	$http = wpmem_use_ssl();
 
 	global $wpmem;
-	if ( $wpmem->captcha == 1 ) {
-
-		$str  = '<script type="text/javascript">
-			var RecaptchaOptions = { theme : \''. $arr['theme'] . '\'' . $lang . ' };
-		</script>
-		<script type="text/javascript" src="' . $http . 'www.google.com/recaptcha/api/challenge?k=' . $arr['public'] . '"></script>
-		<noscript>
-			<iframe src="' . $http . 'www.google.com/recaptcha/api/noscript?k=' . $arr['public'] . '" height="300" width="500" frameborder="0"></iframe><br/>
-			<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-			<input type="hidden" name="recaptcha_response_field" value="manual_challenge"/>
-		</noscript>';
-	
-	} elseif ( $wpmem->captcha == 3 ) {
+	if ( $wpmem->captcha == 3 ) {
 		
 		$str = '<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 		<div class="g-recaptcha" data-sitekey="' . $arr['public'] . '"></div>';
@@ -389,10 +227,9 @@ endif;
 function wpmem_inc_attribution() {
 
 	global $wpmem;
-	$http = ( is_ssl() ) ? 'https://' : 'http://';
 	$str = '
 	<div align="center">
-		<small>Powered by <a href="' . $http . 'rocketgeek.com" target="_blank">WP-Members</a></small>
+		<small>Powered by <a href="https://rocketgeek.com" target="_blank">WP-Members</a></small>
 	</div>';
 		
 	return ( 1 == $wpmem->attrib ) ? $str : '';
@@ -471,9 +308,9 @@ function wpmem_build_rs_captcha() {
 		return array( 
 			'label_text' => $wpmem->get_text( 'register_rscaptcha' ),
 			'label'      => '<label class="text" for="captcha">' . $wpmem->get_text( 'register_rscaptcha' ) . '</label>',
-			'field'      => '<input id="captcha_code" name="captcha_code" size="'.$size.'" type="text" />
-					<input id="captcha_prefix" name="captcha_prefix" type="hidden" value="' . $pre . '" />
-					<img src="'.$src.'" alt="captcha" width="'.$img_w.'" height="'.$img_h.'" />'
+			'field'      => '<input id="captcha_code" name="captcha_code" size="' . esc_attr( $size ) . '" type="text" />
+					<input id="captcha_prefix" name="captcha_prefix" type="hidden" value="' . esc_attr( $pre ) . '" />
+					<img src="' . esc_url( $src ) . '" alt="captcha" width="' . esc_attr( $img_w ) . '" height="' . esc_attr( $img_h ) . '" />'
 		);
 	} else {
 		return;

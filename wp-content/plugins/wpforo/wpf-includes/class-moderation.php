@@ -4,37 +4,26 @@ if (!defined('ABSPATH')) exit;
 
 class wpForoModeration
 {
-    private $wpforo;
-    private $db;
     public $post_statuses;
 
-    public function __construct($wpforo)
-    {
-        $this->wpforo = $wpforo;
-        $this->db = $wpforo->db;
+    public function __construct(){
         $this->post_statuses = apply_filters('wpforo_post_statuses', array('approved', 'unapproved'));
     }
 
 	public function init(){
-		if( !$this->wpforo->perm->usergroup_can( 'aup' ) ){
+		if( !WPF()->perm->usergroup_can( 'aup' ) ){
 			add_filter('wpforo_add_topic_data_filter', array(&$this, 'auto_moderate'));
 			add_filter('wpforo_add_post_data_filter', array(&$this, 'auto_moderate'));
 		}
 		else{
-			if( !$this->wpforo->perm->can_link() ){
-				add_filter('wpforo_add_topic_data_filter', array(&$this, 'remove_links'), 7);
-				add_filter('wpforo_edit_topic_data_filter', array(&$this, 'remove_links'), 7);
-				add_filter('wpforo_add_post_data_filter', array(&$this, 'remove_links'), 7);
-				add_filter('wpforo_edit_post_data_filter', array(&$this, 'remove_links'), 7);
-			}
-			if( $this->wpforo->member->current_user_is_new() ){
+			if( WPF()->member->current_user_is_new() ){
 				if (class_exists('Akismet')) {
 					add_filter('wpforo_add_topic_data_filter', array(&$this, 'akismet_topic'), 8);
 					add_filter('wpforo_edit_topic_data_filter', array(&$this, 'akismet_topic'), 8);
 					add_filter('wpforo_add_post_data_filter', array(&$this, 'akismet_post'), 8);
 					add_filter('wpforo_edit_post_data_filter', array(&$this, 'akismet_post'), 8);
 				}
-				if ( $this->wpforo->tools_antispam['spam_filter'] ) {
+				if ( WPF()->tools_antispam['spam_filter'] ) {
 					add_filter('wpforo_add_topic_data_filter', array(&$this, 'spam_topic'), 9);
 					add_filter('wpforo_edit_topic_data_filter', array(&$this, 'spam_topic'), 9);
 					add_filter('wpforo_add_topic_data_filter', array(&$this, 'spam_post'), 9);
@@ -43,11 +32,17 @@ class wpForoModeration
 					add_filter('wpforo_edit_post_data_filter', array(&$this, 'spam_post'), 9);
 				}
 			}
-			if ( $this->wpforo->tools_antispam['spam_filter'] ) {
+			if ( WPF()->tools_antispam['spam_filter'] ) {
 				add_filter('wpforo_add_topic_data_filter', array(&$this, 'auto_moderate'), 10);
 				add_filter('wpforo_add_post_data_filter', array(&$this, 'auto_moderate'), 10);
 			}
-		}
+            if( !WPF()->perm->can_link() ){
+                add_filter('wpforo_add_topic_data_filter', array(&$this, 'remove_links'), 20);
+                add_filter('wpforo_edit_topic_data_filter', array(&$this, 'remove_links'), 20);
+                add_filter('wpforo_add_post_data_filter', array(&$this, 'remove_links'), 20);
+                add_filter('wpforo_edit_post_data_filter', array(&$this, 'remove_links'), 20);
+            }
+        }
 	}    
 	
 	public function get_post_status_dname($status)
@@ -61,14 +56,14 @@ class wpForoModeration
         if (isset($_GET['filter_by_userid']) && wpforo_bigintval($_GET['filter_by_userid'])) $args['userid'] = wpforo_bigintval($_GET['filter_by_userid']);
         $filter_by_status = intval((isset($_GET['filter_by_status']) ? $_GET['filter_by_status'] : 1));
         $args['status'] = $filter_by_status;
-		if( !isset($_GET['order']) ) $args['order'] = 'DESC';
-        $posts = $this->wpforo->post->get_posts($args, $items_count);
+		if( !isset($_GET['order']) ) $args['orderby'] = '`created` DESC, `postid` DESC';
+        $posts = WPF()->post->get_posts($args, $items_count);
         return $posts;
     }
 
     public function search($needle, $fields = array())
     {
-        $posts = $this->wpforo->post->search($needle);
+        $posts = WPF()->post->search($needle);
         $pids = array();
         foreach ($posts as $post) $pids[] = $post['postid'];
         return $pids;
@@ -76,17 +71,17 @@ class wpForoModeration
 
     public function post_approve($postid)
     {
-        return $this->wpforo->post->status($postid, 0);
+        return WPF()->post->status($postid, 0);
     }
 
     public function post_unapprove($postid)
     {
-        return $this->wpforo->post->status($postid, 1);
+        return WPF()->post->status($postid, 1);
     }
 
     public function get_view_url($arg)
     {
-        return $this->wpforo->post->get_post_url($arg);
+        return WPF()->post->get_post_url($arg);
     }
 
     public function akismet_topic($item)
@@ -101,20 +96,20 @@ class wpForoModeration
         $post['comment_type'] = 'forum-post';
 
         if (empty($item['forumid'])) {
-            $topic = $this->wpforo->topic->get_topic($item['topicid']);
+            $topic = WPF()->topic->get_topic($item['topicid']);
             $item['forumid'] = $topic['forumid'];
         }
 
-        $post['comment_author'] = $this->wpforo->current_user['user_nicename'];
-        $post['comment_author_email'] = $this->wpforo->current_user['user_email'];
-        $post['comment_author_url'] = $this->wpforo->member->get_profile_url($this->wpforo->current_userid);
+        $post['comment_author'] = WPF()->current_user['user_nicename'];
+        $post['comment_author_email'] = WPF()->current_user['user_email'];
+        $post['comment_author_url'] = WPF()->member->get_profile_url(WPF()->current_userid);
         $post['comment_post_modified_gmt'] = current_time('mysql', 1);
         $post['comment_content'] = $item['title'] . "  \r\n  " . $item['body'];
-        $post['permalink'] = $this->wpforo->forum->get_forum_url($item['forumid']);
+        $post['permalink'] = WPF()->forum->get_forum_url($item['forumid']);
 
        $response = Akismet::http_post(Akismet::build_query($post), 'comment-check');
         if ($response[1] == 'true') {
-			$this->ban_for_spam( $this->wpforo->current_userid );
+			$this->ban_for_spam( WPF()->current_userid );
             $item['status'] = 1;
         }
 
@@ -132,18 +127,18 @@ class wpForoModeration
         $post['blog_charset'] = get_option('blog_charset');
         $post['comment_type'] = 'forum-post';
 
-        $topic = $this->wpforo->topic->get_topic($item['topicid']);
+        $topic = WPF()->topic->get_topic($item['topicid']);
         
-        $post['comment_author'] = $this->wpforo->current_user['user_nicename'];
-        $post['comment_author_email'] = $this->wpforo->current_user['user_email'];
-        $post['comment_author_url'] = $this->wpforo->member->get_profile_url($this->wpforo->current_userid);
+        $post['comment_author'] = WPF()->current_user['user_nicename'];
+        $post['comment_author_email'] = WPF()->current_user['user_email'];
+        $post['comment_author_url'] = WPF()->member->get_profile_url(WPF()->current_userid);
         $post['comment_post_modified_gmt'] = $topic['modified'];
         $post['comment_content'] = $item['body'];
-        $post['permalink'] = $this->wpforo->topic->get_topic_url($item['topicid']);
+        $post['permalink'] = WPF()->topic->get_topic_url($item['topicid']);
 
         $response = Akismet::http_post(Akismet::build_query($post), 'comment-check');
         if ($response[1] == 'true') {
-			$this->ban_for_spam( $this->wpforo->current_userid );
+			$this->ban_for_spam( WPF()->current_userid );
             $item['status'] = 1;
         }
 
@@ -161,8 +156,8 @@ class wpForoModeration
 					$level = $this->spam_file($filename); 
 					if( $level > 2 ){
 						$link = '<a href="' . admin_url('admin.php?page=wpforo-tools&tab=antispam#spam-files') . '"><strong>&gt;&gt;</strong></a>';
-						$phrase = '<strong>SPAM! - </strong>' . sprintf( __('Probably spam file attachments have been detected by wpForo Spam Control. Please moderate suspected files here %s', 'wpforo'), $link); 
-						$this->wpforo->notice->add( $phrase, 'error' );
+						$phrase = '<strong>SPAM! - </strong>' . sprintf( __('Probably spam file attachments have been detected by wpForo Spam Control. Please moderate suspected files in Forums &gt; Tools &gt; Antispam Tab.', 'wpforo'), $link);
+						WPF()->notice->add( $phrase, 'error' );
 						return true;
 					}
 				}
@@ -180,11 +175,15 @@ class wpForoModeration
 			1 => array( 'download', 'free')
 		);
 		if($type == 'file'){
-			$ext = strtolower(pathinfo($item, PATHINFO_EXTENSION));
-			$ext_risk = array('pdf', 'doc', 'docx', 'txt', 'htm', 'html', 'rtf', 'xml', 'xls', 'xlsx', 'php', 'cgi');
-			$ext_high_risk = array('php', 'cgi', 'exe');
-			if( in_array($ext, $ext_risk) ){
-				$has_post = $this->wpforo->db->get_var( "SELECT `postid` FROM `".$this->wpforo->db->prefix."wpforo_posts` WHERE `body` LIKE '%" . esc_sql( $item ) . "%' LIMIT 1" );
+            $ext_whitelist = explode('|', WPF()->tools_antispam['exclude_file_ext'] );
+            $ext_whitelist = array_map('trim', $ext_whitelist);
+            $ext = strtolower(pathinfo($item, PATHINFO_EXTENSION));
+            $ext_risk = array('pdf', 'doc', 'docx', 'txt', 'htm', 'html', 'rtf', 'xml', 'xls', 'xlsx', 'php', 'cgi');
+            $ext_risk = wpforo_clear_array($ext_risk, $ext_whitelist);
+            $ext_high_risk = array('php', 'cgi', 'exe');
+            $ext_high_risk = wpforo_clear_array($ext_high_risk, $ext_whitelist);
+            if( in_array($ext, $ext_risk) ){
+				$has_post = WPF()->db->get_var( "SELECT `postid` FROM `".WPF()->tables->posts."` WHERE `body` LIKE '%" . esc_sql( $item ) . "%' LIMIT 1" );
 				foreach($spam_file_phrases as $phrases){
 					foreach($phrases as $phrase){
 						if( strpos($item, $phrase) !== FALSE ){
@@ -235,13 +234,13 @@ class wpForoModeration
 		else{
 			return $topic;
 		}
-		$len = wpfor_strlen($item);
+		$len = wpforo_strlen($item);
 		if( $len < 10 ) return $topic;
 		$item = strip_tags($item);
 		$is_similar = false;
 		$topic_args = array( 'userid' => $topic['userid'] );
-		$topics = $this->wpforo->topic->get_topics($topic_args);
-		$sc_level = ( isset($this->wpforo->tools_antispam['spam_filter_level_topic'])) ? intval($this->wpforo->tools_antispam['spam_filter_level_topic']) : 100;
+		$topics = WPF()->topic->get_topics($topic_args);
+		$sc_level = ( isset(WPF()->tools_antispam['spam_filter_level_topic'])) ? intval(WPF()->tools_antispam['spam_filter_level_topic']) : 100;
 		if( $sc_level > 100 ) $sc_level = 60; $sc_level = (101 - $sc_level);
 		if( !empty($topics) ){
 			$count = count($topics);
@@ -251,7 +250,7 @@ class wpForoModeration
 			if($check_1){ similar_text($item, $check_1, $percent); if( $percent > $sc_level ) $is_similar = true; }
 			if($check_2 && !$is_similar){ similar_text($item, $check_2, $percent); if( $percent > $sc_level ) $is_similar = true; }
 			if( $is_similar ){
-				$this->ban_for_spam( $this->wpforo->current_userid );
+				$this->ban_for_spam( WPF()->current_userid );
 				$topic['status'] = 1;
 			}
 		}
@@ -267,13 +266,12 @@ class wpForoModeration
 		else{
 			return $post;
 		}
-		
-		$len = wpfor_strlen($item);
+
 		$item = strip_tags($item);
 		$is_similar = false;
 		$post_args = array( 'userid' => $post['userid'] );
-		$posts = $this->wpforo->post->get_posts($post_args);
-		$sc_level = ( isset($this->wpforo->tools_antispam['spam_filter_level_post'])) ? intval($this->wpforo->tools_antispam['spam_filter_level_post']) : 100;
+		$posts = WPF()->post->get_posts($post_args);
+		$sc_level = ( isset(WPF()->tools_antispam['spam_filter_level_post'])) ? intval(WPF()->tools_antispam['spam_filter_level_post']) : 100;
 		if( $sc_level > 100 ) $sc_level = 70; $sc_level = (101 - $sc_level);
 		if( !empty($posts) ){
 			$count = count($posts);
@@ -283,7 +281,7 @@ class wpForoModeration
 			if($check_1){ similar_text($item, $check_1, $percent); if( isset($percent) && $percent > $sc_level ) $is_similar = true; }
 			if($check_2 && !$is_similar){ similar_text($item, $check_2, $percent); if( isset($percent) && $percent > $sc_level ) $is_similar = true; }
 			if( $is_similar ){
-				$this->ban_for_spam( $this->wpforo->current_userid );
+				$this->ban_for_spam( WPF()->current_userid );
 				$post['status'] = 1;
 			}
 		}
@@ -293,42 +291,56 @@ class wpForoModeration
 	public function auto_moderate($item){
 		
 		if( empty($item) ) return $item;
-		if( $this->wpforo->perm->usergroup_can( 'em' ) ){ 
+		if( WPF()->perm->usergroup_can( 'em' ) ){
 			$item['status'] = 0;
 			return $item;
 		}
-		if( !$this->wpforo->perm->usergroup_can( 'aup' ) ){
+		if( !WPF()->perm->usergroup_can( 'aup' ) ){
 			$item['status'] = 1;
 			return $item;
 		}
 		
-		if( $this->wpforo->member->current_user_is_new() ){
-			if( ( isset($item['status']) && $item['status'] == 1 ) || $this->has_unapproved( $this->wpforo->current_userid ) ){
-				$this->set_all_unapproved( $this->wpforo->current_userid );
+		if( WPF()->member->current_user_is_new() ){
+			if( WPF()->tools_antispam['unapprove_post_if_user_is_new'] ){
 				$item['status'] = 1;
-			}
-			if( isset($item['body']) && isset($item['title']) && ( $this->has_link($item['body']) || $this->has_link($item['title']) ) ){
-				$item['status'] = 1;
+			}else{
+				$if_link_found = apply_filters('wpforo_new_user_post_unapproved_if_link_found', true );
+				if( $if_link_found && isset($item['body']) && isset($item['title']) && ( $this->has_link($item['body']) || $this->has_link($item['title']) ) ){
+					$item['status'] = 1;
+				}
+				$unapproved_all = apply_filters('wpforo_new_user_post_unapproved_all', false );
+				if( $unapproved_all && ( ( isset($item['status']) && $item['status'] == 1 ) || $this->has_unapproved( WPF()->current_userid ) ) ){
+					$this->set_all_unapproved( WPF()->current_userid );
+					$item['status'] = 1;
+				}
 			}
 		}
-		else{
-			if( !$this->has_approved( $this->wpforo->current_userid ) ){
-				$item['status'] = 1;
-			}
-		}
-		
+
+		// Don't track users as "a user without approved posts" if he/she has no posts.
+        // Just check the number of unapproved posts before initiating this rule,
+        // if no unapproved posts then we don't need to set the first post of this user unapproved.
+        // This checking is already done by New User options when we set "1" post for New User status and turn on the "must be manually approved" option.
+        $must_have_one_approved = apply_filters('wpforo_post_moderation_must_have_one_approved', true );
+		if( $must_have_one_approved && $this->has_unapproved( WPF()->current_userid ) ){
+            // So this rule will only work from the second post,
+            // it'll always keep new posts unapproved if previous posts are not approved yet.
+            if( !$this->has_approved( WPF()->current_userid ) ){
+                $item['status'] = 1;
+            }
+        }
+
 		return $item;
 	}
 	
 	public function has_approved($user){
-		if( empty($user) ) return false;
+		if( !$user ) return false;
 		if( isset($user['ID']) ){
 			$userid = intval($user['ID']);
 		}
 		else{
 			$userid = intval($user);
 		}
-		$has_approved_post = $this->wpforo->db->get_var( "SELECT `postid` FROM `".$this->wpforo->db->prefix."wpforo_posts` WHERE `userid` = '" . intval($userid) . "' AND `status` = 0 LIMIT 1" );
+		$has_approved_post = WPF()->db->get_var( "SELECT `postid` FROM `".WPF()->tables->posts."` WHERE `userid` = '" . wpforo_bigintval($userid) . "' AND `status` = 0 LIMIT 1" );
 		if( $has_approved_post ){
 			return true;
 		}
@@ -345,7 +357,7 @@ class wpForoModeration
 		else{
 			$userid = intval($user);
 		}
-		$has_unapproved_post = $this->wpforo->db->get_var( "SELECT `postid` FROM `".$this->wpforo->db->prefix."wpforo_posts` WHERE `userid` = '" . intval($userid) . "' AND `status` = 1 LIMIT 1" );
+		$has_unapproved_post = WPF()->db->get_var( "SELECT `postid` FROM `".WPF()->tables->posts."` WHERE `userid` = '" . wpforo_bigintval($userid) . "' AND `status` = 1 LIMIT 1" );
 		if( $has_unapproved_post ){
 			return true;
 		}
@@ -355,36 +367,68 @@ class wpForoModeration
 	}
 	
 	public function ban_for_spam( $userid ){
-		if ( isset($userid) && $this->wpforo->tools_antispam['spam_user_ban'] ) {
-			if( !$this->has_approved( $this->wpforo->current_userid ) ){
-				$this->wpforo->member->autoban( $userid );
+		if ( isset($userid) && WPF()->tools_antispam['spam_user_ban'] ) {
+			if( !$this->has_approved( WPF()->current_userid ) ){
+				WPF()->member->autoban( $userid );
 			}
 		}
 	}
 	
 	public function set_all_unapproved( $userid ){
 		if ( isset($userid) ) {
-			$this->wpforo->db->update( $this->wpforo->db->prefix."wpforo_topics", array('status' => 1), array('userid' => intval($userid)), array('%d'), array('%d'));
-			$this->wpforo->db->update( $this->wpforo->db->prefix."wpforo_posts", array('status' => 1), array('userid' => intval($userid)), array('%d'), array('%d'));
+			WPF()->db->update( WPF()->tables->topics, array('status' => 1), array('userid' => intval($userid)), array('%d'), array('%d'));
+			WPF()->db->update( WPF()->tables->posts, array('status' => 1), array('userid' => intval($userid)), array('%d'), array('%d'));
 		}
 	}
 	
 	public function remove_links( $item ){
-		if( isset($item['body']) && $item['body'] ){
-			$item['body'] = preg_replace('/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/is', ' <span style="color:#aaa;">' . wpforo_phrase('removed link', false, false) . '</span> ', $item['body']);
+		if( wpfval($item, 'body') ){
+		    $domain = wpforo_get_request_uri();
+            $urls = wp_extract_urls( $item['body'] );
+            if( !empty($urls) ){
+                foreach( $urls as $k => $url ){
+                    $url = parse_url( $url );
+                    if( wpfval($url, 'host') ){
+                        if( strpos( $domain, $url['host'] ) !== FALSE ) unset($urls[$k]);
+                    }
+                }
+                if( !empty($urls) ){
+                    $item['body'] = str_replace($urls, ' <span style="color:#aaa;">' . wpforo_phrase('removed link', false, false) . '</span> ', $item['body']);
+                }
+            }
 		}
-		if( isset($item['title']) && $item['title'] ){
-			if(preg_match('/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/is', $item['title'] )){
-				$item['title'] = preg_replace('/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/is', ' -' . wpforo_phrase('removed link', false, false) . '- ', $item['title']);
-			}
-		}
+        if( wpfval($item, 'title') ){
+            $domain = wpforo_get_request_uri();
+            $urls = wp_extract_urls( $item['title'] );
+            if( !empty($urls) ){
+                foreach( $urls as $k => $url ){
+                    $url = parse_url( $url );
+                    if( wpfval($url, 'host') ){
+                        if( strpos( $domain, $url['host'] ) !== FALSE ) unset($urls[$k]);
+                    }
+                }
+                if( !empty($urls) ){
+                    $item['title'] = str_replace($urls, ' -' . wpforo_phrase('removed link', false, false) . '- ', $item['title']);
+                }
+            }
+        }
 		return $item;
 	}
 
 	public function has_link( $content ){
-		if( preg_match('/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/is', $content ) ){
-			return true;
-		}
+        $domain = wpforo_get_request_uri();
+        $urls = wp_extract_urls( $content );
+        if( !empty($urls) ){
+            foreach( $urls as $k => $url ){
+                $url = parse_url( $url );
+                if( wpfval($url, 'host') ){
+                    if( strpos( $domain, $url['host'] ) !== FALSE ) unset($urls[$k]);
+                }
+            }
+        }
+        if( !empty($urls) ){
+            return true;
+        }
 		return false;
 	}
 	

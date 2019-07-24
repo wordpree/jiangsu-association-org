@@ -3,13 +3,13 @@
  * WP-Members Admin API Functions
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions included:
  * - wpmem_add_custom_email
@@ -102,4 +102,18 @@ function wpmem_admin_user_profile( $user_id ) {
 function wpmem_admin_form_post_url( $args = false ) {
 	global $wpmem;
 	return $wpmem->admin->form_post_url( $args );
+}
+
+/**
+ * Returns an array of WordPress reserved terms.
+ *
+ * @since 3.0.2
+ * @since 3.2.3 Moved to Admin API as wrapper for WP_Members_Admin_API::wp_reserved_terms().
+ *
+ * @global object $wpmem
+ * @return array  An array of WordPress reserved terms.
+ */
+function wpmem_wp_reserved_terms() {
+	global $wpmem;
+	return $wpmem->admin->wp_reserved_terms();
 }

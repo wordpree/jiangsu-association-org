@@ -4,13 +4,13 @@
  * Contains the JavaScript functions for WP-Members admin.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler 
- * @copyright 2006-2017
+ * @copyright 2006-2019
  */
  
  
@@ -101,6 +101,7 @@
 (function($) {
 	$(document).ready(function() {
 		$("#wpmem_allowhtml").hide();
+		$("#wpmem_rows_cols").hide();
 		$("#wpmem_min_max").hide();
 		$("#wpmem_checkbox_info").hide();
 		$("#wpmem_dropdown_info").hide();
@@ -132,26 +133,35 @@
 				$("#wpmem_pattern").hide();
 				$("#wpmem_title").hide();
 			}
-			if ($("#wpmem_field_type_select").val() == 'textarea' )
+			if ($("#wpmem_field_type_select").val() == 'textarea' ) {
 				$("#wpmem_allowhtml").show();
-			else
+				$("#wpmem_rows_cols").show();
+			} else {
 				$("#wpmem_allowhtml").hide();
+				$("#wpmem_rows_cols").hide();
+			}
 			if ($("#wpmem_field_type_select").val() == 'number' || $("#wpmem_field_type_select").val() == 'date' )
 				$("#wpmem_min_max").show();
 			else
 				$("#wpmem_min_max").hide();
-			if ($("#wpmem_field_type_select").val() == 'checkbox')
+			if ($("#wpmem_field_type_select").val() == 'checkbox') {
 				$("#wpmem_checkbox_info").show();
-			else
+				$("#add_checked_value").prop('required',true);
+			} else {
 				$("#wpmem_checkbox_info").hide();
+				$("#add_checked_value").prop('required',false);
+			}
 			if ( $("#wpmem_field_type_select").val() == 'select' 
 				|| $("#wpmem_field_type_select").val() == 'multiselect'
 				|| $("#wpmem_field_type_select").val() == 'radio'
 				|| $("#wpmem_field_type_select").val() == 'multicheckbox'
-			)
+			) {
 				$("#wpmem_dropdown_info").show();
-			else
+				$("#add_dropdown_value").prop('required',true);
+			} else {
 				$("#wpmem_dropdown_info").hide();
+				$("#add_dropdown_value").prop('required',false);
+			}
 			if ( $("#wpmem_field_type_select").val() == 'multiselect' || $("#wpmem_field_type_select").val() == 'multicheckbox'
 			)
 				$("#wpmem_delimiter_info").show();
@@ -161,10 +171,56 @@
 				$("#wpmem_file_info").show();
 			else
 				$("#wpmem_file_info").hide();
-			if ($("#wpmem_field_type_select").val() == 'hidden')
+			if ($("#wpmem_field_type_select").val() == 'hidden') {
 				$("#wpmem_hidden_info").show();
-			else
+				$("#add_hidden_value").prop('required',true);
+			} else {
 				$("#wpmem_hidden_info").hide();
+				$("#add_hidden_value").prop('required',false);
+			}
+		});
+	});
+})(jQuery);
+
+/**
+ * JS for post block status meta box
+ *
+ * @since 3.2.1
+ */
+(function($) {
+	$(document).ready(function() {
+		$("#wpmem_block").hide();
+	});
+	$(document).ready(function() {
+		$("#wpmem_edit_block_status").click(function() {
+			$("#wpmem_block").show('normal');
+			$("#wpmem_edit_block_status").hide();
+		});
+		$("#wpmem_cancel_block_status").click(function() {
+			$("#wpmem_block").hide('normal');
+			$("#wpmem_edit_block_status").show();
+			$("#wpmem_post_block_status").text($("input[name=wpmem_block_original_label]").val());
+			$('#wpmem_post_block_status_' + $('input[name=wpmem_block_original_value]')).val().prop("checked", true);
+		});
+		$("#wpmem_ok_block_status").click(function() {
+			$("#wpmem_block").hide('normal');
+			$("#wpmem_edit_block_status").show();
+			$("#wpmem_post_block_status").text($("input[name=wpmem_block]:checked + label").text());
+			if($('#wpmem_block_status_0').is(':checked')) { 
+				$("#wpmem_post_icon_0").show();
+				$("#wpmem_post_icon_1").hide();
+				$("#wpmem_post_icon_2").hide();
+			}
+			if($('#wpmem_block_status_1').is(':checked')) { 
+				$("#wpmem_post_icon_0").hide();
+				$("#wpmem_post_icon_1").show();
+				$("#wpmem_post_icon_2").hide();
+			}
+			if($('#wpmem_block_status_2').is(':checked')) { 
+				$("#wpmem_post_icon_0").hide();
+				$("#wpmem_post_icon_1").hide();
+				$("#wpmem_post_icon_2").show();
+			}
 		});
 	});
 })(jQuery);

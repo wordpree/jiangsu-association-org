@@ -5,14 +5,14 @@
  * Handles new user registration and existing user updates.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017 Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019 Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @subpackage WP-Members Registration Functions
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions Included:
  * - wpmem_registration
@@ -48,16 +48,14 @@ function wpmem_registration( $tag ) {
 	global $user_ID, $wpmem, $wpmem_themsg, $userdata; 
 	
 	// Check the nonce.
-	if ( defined( 'WPMEM_USE_NONCE' ) ) {
-		if ( empty( $_POST ) || ! wp_verify_nonce( $_POST['wpmem-form-submit'], 'wpmem-validate-submit' ) ) {
-			$wpmem_themsg = __( 'There was an error processing the form.', 'wp-members' );
-			return;
-		}
+	if ( empty( $_POST ) || ! wp_verify_nonce( $_REQUEST[ '_wpmem_' . $tag . '_nonce' ], 'wpmem_longform_nonce' ) ) {
+		$wpmem_themsg = __( 'There was an error processing the form.', 'wp-members' );
+		return;
 	}
 
 	// Is this a registration or a user profile update?
-	if ( $tag == 'register' ) { 
-		$wpmem->user->post_data['username'] = sanitize_user( wpmem_get( 'user_login' ) );
+	if ( 'register' == $tag ) { 
+		$wpmem->user->post_data['username'] = sanitize_user( wpmem_get( 'username' ) );
 	}
 	
 	// Add the user email to the $wpmem->user->post_data array for _data hooks.
@@ -67,10 +65,17 @@ function wpmem_registration( $tag ) {
 	/** @deprecated 3.1.7 Use wpmem_fields instead. */
 	$wpmem->fields = apply_filters( 'wpmem_register_fields_arr', wpmem_fields( $tag ), $tag );
 	
+	// If this is an update, and tos is a field, and the user has the correct saved value, remove tos.
+	if ( 'update' == $tag && isset( $wpmem->fields['tos'] ) ) {
+		if ( get_user_meta( $user_ID, 'tos', true ) == $wpmem->fields['tos']['checked_value'] ) {
+			unset( $wpmem->fields['tos'] );
+		}
+	}
+	
 	// Build the $wpmem->user->post_data array from $_POST data.
 	foreach ( $wpmem->fields as $meta_key => $field ) {
 		if ( $field['register'] ) {
-			if ( 'password' != $meta_key || 'confirm_password' != $meta_key ) {
+			if ( 'password' != $meta_key && 'confirm_password' != $meta_key && 'username' != $meta_key ) {
 				if ( isset( $_POST[ $meta_key ] ) ) {
 					switch ( $field['type'] ) {
 					case 'checkbox':
@@ -79,10 +84,10 @@ function wpmem_registration( $tag ) {
 					case 'multiselect':
 					case 'multicheckbox':
 						$delimiter = ( isset( $field['delimiter'] ) ) ? $field['delimiter'] : '|';
-						$wpmem->user->post_data[ $meta_key ] = ( isset( $_POST[ $meta_key ] ) ) ? implode( $delimiter, $_POST[ $meta_key ] ) : '';
+						$wpmem->user->post_data[ $meta_key ] = ( isset( $_POST[ $meta_key ] ) ) ? implode( $delimiter, wpmem_sanitize_array( $_POST[ $meta_key ] ) ) : '';
 						break;
 					case 'textarea':
-						$wpmem->user->post_data[ $meta_key ] = $_POST[ $meta_key ];
+						$wpmem->user->post_data[ $meta_key ] = sanitize_textarea_field( $_POST[ $meta_key ] );
 						break;
 					default:
 						$wpmem->user->post_data[ $meta_key ] = sanitize_text_field( $_POST[ $meta_key ] );
@@ -114,14 +119,17 @@ function wpmem_registration( $tag ) {
 	 */
 	$wpmem->user->post_data = apply_filters( 'wpmem_pre_validate_form', $wpmem->user->post_data, $tag );
 
+	if ( 'update' == $tag ) {
+		$pass_arr = array( 'username', 'password', 'confirm_password', 'password_confirm' );
+		foreach ( $pass_arr as $pass ) {
+			unset( $wpmem->fields[ $pass ] );
+		}
+	}
+	
 	// Check for required fields, reverse the array for logical error message order.
-	$wpmem_fields_rev = array_reverse( $wpmem->fields );
-
-	foreach ( $wpmem_fields_rev as $meta_key => $field ) {
-		$pass_arr = array( 'password', 'confirm_password', 'password_confirm' );
-		$pass_chk = ( $tag == 'update' && in_array( $meta_key, $pass_arr ) ) ? true : false;
+	foreach ( array_reverse( $wpmem->fields ) as $meta_key => $field ) {
 		// Validation if the field is required.
-		if ( $field['required'] && $pass_chk == false ) { // @todo - verify $field['required']
+		if ( $field['required'] ) {
 			if ( 'file' == $field['type'] || 'image' == $field['type'] ) {
 				// If this is a new registration.
 				if ( 'register' == $tag ) {
@@ -132,8 +140,20 @@ function wpmem_registration( $tag ) {
 				}
 			} else {
 				// If the required field is any other field type.
-				if ( ! $wpmem->user->post_data[ $meta_key ] ) { 
+				if ( null == $wpmem->user->post_data[ $meta_key ] ) {
 					$wpmem_themsg = sprintf( $wpmem->get_text( 'reg_empty_field' ), __( $field['label'], 'wp-members' ) );
+				}
+			}
+		}
+		
+		// Validate file field type.
+		if ( 'file' == $field['type'] || 'image' == $field['type'] ) {
+			$allowed_file_types = explode( '|', $field['file_types'] );
+			$msg_types  = implode( ', ', $allowed_file_types );
+			if ( ! empty( $_FILES[ $meta_key ]['name'] ) ) {
+				$extension = pathinfo( $_FILES[ $meta_key ]['name'], PATHINFO_EXTENSION );
+				if ( ! in_array( $extension, $allowed_file_types ) ) {
+					$wpmem_themsg = sprintf( $wpmem->get_text( 'reg_file_type' ), __( $field['label'], 'wp-members' ), str_replace( '|', ',', $msg_types ) );
 				}
 			}
 		}
@@ -148,7 +168,9 @@ function wpmem_registration( $tag ) {
 			$result = wpmu_validate_user_signup( $wpmem->user->post_data['username'], $wpmem->user->post_data['user_email'] ); 
 			$errors = $result['errors'];
 			if ( $errors->errors ) {
-				$wpmem_themsg = $errors->get_error_message(); return $wpmem_themsg; exit;
+				$wpmem_themsg = $errors->get_error_message(); 
+				return $wpmem_themsg; 
+				exit();
 			}
 
 		} else {
@@ -189,16 +211,16 @@ function wpmem_registration( $tag ) {
 		$wpmem->user->post_data['user_registered'] = current_time( 'mysql', 1 );
 		$wpmem->user->post_data['user_role']       = get_option( 'default_role' );
 		$wpmem->user->post_data['wpmem_reg_ip']    = $_SERVER['REMOTE_ADDR'];
-		$wpmem->user->post_data['wpmem_reg_url']   = wpmem_get( 'wpmem_reg_page', wpmem_get( 'redirect_to', false, 'request' ), 'request' );
+		$wpmem->user->post_data['wpmem_reg_url']   = esc_url_raw( wpmem_get( 'wpmem_reg_page', wpmem_get( 'redirect_to', false, 'request' ), 'request' ) );
 
 		/*
 		 * These native fields are not installed by default, but if they
 		 * are added, use the $_POST value - otherwise, default to username.
 		 * Value can be filtered with wpmem_register_data.
 	 	 */
-		$wpmem->user->post_data['user_nicename']   = wpmem_get( 'user_nicename', $wpmem->user->post_data['username'] );
-		$wpmem->user->post_data['display_name']    = wpmem_get( 'display_name',  $wpmem->user->post_data['username'] );
-		$wpmem->user->post_data['nickname']        = wpmem_get( 'nickname',      $wpmem->user->post_data['username'] );
+		$wpmem->user->post_data['user_nicename']   = sanitize_text_field( wpmem_get( 'user_nicename', $wpmem->user->post_data['username'] ) );
+		$wpmem->user->post_data['display_name']    = sanitize_text_field( wpmem_get( 'display_name',  $wpmem->user->post_data['username'] ) );
+		$wpmem->user->post_data['nickname']        = sanitize_text_field( wpmem_get( 'nickname',      $wpmem->user->post_data['username'] ) );
 		/**
 		 * Filter registration data after validation before data insertion.
 		 *

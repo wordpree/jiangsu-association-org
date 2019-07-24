@@ -1,6 +1,6 @@
 <?php
 /**
- * The WP_Members Admin User Profile Class.
+ * The WP_Members User Profile Class.
  *
  * @package WP-Members
  * @subpackage WP_Members Admin User Profile Object Class
@@ -30,13 +30,17 @@ class WP_Members_User_Profile {
 	static function profile( $user_obj ) {
 	
 		global $current_screen, $user_ID, $wpmem;
-		$user_id = ( 'profile' == $current_screen->id ) ? $user_ID : $_REQUEST['user_id']; 
-		$display = ( 'profile' == $current_screen->base ) ? 'user' : 'admin'; ?>
+		$user_id = ( 'profile' == $current_screen->id ) ? $user_ID : filter_var( $_REQUEST['user_id'], FILTER_SANITIZE_NUMBER_INT ); 
+		$display = ( 'profile' == $current_screen->base ) ? 'user' : 'admin'; 
+		$display = ( current_user_can( 'edit_users' ) ) ? 'admin' : $display; ?>
 
 		<h3><?php
 		$heading = ( 'admin' == $display ) ? __( 'WP-Members Additional Fields', 'wp-members' ) : __( 'Additional Information', 'wp-members' );
 		/**
 		 * Filter the heading for additional profile fields.
+		 *
+		 * Filter is applied for the admin user edit ("wpmem_admin_profile_heading")
+		 * and the user profile edit ("wpmem_user_profile_heading").
 		 *
 		 * @since 2.8.2 Admin Profile
 		 * @since 2.9.1 Dashboard Profile
@@ -51,9 +55,19 @@ class WP_Members_User_Profile {
 			$wpmem_fields = ( 'admin' == $display ) ? wpmem_fields( 'admin_profile' ) : wpmem_fields( 'dashboard_profile' );
 			// Get excluded meta.
 			$exclude = wpmem_get_excluded_meta( $display . '-profile' );
+		
+			// If tos is an active field, this is the dashboard profile, and user has current field value.
+			if ( isset( $wpmem_fields['tos'] ) 
+				&& 'user' == $display
+				&& ( get_user_meta( $user_ID, 'tos', true ) == $wpmem_fields['tos']['checked_value'] ) ) {
+				unset( $wpmem_fields['tos'] );
+			}
 
 			/**
 			 * Fires at the beginning of generating the WP-Members fields in the user profile.
+			 *
+			 * Action fires for the admin user edit ("wpmem_admin_before_profile")
+		 	 * and the user profile edit ("wpmem_user_before_profile").
 			 *
 			 * @since 2.9.3 Created for admin profile.
 			 * @since 3.1.9 Added to dashboard profile.
@@ -71,7 +85,7 @@ class WP_Members_User_Profile {
 
 				// Determine which fields to show in the additional fields area.
 				$show = ( ! $field['native'] && ! in_array( $meta, $exclude ) ) ? true : false;
-				$show = ( $field['label'] == 'TOS' && $field['register'] ) ? null : $show;
+				//$show = ( 'tos' == $meta && $field['register'] ) ? null : $show;
 
 				if ( $show ) {
 
@@ -131,18 +145,21 @@ class WP_Members_User_Profile {
 						'value'        => $val,
 						'values'       => $values,
 						'label_text'   => __( $field['label'], 'wp-members' ),
-						'row_before'   => '',
-						'label'        => $label,
-						'field_before' => '',
+						'row_before'   => '<tr>',
+						'label'        => '<th>' . $label . '</th>',
+						'field_before' => '<td>',
 						'field'        => $input,
-						'field_after'  => '',
-						'row_after'    => '',
+						'field_after'  => '</td>',
+						'row_after'    => '</tr>',
 					);
 				}
 			}
 
 			/**
-			 * Filter for rows
+			 * Filter for rows.
+			 *
+			 * Filter is applied for the admin user edit ("wpmem_register_form_rows_admin")
+		 	 * and the user profile edit ("wpmem_register_form_rows_user").
 			 *
 			 * @since 3.1.0
 			 * @since 3.1.6 Deprecated $order.
@@ -164,18 +181,21 @@ class WP_Members_User_Profile {
 			 * }
 			 * @param string $tag adminprofile|userprofile
 			 */
-			$rows = apply_filters( 'wpmem_register_form_rows_admin', $rows, $display . 'profile' );
+			$rows = apply_filters( 'wpmem_register_form_rows_' . $display, $rows, $display . 'profile' );
 
 			// Handle form rows display from array.
 			foreach ( $rows as $row ) {
-				$show_field = '
-					<tr>
-						<th>' . $row['label'] . '</th>
-						<td>' . $row['field'] . '</td>
-					</tr>';
+				$show_field =
+					$row['row_before'] . 
+						$row['label'] .
+						$row['field_before'] . $row['field'] . $row['field_after'] .
+					$row['field_after'];
 
 				/**
 				 * Filter the profile field.
+				 *
+				 * Filter is applied for the admin user edit ("wpmem_admin_profile_field")
+				 * and the user profile edit ("wpmem_user_profile_field").
 				 * 
 				 * @since 2.8.2
 				 * @since 3.1.1 Added $user_id and $row
@@ -190,6 +210,9 @@ class WP_Members_User_Profile {
 			/**
 			 * Fires after generating the WP-Members fields in the user profile.
 			 *
+			 * Action fires for the admin user edit ("wpmem_admin_after_profile")
+			 * and the user profile edit ("wpmem_user_after_profile").
+			 *
 			 * @since 2.9.3
 			 *
 			 * @param int   $user_id      The user's ID.
@@ -198,6 +221,19 @@ class WP_Members_User_Profile {
 			do_action( 'wpmem_' . $display . '_after_profile', $user_id, $wpmem_fields ); ?>
 
 		</table><?php
+		
+		/**
+		 * Fires after the user profile table.
+		 *
+		 * Action fires for the admin user edit ("wpmem_admin_after_profile_table")
+		 * and the user profile edit ("wpmem_user_after_profile_table").
+		 *
+		 * @since 3.2.6
+		 *
+		 * @param int   $user_id      The user's ID.
+		 * @param array $wpmem_fields The WP-Members fields.
+		 */
+		do_action( 'wpmem_' . $display . '_after_profile_table', $user_id, $wpmem_fields );
 		
 	}
 	
@@ -221,8 +257,8 @@ class WP_Members_User_Profile {
 		$display = ( 'profile' == $current_screen->base ) ? 'user' : 'admin';
 	
 		if ( ! $user_id ) {
-			$user_id = wpmem_get( 'user_id', false, 'request' );
-			if ( ! $user_id ) {
+			$user_id = filter_var( wpmem_get( 'user_id', -1, 'request' ), FILTER_SANITIZE_NUMBER_INT );
+			if ( 1 > $user_id ) {
 			// Still no user id? User cannot be updated.
 			return;
 			}
@@ -230,10 +266,27 @@ class WP_Members_User_Profile {
 
 		$wpmem_fields = ( 'admin' == $display ) ? wpmem_fields( 'admin_profile_update' ) : wpmem_fields( 'dashboard_profile_update' );
 		
+		// Check for password field before exclusions, just in case we are activating a user (otherwise password is removed on user/admin profiles).
+		$chk_pass = ( array_key_exists( 'password', $wpmem_fields ) && true === $wpmem_fields['password']['register'] ) ? true : false;
+	
 		$exclude = wpmem_get_excluded_meta( $display . '-profile' );
+
+		foreach ( $exclude as $excluded ) {
+			unset( $wpmem_fields[ $excluded ] );
+		}
+
+		// If tos is an active field, this is the dashboard profile, and user has current field value.
+		if ( isset( $wpmem_fields['tos'] ) 
+			&& 'user' == $display 
+			&& get_user_meta( $user_id, 'tos', true ) == $wpmem_fields['tos']['checked_value'] ) {
+			unset( $wpmem_fields['tos'] );
+		}
 
 		/**
 		 * Fires before the user profile is updated.
+		 *
+		 * Action fires for the admin user edit ("wpmem_admin_pre_user_update")
+		 * and the user profile edit ("wpmem_user_pre_user_update").
 		 *
 		 * @since 2.9.2 Added for admin profile update.
 		 * @since 3.1.9 Added for user profile update.
@@ -244,7 +297,6 @@ class WP_Members_User_Profile {
 		do_action( 'wpmem_' . $display . '_pre_user_update', $user_id, $wpmem_fields );
 
 		$fields = array();
-		$chk_pass = false;
 		foreach ( $wpmem_fields as $meta => $field ) {
 			if ( ! $field['native']
 				&& $field['type'] != 'password' 
@@ -252,8 +304,9 @@ class WP_Members_User_Profile {
 				&& $field['type'] != 'multiselect' 
 				&& $field['type'] != 'multicheckbox' 
 				&& $field['type'] != 'file' 
-				&& $field['type'] != 'image' ) {
-				( isset( $_POST[ $meta ] ) ) ? $fields[ $meta ] = $_POST[ $meta ] : false;
+				&& $field['type'] != 'image'
+			    && $field['type'] != 'textarea' ) {
+				( isset( $_POST[ $meta ] ) && 'password' != $field['type'] ) ? $fields[ $meta ] = sanitize_text_field( $_POST[ $meta ] ) : false;
 				
 				// For user profile (not admin).
 				$chk = false;
@@ -266,17 +319,20 @@ class WP_Members_User_Profile {
 						$chk = 'ok';
 					}
 				}
-			} elseif ( $meta == 'password' && $field['register'] ) {
-				$chk_pass = true;
 			} elseif ( $field['type'] == 'checkbox' ) {
-				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? $_POST[ $meta ] : '';
+				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? sanitize_text_field( $_POST[ $meta ] ) : '';
 			} elseif ( $field['type'] == 'multiselect' || $field['type'] == 'multicheckbox' ) {
-				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? implode( $field['delimiter'], $_POST[ $meta ] ) : '';
+				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? implode( $field['delimiter'], wp_unslash( $_POST[ $meta ] ) ) : '';
+			} elseif ( $field['type'] == 'textarea' ) {
+				$fields[ $meta ] = ( isset( $_POST[ $meta ] ) ) ? sanitize_textarea_field( $_POST[ $meta ] ) : '';
 			}
 		}
 
 		/**
 		 * Filter the submitted field values for backend profile update.
+		 *
+		 * Filters is applied for the admin user edit ("wpmem_admin_profile_update")
+		 * and the user profile edit ("wpmem_user_profile_update").
 		 *
 		 * @since 2.8.2 Added for Admin profile update.
 		 * @since 3.1.9 Added for User profile update.
@@ -286,8 +342,7 @@ class WP_Members_User_Profile {
 		 */
 		$fields = apply_filters( 'wpmem_' . $display . '_profile_update', $fields, $user_id );
 
-		// Get any excluded meta fields.
-		$exclude = wpmem_get_excluded_meta( 'admin-profile' );
+		// Handle meta update, skip excluded fields.
 		foreach ( $fields as $key => $val ) {
 			if ( ! in_array( $key, $exclude ) ) {
 				if ( ( 'admin' != $display && 'ok' == $chk ) || 'admin' == $display ) {
@@ -303,12 +358,12 @@ class WP_Members_User_Profile {
 		if ( 'admin' == $display || current_user_can( 'edit_users' ) ) {
 			if ( $wpmem->mod_reg == 1 ) {
 
-				$wpmem_activate_user = ( isset( $_POST['activate_user'] ) == '' ) ? -1 : $_POST['activate_user'];
+				$wpmem_activate_user = ( isset( $_POST['activate_user'] ) == '' ) ? -1 : filter_var( $_POST['activate_user'], FILTER_SANITIZE_NUMBER_INT );
 
 				if ( $wpmem_activate_user == 1 ) {
-					wpmem_a_activate_user( $user_id, $chk_pass );
+					wpmem_activate_user( $user_id, $chk_pass );
 				} elseif ( $wpmem_activate_user == 0 ) {
-					wpmem_a_deactivate_user( $user_id );
+					wpmem_deactivate_user( $user_id );
 				}
 			}
 
@@ -317,10 +372,39 @@ class WP_Members_User_Profile {
 					wpmem_a_extend_user( $user_id );
 				}
 			}
+			
+			if ( 1 == $wpmem->enable_products ) {
+				// Update products.
+				if ( isset( $_POST['_wpmem_membership_product'] ) ) {
+					foreach ( $_POST['_wpmem_membership_product'] as $product_key => $product_value ) {
+						// Sanitize.
+						$product_key = sanitize_text_field( $product_key );
+						// Enable or Disable?
+						if ( 'enable' == $product_value ) {
+							// Does product require a role?
+							if ( false !== $wpmem->membership->products[ $product_key ]['role'] ) {
+								wpmem_update_user_role( $user_id, $wpmem->membership->products[ $product_key ]['role'], 'add' );
+							}
+							// Do we need to set a specific date?
+							if ( isset( $_POST[ '_wpmem_membership_product_expiration_' . $product_key ] ) ) {
+								wpmem_set_user_product( $product_key, $user_id, sanitize_text_field( $_POST[ '_wpmem_membership_product_expiration_' . $product_key ] ) );
+							} else {
+								wpmem_set_user_product( $product_key, $user_id );
+							}
+						}
+						if ( 'disable' == $product_value ) {
+							$wpmem->user->remove_user_product( $product_key, $user_id );
+						}
+					}	
+				}
+			}
 		}
 
 		/**
 		 * Fires after the user profile is updated.
+		 *
+		 * Action fires for the admin user edit ("wpmem_admin_after_user_update")
+		 * and the user profile edit ("wpmem_user_after_user_update").
 		 *
 		 * @since 2.9.2
 		 *
@@ -330,7 +414,6 @@ class WP_Members_User_Profile {
 
 		return;
 	}
-	
 	
 	/**
 	 * Sets user profile update to multipart form data.
@@ -350,5 +433,194 @@ class WP_Members_User_Profile {
 			}
 		}
 		echo ( $has_file ) ? " enctype=\"multipart/form-data\"" : '';
+	}
+	
+	/**
+	 * Adds user activation to the user profile.
+	 *
+	 * @since 3.1.1
+	 * @since 3.2.0 Moved to WP_Members_User_Profile object
+	 *
+	 * @global object $wpmem
+	 * @param  int    $user_id
+	 */
+	public static function _show_activate( $user_id ) {
+		global $wpmem;
+		// See if reg is moderated, and if the user has been activated.
+		if ( $wpmem->mod_reg == 1 ) {
+			$user_active_flag = get_user_meta( $user_id, 'active', true );
+			switch( $user_active_flag ) {
+
+				case '':
+					$label  = __( 'Activate this user?', 'wp-members' );
+					$action = 1;
+					break;
+
+				case 0:
+					$label  = __( 'Reactivate this user?', 'wp-members' );
+					$action = 1;
+					break;
+
+				case 1:
+					$label  = __( 'Deactivate this user?', 'wp-members' );
+					$action = 0;
+					break;
+
+			} ?>
+			<tr>
+				<th><label><?php echo $label; ?></label></th>
+				<td><input id="activate_user" type="checkbox" class="input" name="activate_user" value="<?php echo $action; ?>" /></td>
+			</tr>
+		<?php }
+	}
+
+	/**
+	 * Adds user expiration to the user profile.
+	 *
+	 * @since 3.1.1
+	 * @since 3.2.0 Moved to WP_Members_User_Profile object
+	 *
+	 * @global object $wpmem
+	 * @param  int    $user_id
+	 */
+	public static function _show_expiration( $user_id ) {
+
+	global $wpmem;
+		/*
+		 * If using subscription model, show expiration.
+		 * If registration is moderated, this doesn't show 
+		 * if user is not active yet.
+		 */
+		if ( defined( 'WPMEM_EXP_MODULE' ) && $wpmem->use_exp == 1 ) {
+			if ( ( $wpmem->mod_reg == 1 &&  get_user_meta( $user_id, 'active', true ) == 1 ) || ( $wpmem->mod_reg != 1 ) ) {
+				if ( function_exists( 'wpmem_a_extenduser' ) ) {
+					wpmem_a_extenduser( $user_id );
+				}
+			}
+		} 
+	} 
+
+
+	/**
+	 * Adds user registration IP to the user profile.
+	 *
+	 * @since 3.1.1
+	 * @since 3.2.0 Moved to WP_Members_User_Profile object
+	 *
+	 * @param  int    $user_id
+	 */
+	public static function _show_ip( $user_id ) { ?>
+		<tr>
+			<th><label><?php _e( 'IP @ registration', 'wp-members' ); ?></label></th>
+			<td><?php echo get_user_meta( $user_id, 'wpmem_reg_ip', true ); ?></td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * Add user product access to user profile.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @global object $wpmem
+	 * @param  int    $user_id
+	 */
+	public static function _show_product( $user_id ) { 
+		// If product enabled
+		global $wpmem;
+		$user_products = $wpmem->user->get_user_products( $user_id ); ?>
+		<tr>
+			<th><label><?php _e( 'Product Access', 'wp-members' ); ?></label></th>
+			<td><table><?php
+			foreach ( $wpmem->membership->products as $key => $value ) {
+				$checked = ( $user_products && array_key_exists( $key, $user_products ) ) ? "checked" : "";
+				echo "<tr>";
+				echo '<td style="padding:5px 5px;">
+				<select name="_wpmem_membership_product[' . $key . ']">
+					<option value="">----</option>
+					<option value="enable">'  . __( 'Enable', 'wp-members'  ) . '</option>
+					<option value="disable">' . __( 'Disable', 'wp-members' ) . '</option>
+				</select></td><td style="padding:0px 0px;">' . $value['title'] . '</td>
+				<td style="padding:0px 0px;">';
+				
+				// If user has date, display that; otherwise placeholder
+				$date_value  = (   isset( $user_products[ $key ] ) ) ? $user_products[ $key ] : "";
+				$placeholder = ( ! isset( $user_products[ $key ] ) ) ? 'placeholder="' . __( 'Date', 'wp-members' ) . '" ' : '';
+				$product_date_field = ' <input type="text" name="_wpmem_membership_product_expiration_' . $key . '" value="' . $date_value . '" class="wpmem_datepicker" ' . $placeholder . '/>';
+
+				if ( isset( $user_products[ $key ] ) ) {
+					echo '<span id="wpmem_product_enabled" class="dashicons dashicons-yes"></span>';
+					if ( $user_products[ $key ] !== true ) {
+						echo __( 'Expires:', 'wp-members' );
+						echo $product_date_field;
+					} else {
+						_e( 'Enabled', 'wp-members' );
+					}
+				} else {
+					if ( isset( $value['expires'] ) && ! empty( $value['expires'] ) ) {
+						echo '<span id="wpmem_product_enabled" class="dashicons"></span>';
+						echo __( 'Expires:', 'wp-members' );
+						echo $product_date_field;
+					} else {
+						echo "&nbsp;";
+					}
+				}				
+				echo '</td></tr>';
+			}
+		
+				?></table>
+			<script>
+			jQuery(function() {
+				jQuery( ".wpmem_datepicker" ).datepicker({
+					dateFormat : "mm/dd/yy"
+				});
+			});
+			</script></td>
+		</tr>
+		<?php	
+	}
+
+	/**
+	 * Add jquery ui tabs to user profile.
+	 *
+	 * @since 3.2.5
+	 *
+	 * @param int $user_id
+	 */
+	static function _profile_tabs( $user_id ) { 
+
+		/**
+		 * Add tabs to user profile tabs.
+		 *
+		 * @since 3.2.5
+		 *
+		 * @param array {
+		 *    @type string $tab     (required)
+		 *    @type string $content (optional)
+		 * }
+		 */
+		$tabs = apply_filters( 'wpmem_user_profile_tabs', array() ); 
+
+		if ( ! empty( $tabs ) ) { ?>
+			<script>
+				jQuery(document).ready(function($){
+					$("#wpmem_user_profile_tabs").tabs();
+				});
+			</script>
+			<?php
+			echo '<div id="wpmem_user_profile_tabs">';
+			echo '<ul>';
+			foreach ( $tabs as $key => $value ) {
+				echo '<li><a href="#wpmem_user_profile_tabs-' . ( $key ) . '">' . $value['tab'] . '</a></li>';
+			}
+			echo '</ul>';
+			foreach ( $tabs as $key => $value ) {
+				echo '<div id="wpmem_user_profile_tabs-' . ( $key ) . '">';
+				echo ( isset( $value['content'] ) ) ? $value['content'] : '';
+				do_action( 'wpmem_user_profile_tabs_content', $key );
+				echo '</div>';
+			}
+			echo '</div>';
+		}
 	}
 }

@@ -417,12 +417,12 @@ button.ui-button::-moz-focus-inner {
 
 .ui-dialog .ui-dialog-titlebar-close:before{
 	content: "\f00d";
-	font-family: FontAwesome;
+	font-family: "Font Awesome\ 5 Free";
 	display: inline-block;
 	line-height: 1em;
 	vertical-align: top;
 	color: rgba(35, 35, 35, 0.5);
-	font-weight: normal;
+	font-weight: bold;
 }
 
 .ui-dialog .ui-dialog-content {

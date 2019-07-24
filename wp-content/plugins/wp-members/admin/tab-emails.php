@@ -5,13 +5,13 @@
  * Functions to manage the emails tab.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions included:
  * - wpmem_a_build_emails
@@ -21,6 +21,23 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
+}
+
+/**
+ * Creates the tab.
+ *
+ * @since 3.2.0
+ *
+ * @param  string      $tab The admin tab being displayed.
+ * @return string|bool      The tab html, otherwise false.
+ */
+function wpmem_a_emails_tab( $tab ) {
+	if ( $tab == 'emails' || ! $tab ) {
+		// Render the tab.
+		return wpmem_a_build_emails();
+	} else {
+		return false;
+	}
 }
 
 /**
@@ -42,20 +59,20 @@ function wpmem_a_build_emails() {
 					<div class="inside">
 						<p>
 						<?php _e( 'You can customize the content of the emails sent by the plugin.', 'wp-members' ); ?><br />
-						<a href="http://rocketgeek.com/plugins/wp-members/users-guide/customizing-emails/" target="_blank">
+						<a href="https://rocketgeek.com/plugins/wp-members/users-guide/customizing-emails/" target="_blank">
 						<?php _e( 'A list of shortcodes is available here.', 'wp-members' ); ?></a>
 						</p>
 						<hr />
-						<form name="updateemailform" id="updateemailform" method="post" action="<?php echo wpmem_admin_form_post_url(); ?>"> 
+						<form name="updateemailform" id="updateemailform" method="post" action="<?php echo esc_url( wpmem_admin_form_post_url() ); ?>"> 
 						<?php wp_nonce_field( 'wpmem-update-emails' ); ?>
 							<table class="form-table"> 
 								<tr valign="top"> 
 									<th scope="row"><?php _e( 'Set a custom email address', 'wp-members' ); ?></th> 
-									<td><input type="text" name="wp_mail_from" size="40" value="<?php echo $wpmem->email['from']; ?>" />&nbsp;<span class="description"><?php _e( '(optional)', 'wp-members' ); ?> email@yourdomain.com</span></td> 
+									<td><input type="text" name="wp_mail_from" size="40" value="<?php echo esc_attr( $wpmem->email->from ); ?>" />&nbsp;<span class="description"><?php _e( '(optional)', 'wp-members' ); ?> email@yourdomain.com</span></td> 
 								</tr>
 								<tr valign="top"> 
 									<th scope="row"><?php _e( 'Set a custom email name', 'wp-members' ); ?></th> 
-									<td><input type="text" name="wp_mail_from_name" size="40" value="<?php echo stripslashes( $wpmem->email['from_name'] ); ?>" />&nbsp;<span class="description"><?php _e( '(optional)', 'wp-members' ); ?> John Smith</span></td>
+									<td><input type="text" name="wp_mail_from_name" size="40" value="<?php echo esc_attr( stripslashes( $wpmem->email->from_name ) ); ?>" />&nbsp;<span class="description"><?php _e( '(optional)', 'wp-members' ); ?> John Smith</span></td>
 								</tr>
 								<tr><td colspan="2"><hr /></td></tr>
 							<?php if ( ! empty ( $wpmem->admin->emails ) ) {	
@@ -66,7 +83,7 @@ function wpmem_a_build_emails() {
 								$arr = get_option( 'wpmembers_email_footer' ); ?>
 								<tr valign="top">
 									<th scope="row"><strong><?php echo __( "Email Signature", 'wp-members' ); ?></strong> <span class="description"><?php _e( '(optional)', 'wp-members' ); ?></span></th>
-									<td><textarea name="<?php echo 'wpmembers_email_footer_body'; ?>" rows="10" cols="50" id="" class="large-text code"><?php echo stripslashes( $arr ); ?></textarea></td>
+									<td><textarea name="<?php echo 'wpmembers_email_footer_body'; ?>" rows="10" cols="50" id="" class="large-text code"><?php echo esc_textarea( stripslashes( $arr ) ); ?></textarea></td>
 								</tr>
 								<tr><td colspan="2"><hr /></td></tr>
 								<tr valign="top">
@@ -83,7 +100,7 @@ function wpmem_a_build_emails() {
 				<div class="postbox">
 					<h3><span><?php _e( 'Need help?', 'wp-members' ); ?></span></h3>
 					<div class="inside">
-						<strong><i>See the <a href="http://rocketgeek.com/plugins/wp-members/users-guide/plugin-settings/emails/" target="_blank">Users Guide on email options</a>.</i></strong>
+						<strong><i>See the <a href="https://rocketgeek.com/plugins/wp-members/users-guide/plugin-settings/emails/" target="_blank">Users Guide on email options</a>.</i></strong>
 					</div>
 				</div>
 			</div> <!-- #post-body-content -->
@@ -109,13 +126,11 @@ function wpmem_update_emails() {
 	check_admin_referer( 'wpmem-update-emails' );
 
 	// Update the email address (if applicable).
-	if ( $wpmem->email['from'] != $_POST['wp_mail_from'] || $wpmem->email['from_name'] != $_POST['wp_mail_from_name'] ) {
-		$wpmem->email['from']      = $_POST['wp_mail_from'];
-		$wpmem->email['from_name'] = $_POST['wp_mail_from_name'];
-		$wpmem_newsettings = get_option( 'wpmembers_settings' );
-		$wpmem_newsettings['email']['from']      = $_POST['wp_mail_from'];
-		$wpmem_newsettings['email']['from_name'] = $_POST['wp_mail_from_name'];
-		update_option( 'wpmembers_settings', $wpmem_newsettings );
+	if ( $wpmem->email->from    != $_POST['wp_mail_from'] || $wpmem->email->from_name != $_POST['wp_mail_from_name'] ) {
+		$wpmem->email->from      = sanitize_email( $_POST['wp_mail_from'] );
+		$wpmem->email->from_name = sanitize_text_field( $_POST['wp_mail_from_name'] );
+		update_option( 'wpmembers_email_wpfrom', $wpmem->email->from );
+		update_option( 'wpmembers_email_wpname', $wpmem->email->from_name );
 	}
 	
 	// Update the various emails being used.
@@ -127,15 +142,15 @@ function wpmem_update_emails() {
 
 	for ( $row = 0; $row < ( count( $arr ) - 1 ); $row++ ) {
 		$arr2 = array( 
-			"subj" => $_POST[ $arr[ $row ] . '_subj' ],
-			"body" => $_POST[ $arr[ $row ] . '_body' ],
+			"subj" => sanitize_text_field( $_POST[ $arr[ $row ] . '_subj' ] ),
+			"body" => wp_kses( $_POST[ $arr[ $row ] . '_body' ], 'post' ),
 		);
 		update_option( $arr[ $row ], $arr2, false );
 		$arr2 = '';
 	}
 
 	// Updated the email footer.
-	update_option( $arr[ $row ], $_POST[ $arr[ $row ] . '_body' ], false );
+	update_option( $arr[ $row ], wp_kses( $_POST[ $arr[ $row ] . '_body' ], 'post' ), false );
 	
 	if ( ! empty ( $wpmem->admin->emails ) ) {
 		foreach( $wpmem->admin->emails as $email ) {

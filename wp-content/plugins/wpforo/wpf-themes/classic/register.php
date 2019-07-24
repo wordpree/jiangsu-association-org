@@ -1,61 +1,50 @@
 <?php
 	// Exit if accessed directly
 	if( !defined( 'ABSPATH' ) ) exit;
-	$user_login = (isset($_POST['wpfreg']['user_login'])) ? sanitize_user($_POST['wpfreg']['user_login']) : '';;
-	$user_email = (isset($_POST['wpfreg']['user_email'])) ? sanitize_email($_POST['wpfreg']['user_email']) : '';
+
+    $fields = wpforo_register_fields();
 ?>
 
 <p id="wpforo-title"><?php wpforo_phrase('Forum - Registration') ?></p>
 
-<?php if( wpforo_feature('user-register', $wpforo) ): ?>
-    <form name="wpfreg" action="" method="POST">
-      <div class="wpforo-register-wrap">
+<?php if( wpforo_feature('user-register') ): ?>
+    <form name="wpfreg" action="" enctype="multipart/form-data" method="POST">
+      <div class="wpforo-register-wrap wpfbg-9">
         <div class="wpforo-register-content">
-         <table class="wpforo-register-table wpfcl-1" width="100%" border="0" cellspacing="0" cellpadding="0">
-              <tr class="wpfbg-9">
-                <td class="wpf-register-label">
-                    <p class="wpf-label wpfcl-1"><?php wpforo_phrase('Username') ?>:</p>
-                    <span class="wpf-desc wpfcl-2"><?php wpforo_phrase('Length must be between 3 characters and 15 characters.') ?></span>
-                </td>
-                <td class="wpf-register-field"><input autofocus required="TRUE" type="text" value="<?php echo esc_attr($user_login) ?>" name="wpfreg[user_login]" class="wpf-register-text wpfw-70" maxlength="30" /></td>
-              </tr>
-              <tr class="wpfbg-7">
-                <td class="wpf-register-label">
-                    <p class="wpf-label wpfcl-1"><?php wpforo_phrase('Email') ?>:</p>
-                </td>
-                <td class="wpf-register-field"><input required="TRUE" type="text" value="<?php echo esc_attr($user_email) ?>" name="wpfreg[user_email]" class="wpf-register-text wpfw-70" /></td>
-              </tr>
-              <?php if( wpforo_feature('user-register-email-confirm', $wpforo) ): ?>
-	            <tr class="wpfbg-9">
-	                <td class="wpf-register-label">
-	                </td>
-	                <td class="wpf-register-field">
-	                    <span class="wpf-desc wpfcl-2"><?php wpforo_phrase('After registration you will receive email confimation and link for set a new password') ?>:</span>
-	                </td>
-	            </tr>
-	          <?php else : ?>
-	          	<tr class="wpfbg-9">
-	                <td class="wpf-register-label">
-	                    <p class="wpf-label wpfcl-1"><?php wpforo_phrase('Password') ?>:</p>
-	                    <span class="wpf-desc wpfcl-2"><?php wpforo_phrase('Must be minimum 6 characters.') ?></span>
-	                </td>
-	                <td class="wpf-register-field">
-	                    <input required="TRUE" type="password" name="wpfreg[user_pass1]" class="wpf-register-text wpfw-50" /> <br />
-	                    <input required="TRUE" type="password" name="wpfreg[user_pass2]" class="wpf-register-text wpfw-50" /> &nbsp;<span class="wpf-desc wpfcl-2" style="white-space:nowrap"><?php wpforo_phrase('confirm password') ?></span>
-	                </td>
-	            </tr>
-              <?php endif ?>
-              <tr class="wpfbg-7">
-                <td class="wpf-register-label"></td>
-                <td id="wpforo_register_form_hook">
-                    <?php do_action('register_form') ?>
-                </td>
-              </tr>
-              <tr class="wpfbg-9">
-                <td class="wpf-register-label">&nbsp;</td>
-                <td class="wpf-register-field">&nbsp;<input type="submit" value="<?php wpforo_phrase('Register') ?>" /></td>
-              </tr>
-           </table>
+		<h3><?php wpforo_phrase('Join us today!') ?></h3>
+         <div class="wpf-table wpforo-register-table wpfbg-9" style="padding-bottom:0px;">
+
+			  <?php wpforo_fields( $fields ); ?>
+              
+              <div class="wpf-tr">
+              		<div class="wpf-td wpfw-1"><?php do_action('register_form') ?></div>
+                    <div class="wpf-cl"></div>
+              </div>
+              <?php if( wpforo_feature('user-register-email-confirm') ): ?>
+                  <div class="wpf-tr">
+                        <div class="wpf-td wpfw-1">
+                            <i class="fas fa-info-circle wpfcl-5 wpf-reg-info" aria-hidden="true" style="font-size:16px;"></i> &nbsp;<?php wpforo_phrase('After registration you will receive an email confirmation with a link to set a new password') ?>
+                        </div>
+                  		<div class="wpf-cl"></div>
+                  </div>
+              <?php endif; ?>
+              <div class="wpf-tr">
+                    <div class="wpf-td wpfw-1">
+                        <div class="wpf-field wpf-field-type-submit" style="text-align:center; width:100%;">
+                            <input type="submit" name="wpfororeg" value="<?php wpforo_phrase('Register') ?>" />
+                        </div>
+                        <div class="wpf-field wpf-extra-field-end">
+                            <div class="wpf-field-wrap" style="text-align:center; width:100%;">
+                                <?php do_action('wpforo_register_form_end') ?>
+                                <div class="wpf-field-cl"></div>
+                            </div>
+                        </div>
+                        <div class="wpf-field-cl"></div>
+                    </div>
+                	<div class="wpf-cl"></div>
+                </div>
+                <div class="wpf-cl"></div>
+              </div>
         </div>
       </div>
     </form>

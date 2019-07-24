@@ -1,7 +1,7 @@
 <?php
 	// Exit if accessed directly
 	if( !defined( 'ABSPATH' ) ) exit;
-	if( !current_user_can('administrator') ) exit;
+	if( !WPF()->perm->usergroup_can('mth') ) exit;
 ?>
 
 <div id="wpf-admin-wrap" class="wrap wpforo-themes">
@@ -9,7 +9,7 @@
 		<?php _e('Forum Themes', 'wpforo'); ?>
 		<a href="<?php echo admin_url( 'admin.php?page=wpforo-themes&action=add' ) ?>" class="add-new-h2" style="margin-left:10px; display:none;"><?php _e('Add New', 'wpforo'); ?></a>
 	</h2>
-    <?php $wpforo->notice->show(FALSE) ?>
+    <?php WPF()->notice->show(FALSE) ?>
 	
     <div style="box-shadow:none; margin:25px 0px 20px 0px;" class="wpf-info-bar">
         <p style="font-size:13px; padding:0px; margin:10px;">
@@ -26,16 +26,16 @@
     </div>
     
 	<?php 
-    $themes = $wpforo->tpl->find_themes();
+    $themes = WPF()->tpl->find_themes();
 	$theme_count = count($themes);
-	$wpforo->theme;
+	WPF()->tpl->theme;
 	if(!empty($themes)):
 		foreach( $themes as $main_file => $theme ): 
 			$theme_folder = trim(basename(dirname($main_file)), '/');
 			$theme_url = WPFORO_THEME_URL . '/' . $theme_folder;
-			$layouts = $wpforo->tpl->find_themes('/'.$theme_folder.'/layouts', 'php', 'layout');
-			$styles = $wpforo->tpl->find_styles( $theme_folder );
-			$is_active = ( $wpforo->theme == $theme_folder ) ? true : false;
+			$layouts = WPF()->tpl->find_themes('/'.$theme_folder.'/layouts', 'php', 'layout');
+			$styles = WPF()->tpl->find_styles( $theme_folder );
+			$is_active = ( WPF()->tpl->theme == $theme_folder ) ? true : false;
 			$theme_archive = get_option( 'wpforo_theme_archive_' . $theme_folder );
 			$has_archive = (!empty($theme_archive)) ? true : false;
 			?>

@@ -1,16 +1,24 @@
 <?php
 	// Exit if accessed directly
 	if( !defined( 'ABSPATH' ) ) exit;
-	if( !current_user_can('administrator') ) exit;
+	if( !WPF()->perm->usergroup_can('ms') ) exit;
+	$nocan = array( 	
+		'no_access' => array('et', 'dt', 'dot', 'er', 'dr', 'dor', 'l', 's', 'at', 'cot', 'p', 'op', 'vp', 'au', 'sv', 'mt', 'ccp' ,'r', 'ct', 'cr', 'eot', 'eor', 'oat', 'osv', 'cvp', 'v', 'a'),
+		'read_only' => array('et', 'dt', 'dot', 'er', 'dr', 'dor', 'l', 's', 'at', 'cot', 'p', 'op', 'vp', 'au', 'sv', 'mt', 'ccp' ,'r'),
+		'standard' => array('et', 'dt', 'er', 'dr', 'at', 'cot', 'p', 'vp', 'au', 'sv', 'mt')
+	);
 ?>
 
 <?php if( !isset($_GET['action']) ): ?>
-	<?php $accesses = $wpforo->perm->get_accesses() ?>
+	<?php $accesses = WPF()->perm->get_accesses() ?>
     <h2 style="margin-top:0px; margin-bottom:20px;"><a href="?page=wpforo-settings&tab=accesses&action=add" class="add-new-h2"><?php _e('Add New Forum Access', 'wpforo'); ?></a></h2>
-    <table id="usergroup_table" class="wp-list-table widefat fixed posts" cellspacing="0">
+    <table id="usergroup_table" class="wp-list-table widefat fixed posts" cellspacing="0" style="max-width: 900px;">
 		<thead>
 			<tr>
-                <th scope="col" id="title" class="manage-column column-title sorted desc" style="padding:10px; font-size:14px; padding-left:15px; font-weight:bold;"><span><?php _e('Access names', 'wpforo'); ?></span></th>
+                <th scope="col" id="title" class="manage-column column-title sorted desc" style="padding:10px; font-size:14px; padding-left:15px; font-weight:bold;">
+                    <label><?php _e('Access names', 'wpforo'); ?><a href="https://wpforo.com/docs/root/wpforo-settings/forum-accesses/" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="display: inline;"><i class="far fa-question-circle"></i></a></label>
+                    <p class="wpf-info"><?php _e('Forum Accesses are designed to do a Forum specific user permission control. These are set of permissions which are attached to certain Usergeoup in each forum. Thus users can have different permissions in different forums based on their Usergroup.', 'wpforo'); ?></p>
+                </th>
             </tr>
 		</thead>
 		<tbody id="the-list">
@@ -47,21 +55,20 @@
                 <input type="hidden" name="access[action]" value="<?php echo ( $_GET['action'] == 'add'  ? 'add' : 'edit' ) ?>" />
                 <input type="hidden" name="access[key]" value="<?php echo ( isset($_GET['access']) ? esc_attr(sanitize_text_field($_GET['access'])) : '' ) ?>" />
                 <label class="wpf-label-big"><?php _e('Access name', 'wpforo'); ?></label>
-                <?php if( isset( $_GET['access'] ) ){ $access = $wpforo->perm->get_access( $_GET['access'] );} ?>
+                <?php if( isset( $_GET['access'] ) ){ $access = WPF()->perm->get_access( $_GET['access'] );} ?>
                 <input name="access[name]" type="text" size="40" required="TRUE" value="<?php echo ( $_GET['action'] == 'edit' ? esc_attr($access['title']) : '') ?>" style="background:#FDFDFD; width:30%; min-width:320px;">
                 <p>&nbsp;</p>
-                
                 <?php 
                 $access_key = ( isset( $_GET['access'] ) ? $_GET['access'] : 0 ); 
-                $cans = $wpforo->perm->forum_cans_form( $access_key ); ?>
+                $cans = WPF()->perm->forum_cans_form( $access_key ); ?>
                 <?php $n = 0; foreach( $cans as $can => $data  ): ?>
                     <?php if( $n%4 == 0 ): ?>
                     </table>
                     <table class="wpf-table-box-left" style="margin-right:15px; margin-bottom:15px;  min-width:320px;">
                          <?php endif; ?>
                         <tr>
-                            <th class="wpf-dw-td-nowrap"><label class="wpf-td-label" for="wpf-can-<?php echo esc_attr($can) ?>"><?php echo esc_html( __( $data['name'], 'wpforo' ) ) ?></label></th>
-                            <td class="wpf-dw-td-value" style="text-align:center;"><input id="wpf-can-<?php echo esc_attr($can) ?>" type="checkbox" name="cans[<?php echo esc_attr($can) ?>]" value="1" <?php echo ( $data['value'] ) ? 'checked="checked"' : ''; ?>></td>
+                            <th class="wpf-dw-td-nowrap"><label class="wpf-td-label" for="wpf-can-<?php echo esc_attr($can) ?>" <?php if(isset($_GET['access']) && isset($nocan[$_GET['access']]) && in_array($can, $nocan[$_GET['access']])) echo 'style="color: #aaa;" ' ?>><?php echo esc_html( __( $data['name'], 'wpforo' ) ) ?></label></th>
+                            <td class="wpf-dw-td-value" style="text-align:center;"><input <?php if(isset($_GET['access']) && isset($nocan[$_GET['access']]) && in_array($can, $nocan[$_GET['access']])) echo ' disabled' ?> id="wpf-can-<?php echo esc_attr($can) ?>" type="checkbox" name="cans[<?php echo esc_attr($can) ?>]" value="1" <?php echo ( $data['value'] ) ? 'checked="checked"' : ''; ?>></td>
                         </tr>
                 <?php $n++; endforeach ?>
                 </table>

@@ -21,7 +21,7 @@
       });
       
       ed.addShortcut('ctrl+0','pre','preFormat')
-    },
+    }
   });
 
   // Register plugin

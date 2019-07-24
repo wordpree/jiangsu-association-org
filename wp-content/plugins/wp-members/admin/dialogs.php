@@ -5,13 +5,13 @@
  * Handles functions that output admin dialogs to adminstrative users.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions included:
  * - wpmem_a_do_warnings
@@ -167,11 +167,11 @@ function wpmem_a_meta_box() {
 		<div class="inside">
 
 			<p><strong><?php _e('Version:', 'wp-members'); echo "&nbsp;".WPMEM_VERSION; ?></strong><br />
-				<a href="http://rocketgeek.com/plugins/wp-members/quick-start-guide/"><?php _e( 'Quick Start Guide', 'wp-members' ); ?></a><br />
-				<a href="http://rocketgeek.com/plugins/wp-members/users-guide/"><?php _e( 'Online User Guide', 'wp-members' ); ?></a><br />
-				<a href="http://rocketgeek.com/plugins/wp-members/users-guide/faqs/"><?php _e( 'FAQs', 'wp-members' ); ?></a>
+				<a href="https://rocketgeek.com/plugins/wp-members/quick-start-guide/"><?php _e( 'Quick Start Guide', 'wp-members' ); ?></a><br />
+				<a href="https://rocketgeek.com/plugins/wp-members/users-guide/"><?php _e( 'Online User Guide', 'wp-members' ); ?></a><br />
+				<a href="https://rocketgeek.com/plugins/wp-members/users-guide/faqs/"><?php _e( 'FAQs', 'wp-members' ); ?></a>
 			<?php if( ! defined( 'WPMEM_REMOVE_ATTR' ) ) { ?>
-				<br /><br /><a href="http://rocketgeek.com/about/site-membership-subscription/">Find out how to get access</a> to WP-Members private members forum, premium code snippets, tutorials, and add-on modules!
+				<br /><br /><a href="https://rocketgeek.com/about/site-membership-subscription/">Find out how to get access</a> to WP-Members private members forum, premium code snippets, tutorials, and add-on modules!
 			<?php } ?>
 			</p>
 
@@ -180,7 +180,7 @@ function wpmem_a_meta_box() {
 			<?php _e( 'A plugin developed by', 'wp-members' ); ?>&nbsp;<a href="http://butlerblog.com">Chad Butler</a><br />
 			<?php _e( 'Follow', 'wp-members' ); ?> ButlerBlog: <a href="http://feeds.butlerblog.com/butlerblog" target="_blank">RSS</a> | <a href="http://www.twitter.com/butlerblog" target="_blank">Twitter</a><br />
 			Copyright &copy; 2006-<?php echo date("Y"); ?><br /><br />
-			Premium support and installation service <a href="http://rocketgeek.com/about/site-membership-subscription/">available at rocketgeek.com</a>.
+			Premium support and installation service <a href="https://rocketgeek.com/about/site-membership-subscription/">available at rocketgeek.com</a>.
 			</i></p>
 		</div>
 	</div><?php
@@ -198,7 +198,7 @@ function wpmem_a_rss_box() {
 		<h3><span><?php _e( 'Latest from RocketGeek', 'wp-members' ); ?></span></h3>
 		<div class="inside"><?php
 		wp_widget_rss_output( array(
-			'url'          => 'http://rocketgeek.com/feed/',  //put your feed URL here
+			'url'          => 'https://rocketgeek.com/feed/',  //put your feed URL here
 			'title'        => __( 'Latest from RocketGeek', 'wp-members' ),
 			'items'        => 4, //how many posts to show
 			'show_summary' => 0,
@@ -206,6 +206,18 @@ function wpmem_a_rss_box() {
 			'show_date'    => 0,
 		) );?>
 		</div>
+	</div><?php
+}
+
+/**
+ * Adds the rating request meta box.
+ *
+ * @since 3.2.0
+ */
+function wpmem_a_rating_box() {
+	?><div class="postbox">
+		<h3><?php _e( 'Like WP-Members?', 'wp-members' ); ?></h3>
+		<div class="inside"><?php echo sprintf( __( 'If you like WP-Members please give it a %s&#9733;&#9733;&#9733;&#9733;&#9733;%s rating. Thanks!!', 'wp-members' ), '<a href="https://wordpress.org/support/plugin/wp-members/reviews?rate=5#new-post">', '</a>' ); ?></div>
 	</div><?php
 }
 
@@ -226,16 +238,16 @@ function butlerblog_dashboard_widget() {
  * @since 2.8.0
  */
 function butlerblog_feed_output() {
-    echo '<div class="rss-widget">';
-    wp_widget_rss_output( array(
-        'url'          => 'http://feeds.feedburner.com/butlerblog',
-        'title'        => __( 'Latest from ButlerBlog', 'wp-members' ),
-        'items'        => 5,
-        'show_summary' => 0,
-        'show_author'  => 0,
-        'show_date'    => 1,
-    ) );
-    echo "</div>";
+	echo '<div class="rss-widget">';
+	wp_widget_rss_output( array(
+		'url'          => 'https://feeds.feedburner.com/butlerblog',
+		'title'        => __( 'Latest from ButlerBlog', 'wp-members' ),
+		'items'        => 5,
+		'show_summary' => 0,
+		'show_author'  => 0,
+		'show_date'    => 1,
+	) );
+	echo "</div>";
 }
 
 // End of file.

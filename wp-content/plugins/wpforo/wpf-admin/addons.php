@@ -3,7 +3,7 @@
 	if( !defined( 'ABSPATH' ) ) exit;
 	if( !current_user_can('administrator') ) exit;
 	
-	$wpforo->notice->refreshAddonPage(); $wpforo->notice->dismissAddonNoteOnPage();
+	WPF()->notice->refreshAddonPage(); WPF()->notice->dismissAddonNoteOnPage();
 	
 ?>
 
@@ -28,7 +28,7 @@
                             <?php _e('All wpForo addons are being developed by wpForo developers at gVectors Team. Addon prices also include a small donation to the hard work wpForo developers do for free. When you buy an addon, you also donate the free wpForo development and support. Addons are the only incoming source for wpForo developers. wpForo is a premium forum plugin which will always be available for free. There will never be paid and pro versions of this forum board. We have another dozens of awesome features in our to-do list which will also be added for free in future releases. So the free wpForo development always stays on the first priority and wpForo is being extended with new free functions and features even faster than before.', 'wpforo'); ?>
 							<br>
                             <p style="font-size:10px; color:#B1B1B1; font-style:italic; text-align:right; line-height:12px; padding-top:6px; margin:0px;">
-                                Thank you!<br> Sincerely yours,<br> gVectors Team&nbsp;                            </p>
+                                <?php _e('Thank you!<br> Sincerely yours,<br> gVectors Team', 'wpforo'); ?>&nbsp;                            </p>
                         </td>
                     </tr>
                 </tbody></table>
@@ -38,7 +38,7 @@
     <br style="clear:both">
     <div class="wpforo-addons-wrapper">
         <?php
-        foreach ($wpforo->addons as $key => $addon) {
+        foreach (WPF()->addons as $key => $addon) {
             $installed = (class_exists($addon['class'])) ? true : false;
             ?>
             <div class="wpforo-addon-block">

@@ -5,13 +5,13 @@
  * Handles functions that output front-end dialogs to end users.
  * 
  * This file is part of the WP-Members plugin by Chad Butler
- * You can find out more about this plugin at http://rocketgeek.com
- * Copyright (c) 2006-2017  Chad Butler
+ * You can find out more about this plugin at https://rocketgeek.com
+ * Copyright (c) 2006-2019  Chad Butler
  * WP-Members(tm) is a trademark of butlerblog.com
  *
  * @package WP-Members
  * @author Chad Butler
- * @copyright 2006-2017
+ * @copyright 2006-2019
  *
  * Functions Included:
  * - wpmem_inc_loginfailed
@@ -51,7 +51,7 @@ function wpmem_inc_loginfailed() {
 		'heading'        => $wpmem->get_text( 'login_failed_heading' ),
 		'heading_after'  => '</h2>',
 		'p_before'       => '<p>',
-		'message'        => $wpmem->get_text( 'login_failed' ),
+		'message'        => $wpmem->get_text( 'login_failed' ), // @todo $wpmem->error
 		'p_after'        => '</p>',
 		'link'           => '<a href="' . esc_url( $_SERVER['REQUEST_URI'] ) . '">' . $wpmem->get_text( 'login_failed_link' ) . '</a>',
 	);
@@ -207,8 +207,8 @@ function wpmem_inc_memberlinks( $page = 'member' ) {
 			'wrapper_before' => '<ul>',
 			'wrapper_after'  => '</ul>',
 			'rows'           => array(
-				'<li><a href="' . add_query_arg( 'a', 'edit' )      . '">' . $wpmem->get_text( 'profile_edit' )     . '</a></li>',
-				'<li><a href="' . add_query_arg( 'a', 'pwdchange' ) . '">' . $wpmem->get_text( 'profile_password' ) . '</a></li>',
+				'<li><a href="' . esc_url( add_query_arg( 'a', 'edit' ) )      . '">' . $wpmem->get_text( 'profile_edit' )     . '</a></li>',
+				'<li><a href="' . esc_url( add_query_arg( 'a', 'pwdchange' ) ) . '">' . $wpmem->get_text( 'profile_password' ) . '</a></li>',
 			),
 			'after_wrapper'  => '',
 		);
@@ -260,8 +260,8 @@ function wpmem_inc_memberlinks( $page = 'member' ) {
 			'wrapper_before' => '<ul>',
 			'wrapper_after'  => '</ul>',
 			'rows'           => array(
-				'<li><a href="' . $logout . '">' . $wpmem->get_text( 'register_logout' ) . '</a></li>',
-				'<li><a href="' . get_option('home') . '">' . $wpmem->get_text( 'register_continue' ) . '</a></li>',
+				'<li><a href="' . esc_url( $logout ) . '">' . $wpmem->get_text( 'register_logout' ) . '</a></li>',
+				'<li><a href="' . esc_url( get_option('home') ) . '">' . $wpmem->get_text( 'register_continue' ) . '</a></li>',
 			),
 			'after_wrapper'  => '',
 		);
@@ -303,14 +303,15 @@ function wpmem_inc_memberlinks( $page = 'member' ) {
 		break;
 
 	case 'login':
-
+		
+		$logout = urldecode( $logout ); // @todo Resolves sprintf issue if url is encoded.
 		$args = array(
 			'wrapper_before' => '<p>',
 			'wrapper_after'  => '</p>',
 			'user_login'     => $user_login,
 			'welcome'        => $wpmem->get_text( 'login_welcome' ),
 			'logout_text'    => $wpmem->get_text( 'login_logout' ),
-			'logout_link'    => '<a href="' . $logout . '">%s</a>',
+			'logout_link'    => '<a href="' . esc_url( $logout ) . '">%s</a>',
 			'separator'      => '<br />',
 		);
 		/**
@@ -356,7 +357,7 @@ function wpmem_inc_memberlinks( $page = 'member' ) {
 			'user_login'     => $user_login,
 			'welcome'        => $wpmem->get_text( 'status_welcome' ),
 			'logout_text'    => $wpmem->get_text( 'status_logout' ),
-			'logout_link'    => '<a href="' . $logout . '">%s</a>',
+			'logout_link'    => '<a href="' . esc_url( $logout ) . '">%s</a>',
 			'separator'      => ' | ',
 		);
 		/**
@@ -401,6 +402,7 @@ if ( ! function_exists( 'wpmem_page_pwd_reset' ) ):
  * password forms for page=password shortcode.
  *
  * @since 2.7.6
+ * @since 3.2.6 Added nonce validation.
  *
  * @global object $wpmem
  * @param  string $wpmem_regchk
@@ -415,23 +417,16 @@ function wpmem_page_pwd_reset( $wpmem_regchk, $content ) {
 	
 		switch ( $wpmem_regchk ) {
 
-		case "pwdchangempty":
-			$content = wpmem_inc_regmessage( $wpmem_regchk, $wpmem->get_text( 'pwdchangempty' ) );
-			$content = $content . wpmem_inc_changepassword();
-			break;
+			case "pwdchangesuccess":
+				$content = $content . wpmem_inc_regmessage( $wpmem_regchk );
+				break;
 
-		case "pwdchangerr":
-			$content = wpmem_inc_regmessage( $wpmem_regchk );
-			$content = $content . wpmem_inc_changepassword();
-			break;
-
-		case "pwdchangesuccess":
-			$content = $content . wpmem_inc_regmessage( $wpmem_regchk );
-			break;
-
-		default:
-			$content = $content . wpmem_inc_changepassword();
-			break;
+			default:
+				if ( isset( $wpmem_regchk ) && '' != $wpmem_regchk ) {
+					$content .= wpmem_inc_regmessage( $wpmem_regchk, $wpmem->get_text( $wpmem_regchk ) );
+				}
+				$content = $content . wpmem_inc_changepassword();
+				break;
 		}
 
 	} else {
@@ -444,22 +439,18 @@ function wpmem_page_pwd_reset( $wpmem_regchk, $content ) {
 		} else {
 
 			switch( $wpmem_regchk ) {
-	
-			case "pwdreseterr":
-				$content = $content 
-					. wpmem_inc_regmessage( $wpmem_regchk )
-					. wpmem_inc_resetpassword();
-				$wpmem_regchk = ''; // Clear regchk.
-				break;
-	
-			case "pwdresetsuccess":
-				$content = $content . wpmem_inc_regmessage( $wpmem_regchk );
-				$wpmem_regchk = ''; // Clear regchk.
-				break;
-	
-			default:
-				$content = $content . wpmem_inc_resetpassword();
-				break;
+
+				case "pwdresetsuccess":
+					$content = $content . wpmem_inc_regmessage( $wpmem_regchk );
+					$wpmem_regchk = ''; // Clear regchk.
+					break;
+
+				default:
+					if ( isset( $wpmem_regchk ) && '' != $wpmem_regchk ) {
+						$content = wpmem_inc_regmessage( $wpmem_regchk, $wpmem->get_text( $wpmem_regchk ) );
+					}
+					$content = $content . wpmem_inc_resetpassword();
+					break;
 			}
 		
 		}
@@ -534,7 +525,7 @@ function wpmem_page_forgot_username( $wpmem_regchk, $content ) {
 			break;
 
 		case "usernamesuccess":
-			$email = ( isset( $_POST['user_email'] ) ) ? $_POST['user_email'] : '';
+			$email = ( isset( $_POST['user_email'] ) ) ? sanitize_email( $_POST['user_email'] ) : '';
 			$msg = sprintf( $wpmem->get_text( 'usernamesuccess' ), $email );
 			$content = $content . wpmem_inc_regmessage( 'usernamesuccess', $msg );
 			$wpmem->regchk = ''; // Clear regchk.
@@ -549,64 +540,6 @@ function wpmem_page_forgot_username( $wpmem_regchk, $content ) {
 
 	return $content;
 
-}
-
-
-/**
- * Forgot Username Form.
- *
- * Loads the form for retrieving a username.
- *
- * @since 3.0.8
- *
- * @global object $wpmem The WP_Members object class.
- * @return string $str   The generated html for the forgot username form.
- */
-function wpmem_inc_forgotusername() {
-	
-	global $wpmem;
-
-	// create the default inputs
-	$default_inputs = array(
-		array(
-			'name'   => $wpmem->get_text( 'username_email' ), 
-			'type'   => 'text',
-			'tag'    => 'user_email',
-			'class'  => 'username',
-			'div'    => 'div_text',
-		),
-	);
-
-	/**
-	 * Filter the array of forgot username form fields.
-	 *
-	 * @since 2.9.0
-	 *
-	 * @param array $default_inputs An array matching the elements used by default.
- 	 */	
-	$default_inputs = apply_filters( 'wpmem_inc_forgotusername_inputs', $default_inputs );
-	
-	$defaults = array(
-		'heading'      => $wpmem->get_text( 'username_heading' ), 
-		'action'       => 'getusername', 
-		'button_text'  => $wpmem->get_text( 'username_button' ),
-		'inputs'       => $default_inputs,
-	);
-
-	/**
-	 * Filter the arguments to override change password form defaults.
-	 *
-	 * @since 
-	 *
-	 * @param array $args An array of arguments to use. Default null.
- 	 */
-	$args = apply_filters( 'wpmem_inc_forgotusername_args', '' );
-
-	$arr  = wp_parse_args( $args, $defaults );
-
-    $str  = wpmem_login_form( 'page', $arr );
-	
-	return $str;
 }
 
 // End of file.

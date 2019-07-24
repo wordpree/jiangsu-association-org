@@ -1,11 +1,11 @@
 <?php
 	// Exit if accessed directly
 	if( !defined( 'ABSPATH' ) ) exit;
-	if( !current_user_can('administrator') ) exit;
+	if( !WPF()->forum->manage() ) exit;
 ?>
 
 <!-- Screen Options -->
-<?php if( isset($_GET['action']) && $_GET['action'] == 'add' || isset($_GET['action']) && $_GET['action'] == 'edit') : ?>
+<?php if ( isset( $_GET['action'] ) && in_array( $_GET['action'], array( 'add', 'edit' ) ) ) : ?>
 	
 	<div id="screen-meta" class="metabox-prefs" style="display: none; ">
 		<div id="screen-options-wrap" class="hidden" tabindex="-1" aria-label="Screen Options Tab" style="display: none; ">
@@ -14,7 +14,7 @@
 				<div class="metabox-prefs">
 					<label for="forum_cat-hide"><input class="hide-postbox-tog" name="forum_cat-hide" type="checkbox" id="forum_cat-hide" value="forum_cat" checked="checked"><?php _e('Forum Options', 'wpforo'); ?></label>
 					<label for="forum_permissions-hide"><input class="hide-postbox-tog" name="forum_permissions-hide" type="checkbox" id="forum_permissions-hide" value="forum_permissions" checked="checked"><?php _e('Permissions', 'wpforo'); ?></label>
-					<label for="forum_slug-hide"><input class="hide-postbox-tog" name="forum_slug-hide" type="checkbox" id="forum_slug-hide" value="forum_slug"><?php _e('Slug', 'wpforo'); ?></label>
+					<label for="forum_slug-hide"><input class="hide-postbox-tog" name="forum_slug-hide" type="checkbox" id="forum_slug-hide" value="forum_slug" checked="checked"><?php _e('Slug', 'wpforo'); ?></label>
 					<label for="forum_meta-hide"><input class="hide-postbox-tog" name="forum_meta-hide" type="checkbox" id="forum_meta-hide" value="forum_meta" checked="checked"><?php _e('Forum Meta', 'wpforo'); ?></label>
 					<br class="clear">
 				</div>
@@ -40,22 +40,23 @@
 	<div id="wpf-admin-wrap" class="wrap">
 
 	<h2 style="padding:30px 0px 10px 0px; line-height: 20px;">
-		<?php _e('Categories and Forums', 'wpforo'); ?> &nbsp; 
+		<?php _e('Categories and Forums', 'wpforo'); ?> &nbsp;
 		<a href="<?php echo admin_url( 'admin.php?page=wpforo-forums&action=add' ) ?>" class="add-new-h2"><?php _e('Add New', 'wpforo'); ?></a>
 	</h2>
 
-	<?php $wpforo->notice->show(FALSE) ?>
+	<?php WPF()->notice->show(FALSE) ?>
 	
 	<!-- Forum Hierarchy -->
 	<?php if( !isset($_GET['action'])) : ?>
-		<?php if($wpforo->perm->usergroup_can('ef')): ?>
+		<?php if( WPF()->forum->manage() ): ?>
 			
-            <div class="wpf-info-bar" style="line-height: 1em; clear:both; padding: 5px 30px; font-size:15px; display:block; box-shadow:none; margin: 20px 0 10px 0; font-style: italic; background: #FFFFC6; width:90%;">
+            <div class="wpf-info-bar" style="line-height: 1em; clear:both; padding: 5px 30px; font-size:15px; display:block; box-shadow:none; margin: 20px 0 10px 0; font-style: italic; background: #FFFFC6; width:90%; position: relative;">
+                <a href="https://wpforo.com/docs/root/categories-and-forums/forum-manager/" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="font-size: 16px; position: absolute; right: 15px; top: 15px;"><i class="far fa-question-circle"></i></a>
             	<ul style="list-style-type: disc; line-height:18px;">
-            		<li style="list-style:none; margin-left:-17px; font-style:normal; font-weight:bold;"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; <?php _e('Important Tips', 'wpforo'); ?></li>
+            		<li style="list-style:none; margin-left:-17px; font-style:normal; font-weight:bold;"><i class="fas fa-info-circle" aria-hidden="true"></i>&nbsp; <?php _e('Important Tips', 'wpforo'); ?></li>
                     <li><?php _e('Please drag and drop forum panels to set parent-child hierarchy.', 'wpforo'); ?></li>
             		<li><?php _e('If a category (blue panels) does not have forums (grey panels) it will not be displayed on front-end. Each category should contain at least one forum.', 'wpforo'); ?></li>
-                    <li><?php _e('Forums can be displayed with different layouts (Extended, Simplified, Q&A), just edit the top (blue panels) category and set the layout you want. Child forums\' layout depends on the top category (blue panels) layout. They cannot have a different layout.', 'wpforo'); ?></li>
+                    <li><?php _e('Forums can be displayed with different layouts (Extended, Simplified, Q&A, Threaded), just edit the top (blue panels) category and set the layout you want. Child forums\' layout depends on the top category (blue panels) layout. They cannot have a different layout.', 'wpforo'); ?></li>
             	</ul>
             </div>
             <br style="clear: both;" />
@@ -66,7 +67,7 @@
 				<div id="post-body">
 					<ul id="menu-to-edit" class="menu">
 						
-						<?php $wpforo->forum->tree('drag_menu'); ?>
+						<?php WPF()->forum->tree('drag_menu'); ?>
 						
 					</ul>
 				</div><br />
@@ -85,8 +86,18 @@
 	<br style="clear: both;"/>
 	<!-- Forum Add || Edit -->
 	<?php if( ( isset($_GET['action']) && $_GET['action'] == 'add' ) || ( isset($_GET['action']) && $_GET['action'] == 'edit' ) ) : ?>
-		<?php if($wpforo->perm->usergroup_can('cf')): ?>
-			<?php if(isset($_GET['id'])) $data = $wpforo->forum->get_forum( array('forumid' => $_GET['id']) ); ?>
+		<?php if( WPF()->forum->manage() ): ?>
+			<?php
+                $data = array();
+                $disabled_forumid = 0;
+				$selected_forumid = 0;
+                if(!empty($_GET['id'])){
+					 $disabled_forumid = array( $_GET['id'] );
+                    if( $data = WPF()->forum->get_forum( array('forumid' => $_GET['id']) ) ) $selected_forumid = $data['parentid'];
+                }
+                if (!empty($_GET['parentid']))$selected_forumid = $_GET['parentid'];
+                $color = (wpfval($data, 'color')) ? $data['color'] : wpforo_random_colors();
+            ?>
 			<div id="poststuff">
 				<form name="forum" action="" method="post">
                 	<?php wp_nonce_field( 'wpforo-forum-addedit' ); ?>
@@ -103,7 +114,7 @@
 									</div>
 									<p>&nbsp;</p>
 									<div class="form-field">
-										<textarea placeholder="<?php _e('Enter description here . . .', 'wpforo'); ?>" name="forum[description]" rows="5" cols="40" style="padding:10px;"><?php echo esc_textarea(isset($data['description']) ? $data['description'] : '') ?></textarea>
+										<textarea placeholder="<?php _e('Enter description here . . .', 'wpforo'); ?>" name="forum[description]" rows="2" cols="40" style="padding:10px;"><?php echo esc_textarea(isset($data['description']) ? $data['description'] : '') ?></textarea>
 										<p><?php _e('This is a forum description. This content will be displayed under forum title on the forum list.', 'wpforo'); ?></p>
 									</div>
 								</div>
@@ -114,16 +125,16 @@
 							<div id="side-sortables" class="meta-box-sortables ui-sortable">
 								
                                 
-								<div id="forum_cat" class="postbox" style="display: block; ">
+								<div id="forum_cat" class="postbox">
 									<div class="handlediv" title="Click to toggle"><br></div>
-									<h3 class="hndle"><span><?php _e('Forum Options', 'wpforo'); ?></span></h3>
+									<h3 class="hndle"><span><?php _e('Forum Options', 'wpforo'); ?> &nbsp;<a href="https://wpforo.com/docs/root/categories-and-forums/forum-manager/add-new-forum/#forum-options" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="font-size: 14px;"><i class="far fa-question-circle"></i></a></span></h3>
 									<div class="inside">
 										<div class="form-field">
 											<p><strong><?php _e('Parent Forum', 'wpforo'); ?></strong></p>
 											<p>
                                             <select id="parent" name="forum[parentid]" class="postform" <?php echo (isset($data['is_cat']) && $data['is_cat'] == 1 ? 'disabled' : '') ?>>
 												<option value="0"><?php _e('No parent', 'wpforo'); ?></option>
-												<?php $wpforo->forum->tree('select_box'); ?>
+												<?php WPF()->forum->tree('select_box', true, $selected_forumid, false, $disabled_forumid); ?>
 											</select>
 											</p>
 											<p class="form-field">
@@ -131,10 +142,10 @@
 											</p>
 											<p><strong><?php _e('Category Layout', 'wpforo'); ?></strong></p>
 											<p>
-                                            <?php $layouts = $wpforo->tpl->find_layouts( WPFORO_THEME ); ?>
+                                            <?php $layouts = WPF()->tpl->find_layouts( WPFORO_THEME ); ?>
                                             <?php if(!empty($layouts)): ?>
                                                 <select id="cat_layout" name="forum[cat_layout]" class="postform" <?php $data['cat_layout'] = ( isset($data['cat_layout']) ? $data['cat_layout'] : 1 ); echo ( isset($data['is_cat']) && $data['is_cat'] == 1  ? '' : 'disabled="TRUE"' ); ?> >
-                                                    <?php $wpforo->tpl->show_layout_selectbox($data['cat_layout']); ?>
+                                                    <?php WPF()->tpl->show_layout_selectbox($data['cat_layout']); ?>
                                                 </select>
                                             <?php else: ?>
                                             	<p><?php _e('No layout found.', 'wpforo'); ?></p>
@@ -144,103 +155,159 @@
 									</div>
 								</div>
 								
-                                <div id="submitdiv" class="postbox" style="display: block; ">
+                                <div id="submitdiv" class="postbox">
 									<div class="handlediv" title="Click to toggle"><br></div>
 									<h3 class="hndle"><span><?php _e('Publish', 'wpforo'); ?></span></h3>
 									<div class="inside">
 										<div id="major-publishing-actions" style="text-align:right;">
 											<?php if( $_GET['action'] == 'edit' ) : ?>
 												<a class="wpf-delete button" href="?page=wpforo-forums&id=<?php echo intval($data['forumid']) ?>&action=del" onclick="if (!confirm('<?php _e('Are you sure you want to delete this forum?', 'wpforo'); ?>')) { return false; }"><?php _e('Delete', 'wpforo'); ?></a> &nbsp; 
-												<a class="preview button" href="<?php echo wpforo_home_url( (isset($data['slug']) ? $data['slug'] : '') ) ?>" target="wp-preview" id="post-preview"  style="display:inline-block;float:none;"><?php _e('View', 'wpforo'); ?></a> &nbsp; 
-											<?php endif; ?>
-											<input type="submit" name="forum[save_edit]" class="button button-primary forum_submit" style="display:inline-block;float:none;" value="<?php _e('Publish', 'wpforo'); ?>">
-											<div class="clear"></div>
+												<a class="preview button" href="<?php echo wpforo_home_url( (isset($data['slug']) ? $data['slug'] : '') ) ?>" target="wp-preview" id="post-preview"  style="display:inline-block;float:none;"><?php _e('View', 'wpforo'); ?></a> &nbsp;
+                                                <input type="submit" name="forum[save_edit]" class="button button-primary forum_submit" style="display:inline-block;float:none;" value="<?php _e('Update', 'wpforo'); ?>">
+                                            <?php else: ?>
+                                                <input type="submit" name="forum[save_edit]" class="button button-primary forum_submit" style="display:inline-block;float:none;" value="<?php _e('Publish', 'wpforo'); ?>">
+                                            <?php endif; ?>
+                                            <div class="clear"></div>
 										</div>
 									</div>
 								</div>
                                 
                                 
-                                <div id="forum_permissions" class="postbox" style="display: block; ">
+                                <div id="forum_permissions" class="postbox">
 									<div class="handlediv" title="Click to toggle"><br></div>
-									<h3 class="hndle"><span>Forum Permissions</span></h3>
+									<h3 class="hndle"><span><?php _e('Forum Permissions', 'wpforo'); ?> &nbsp;<a href="https://wpforo.com/docs/root/categories-and-forums/forum-manager/add-new-forum/#forum-permissions" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="font-size: 14px;"><i class="far fa-question-circle"></i></a></span></h3>
 									<div class="inside">
 										<table>
-											<?php $wpforo->forum->permissions(); ?>
+											<?php WPF()->forum->permissions(); ?>
 										</table>
 									</div>
 								</div>
-                                
-                                <?php if( get_option('wpforo_integrate_s2member') == 1 && false ) : ?>
-									
-									<?php 
-										
-										if(isset( $_GET['id'] )){
-											$srlz = get_option( 'wpforo_s2member_items_levels' );
-											$s2member_items_levels = unserialize( $srlz );
-											
-											for( $i = 0; $i < 5; $i++ ){
-												$f_ids = explode(',', $s2member_items_levels['level'.$i.'_forums']);
-												if(in_array( $_GET['id'], $f_ids)){
-													$lvl = $i;
-													break;
-												}
-												unset($f_ids);
-											}
-										}else{
-											$lvl = -1;
-										}
-										
-									?>
-									
-									<div id="ws-plugin--s2member-security" class="postbox " style="display: block; ">
-										<div class="handlediv" title="Click to toggle"><br></div>
-										<h3 class="hndle"><span>s2Member®</span></h3>
-										<div class="inside">
-											
-											<p style="margin-left:2px;"><strong>Forum Level Restriction?</strong></p>
-											<label class="screen-reader-text" for="ws-plugin--s2member-security-meta-box-level">Add Level Restriction?</label>
-											<select name="forum[s2member_level]" id="ws-plugin--s2member-security-meta-box-level" style="width:99%;">
-												<option value=""></option>
-												<option value="0" <?php echo ( $lvl != null && $lvl == 0 ? 'selected' : '' ); ?> >Require Level #0 (or higher)</option>
-												<option value="1" <?php echo ( $lvl != null && $lvl == 1 ? 'selected' : '' ); ?> >Require Level #1 (or higher)</option>
-												<option value="2" <?php echo ( $lvl != null && $lvl == 2 ? 'selected' : '' ); ?> >Require Level #2 (or higher)</option>
-												<option value="3" <?php echo ( $lvl != null && $lvl == 3 ? 'selected' : '' ); ?> >Require Level #3 (or higher)</option>
-												<option value="4" <?php echo ( $lvl != null && $lvl == 4 ? 'selected' : '' ); ?> >Require Highest Level #4</option>
-											</select><br>
-											
-										</div>
-									</div>
-									
-								<?php endif; ?>
-                                
-							</div>
-						</div>
-						
+
+                                <div id="forum_color" class="postbox">
+                                    <div class="handlediv" title="Click to toggle"><br></div>
+                                    <h3 class="hndle"><span><?php _e('Additional Options', 'wpforo'); ?> &nbsp;</span></h3>
+                                    <div class="inside">
+                                        <div class="wpf-forum-additional-options">
+                                            <div style="float: left; padding: 2px 10px 0px 0px;"><?php _e('Forum Color', 'wpforo') ?></div>
+                                            <div class="wpforo-style-field">
+                                                <input class="wpforo-color-field" name="forum[color]" type="text" value="<?php wpfo(strtoupper($color)); ?>" title="<?php wpfo(strtoupper($color)); ?>" />
+                                            </div>
+                                            <div style="clear: both"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script language="javascript">jQuery(document).ready(function($){$(function () { $('.wpforo-color-field').wpColorPicker(); });});</script>
+
+                                <style>
+                                    #forum_layout .wpf-fl-box a:not(.wpf-lightbox){ cursor: zoom-in; display: inline-block; }
+                                    .wpf-lightbox{ display: none; cursor: zoom-out; position: fixed; z-index: 999; width: 100%; height: 100%; text-align: center; top: 0; left: 0; background: rgba(0,0,0,0.8); }
+                                    .wpf-lightbox img{ max-width: 90%; max-height: 90%; margin-top: 3%; }
+                                    .wpf-lightbox:target{ outline: none; display: block; }
+                                    .wpf-fl-wrap{display: flex; flex-wrap: wrap; flex-direction: row; justify-content: space-evenly; align-items: stretch;}
+                                    .wpf-fl-box{margin: 6px; border: 1px solid #cccccc; padding: 5px; text-align: center;}
+                                    .wpf-fl-box h4{ cursor: pointer; text-align: center; margin: 1px; font-size: 14px; background: #bbbbbb; color: #ffffff; padding: 2px 1px 4px 1px;}
+                                    .wpf-fl-box.wpf-fl-active{border-color: #128403;}
+                                    .wpf-fl-box.wpf-fl-active h4{background-color: #128403;}
+                                </style>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+                                $( "#forum_layout" ).on('click', ".wpf-fl-box:not(.wpf-fl-active) h4", function () {
+                                    if( $('#use_us_cat').is(':checked') ){
+                                        var wrap = $(this).parents('.wpf-fl-box');
+                                        if( wrap ){
+                                            var layout = wrap.data('layout');
+                                            if( layout ){
+                                                $('#cat_layout option[value="' + layout + '"]').attr('selected', true);
+                                                $(".wpf-fl-box").removeClass("wpf-fl-active");
+                                                wrap.addClass("wpf-fl-active");
+                                            }
+                                        }
+                                    }
+                                });
+                                $('#cat_layout').on('change', function () {
+                                    $(".wpf-fl-box").removeClass("wpf-fl-active");
+                                    $("#wpfl-" + this.value).addClass("wpf-fl-active");
+                                });
+                                $('#use_us_cat').on('change', function () {
+                                    if (!$(this).is(':checked')) {
+										<?php if( wpfkey( $data, 'is_cat' ) && ! wpfval( $data, 'is_cat' ) ): ?>
+                                            $(".wpf-fl-box").removeClass("wpf-fl-active");
+                                            var wpf_layout = $('#wpf-current-layout').val();
+                                            $("#wpfl-" + wpf_layout).addClass("wpf-fl-active");
+										<?php else: ?>
+                                            $(".wpf-fl-box").removeClass("wpf-fl-active");
+                                            $("#forum_layout").hide();
+										<?php endif; ?>
+                                    } else {
+                                        $(".wpf-fl-box").removeClass("wpf-fl-active");
+                                        var wpf_layout = $('#cat_layout').find('option:selected').val();
+                                        $("#wpfl-" + wpf_layout).addClass("wpf-fl-active");
+                                        $("#forum_layout").show();
+                                    }
+                                });
+                            });
+                        </script>
 						<div id="postbox-container-2" class="postbox-container">
 							<div id="normal-sortables" class="meta-box-sortables ui-sortable">
-								
-								<div id="forum_slug" class="postbox  hide-if-js" style="display: none; ">
+
+                                <div id="forum_layout" class="postbox"  <?php if(!wpfkey($data, 'is_cat')) echo 'style="display: none"' ;?>>
+                                    <div class="handlediv" title="Click to toggle"><br></div>
+                                    <h3 class="hndle">
+                                        <span>
+                                            <?php if( wpfkey($data, 'is_cat') ): ?>
+                                                <?php if( wpfval($data, 'is_cat') ): ?>
+                                                    <?php _e('Current Layout of this Category', 'wpforo'); ?>
+                                                <?php else: ?>
+                                                    <?php _e('Current Layout of this Forum (inherited from parent category)', 'wpforo'); ?>
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                <?php _e('Category Layout', 'wpforo'); ?>
+                                            <?php endif; ?>
+                                            &nbsp;<a href="https://wpforo.com/docs/root/categories-and-forums/forum-layouts/" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="font-size: 14px;"><i class="far fa-question-circle"></i></a>
+                                        </span>
+                                    </h3>
+                                    <div class="inside" style="padding: 5px 7px;">
+                                        <div class="wpf-fl-wrap">
+                                            <input type="hidden" id="wpf-current-layout" name="wpf-current-layout" value="<?php if( wpfval($data, 'cat_layout') ) echo intval($data['cat_layout']) ?>">
+                                        <?php $layouts = WPF()->tpl->find_layouts( WPFORO_THEME );
+                                              if( !empty($layouts) ): foreach( $layouts as $layout ) : ?>
+                                                    <div id="wpfl-<?php echo intval($layout['id']) ?>" data-layout="<?php echo intval($layout['id']) ?>" class="wpf-fl-box <?php if( wpfkey($data, 'is_cat') && $layout['id'] == $data['cat_layout'] ) echo 'wpf-fl-active' ?>">
+                                                        <a href="#img1<?php echo intval($layout['id']); ?>"><img src="<?php echo WPFORO_URL ?>/wpf-themes/classic/layouts/<?php echo intval($layout['id']); ?>/view-forums.png" style="height: 100px;"/></a>
+                                                        <a href="#_" class="wpf-lightbox" id="img1<?php echo intval($layout['id']); ?>"><img src="<?php echo WPFORO_URL ?>/wpf-themes/classic/layouts/<?php echo intval($layout['id']); ?>/view-forums.png"/></a>
+                                                        <a href="#img2<?php echo intval($layout['id']); ?>"><img src="<?php echo WPFORO_URL ?>/wpf-themes/classic/layouts/<?php echo intval($layout['id']); ?>/view-posts.png" style="height: 100px;"/></a>
+                                                        <a href="#_" class="wpf-lightbox" id="img2<?php echo intval($layout['id']); ?>"><img src="<?php echo WPFORO_URL ?>/wpf-themes/classic/layouts/<?php echo intval($layout['id']); ?>/view-posts.png"/></a>
+                                                        <h4><?php echo esc_html($layout['name']) ?><!-- <input type="radio" name="forum[cat_layout]" value="<?php echo esc_attr(trim($layout['id'])) ?>" <?php echo ( $layout['id'] == $data['cat_layout'] ? ' checked="checked" ' : '' ); ?> /> --></h4>
+                                                    </div>
+                                            <?php endforeach; endif; ?>
+                                        </div>
+                                        <p style="font-style: italic; padding: 0px 10px 5px 10px; margin: 10px 0px;"><i class="fas fa-info-circle" style="color: #777777; font-size: 14px; padding-right: 3px;"></i> <?php _e('Forums can be displayed with different layouts (Extended, Simplified, Q&A, Threaded). Use the "Category Layout" dropdown located on the top right section to set the layout you want. This option is only available for Categories (top parent forums). Other forums and sub-forums inherit it. They cannot have a different layout, therefore the layout dropdown option becomes disabled if this forum is not a Category.', 'wpforo'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div id="forum_slug" class="postbox">
 									<div class="handlediv" title="Click to toggle"><br></div>
-									<h3 class="hndle"><span><?php _e('Forum Slug', 'wpforo'); ?></span></h3>
+									<h3 class="hndle"><span><?php _e('Forum Slug', 'wpforo'); ?> &nbsp;<a href="https://wpforo.com/docs/root/categories-and-forums/forum-manager/add-new-forum/#forum-slug" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="font-size: 14px;"><i class="far fa-question-circle"></i></a></span></h3>
 									<div class="inside">
 										<input name="forum[slug]"  type="text" value="<?php echo esc_attr(isset($data['slug']) ? $data['slug'] : '') ?>" size="40" />
 										<p><?php _e('The "slug" is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.', 'wpforo'); ?> </p><br /> 
 									</div>
 								</div>
 								
-                                <div id="forum_icon" class="postbox  hide-if-js" style="display: block; ">
+                                <div id="forum_icon" class="postbox">
 									<div class="handlediv" title="Click to toggle"><br></div>
-									<h3 class="hndle"><span><?php _e('Forum Icon', 'wpforo'); ?></span></h3>
+									<h3 class="hndle"><span><?php _e('Forum Icon', 'wpforo'); ?> &nbsp;<a href="https://wpforo.com/docs/root/categories-and-forums/forum-manager/add-new-forum/#forum-icon" title="<?php _e('Read the documentation', 'wpforo') ?>" target="_blank" style="font-size: 14px;"><i class="far fa-question-circle"></i></a></span></h3>
 									<div class="inside" style="padding-top:10px;">
 										<div class="form-field">
 											<label for="tag-icon" style="display:block; padding-bottom:5px;"><?php _e('Font-awesome Icon', 'wpforo'); ?>:</label>
-											<input name="forum[icon]" value="<?php echo (isset($data['icon']) && $data['icon']) ? esc_attr($data['icon']) : 'fa-comments'; ?>" type="text"/>
-                                            <p style="margin-bottom:0px; margin-top:5px;"><?php _e('You can find all icons', 'wpforo'); ?> <a href="http://fontawesome.io/icons/" target="_blank"><?php _e('here', 'wpforo'); ?>.</a> <?php _e('Make sure you insert a class of font-awesome icon, it should start with fa- prefix like &quot;fa-comments&quot;.', '') ?></p>
+											<input name="forum[icon]" value="<?php echo (isset($data['icon']) && $data['icon']) ? esc_attr($data['icon']) : 'fas fa-comments'; ?>" type="text"/>
+                                            <p style="margin-bottom:0px; margin-top:5px;"><?php _e('You can find all icons', 'wpforo'); ?> <a href="http://fontawesome.io/icons/" target="_blank"><?php _e('here', 'wpforo'); ?>.</a> <?php _e('Make sure you insert a class of font-awesome icon, it should start with fa- prefix like &quot;fas fa-comments&quot;.', '') ?></p>
 										</div>
 									</div>
 								</div>
                                 
-								<div id="forum_meta" class="postbox  hide-if-js" style="display: block; ">
+								<div id="forum_meta" class="postbox">
 									<div class="handlediv" title="Click to toggle"><br></div>
 									<h3 class="hndle"><span><?php _e('Forum SEO', 'wpforo'); ?></span></h3>
 									<div class="inside" style="padding-top:10px;">
@@ -289,7 +356,7 @@
 							<tr>
 								<td colspan="2">
                                     <select id="forum_select" name="forum[mergeid]" class="postform" disabled="" >
-                                        <?php $wpforo->forum->tree('select_box', false); ?>
+                                        <?php WPF()->forum->tree('select_box', false); ?>
                                     </select>
                                     <p><?php _e('All sub-forums, topics and replies will be attached to selected forum. Layout will be inherited from this forum.', 'wpforo'); ?></p>
                                 </td>
