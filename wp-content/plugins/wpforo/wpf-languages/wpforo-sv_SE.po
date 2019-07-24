@@ -1,0 +1,3874 @@
+# Copyright (C) 2016 gVectors Team
+# This file is distributed under the same license as the wpForo package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Forum - wpForo\n"
+"POT-Creation-Date: 2017-05-23 23:12+0400\n"
+"PO-Revision-Date: 2017-05-23 23:13+0400\n"
+"Last-Translator: gVectors Team <info@gvectors.com>\n"
+"Language-Team: \n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: wpforo.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: wpf-admin/addons.php:14 wpf-admin/addons.php:22
+msgid "wpForo Addons"
+msgstr "wpForo Tillägg"
+
+#: wpf-admin/addons.php:28
+msgid ""
+"All wpForo addons are being developed by wpForo developers at gVectors Team. "
+"Addon prices also include a small donation to the hard work wpForo "
+"developers do for free. When you buy an addon, you also donate the free "
+"wpForo development and support. Addons are the only incoming source for "
+"wpForo developers. wpForo is a premium forum plugin which will always be "
+"available for free. There will never be paid and pro versions of this forum "
+"board. We have another dozens of awesome features in our to-do list which "
+"will also be added for free in future releases. So the free wpForo "
+"development always stays on the first priority and wpForo is being extended "
+"with new free functions and features even faster than before."
+msgstr ""
+"Alla wpForo addons utvecklas av wpForo utvecklare på gVectors Team. Addon "
+"priser inkluderar också en liten donation till det hårda arbete wpForo "
+"utvecklare gör gratis. När du köper en addon du också donera gratis wpForo "
+"utveckling och support. Addons är den enda inkommande källa för wpForo "
+"utvecklare. wpForo är en premie forum plugin som alltid kommer att finnas "
+"tillgänglig för gratis. Det kommer aldrig att betalas och pro versioner av "
+"detta forum ombord. Vi har en annan dussintals fantastiska funktioner i vår "
+"att göra-lista som också kommer att läggas gratis i framtida versioner. Så "
+"den fria wpForo utveckling förblir alltid på första prioritet och wpForo "
+"förlängs med nya fria funktioner och egenskaper ännu snabbare än tidigare."
+
+#: wpf-admin/addons.php:51
+msgid "Installed"
+msgstr "installerad"
+
+#: wpf-admin/addons.php:55
+msgid "Version"
+msgstr "Version"
+
+#: wpf-admin/addons.php:56
+msgid "at least"
+msgstr "Som minst"
+
+#: wpf-admin/addons.php:58
+msgid "Details | Buy"
+msgstr "Detaljer | Köp"
+
+#: wpf-admin/addons.php:64
+msgid "More information about"
+msgstr "Mer information om"
+
+#: wpf-admin/admin.php:26 wpf-admin/admin.php:27
+#: wpf-includes/wpf-phrases.php:599
+msgid "Dashboard"
+msgstr "Kontrollpanel"
+
+#: wpf-admin/admin.php:26 wpf-admin/admin.php:28 wpf-admin/dashboard.php:138
+#: wpf-admin/options-tabs/styles.php:16 wpf-admin/options.php:15
+#: wpf-includes/wpf-hooks.php:1639 wpf-includes/wpf-phrases.php:123
+msgid "Forums"
+msgstr "Hjälpforum"
+
+#: wpf-admin/admin.php:29 wpf-includes/wpf-hooks.php:22
+#: wpf-includes/wpf-hooks.php:1655
+msgid "Settings"
+msgstr "Inställningar"
+
+#: wpf-admin/admin.php:30 wpf-includes/wpf-hooks.php:1664
+msgid "Tools"
+msgstr ""
+
+#: wpf-admin/admin.php:31 wpf-includes/wpf-hooks.php:1673
+msgid "Moderation"
+msgstr ""
+
+#: wpf-admin/admin.php:32 wpf-admin/dashboard.php:150 wpf-admin/member.php:10
+#: wpf-admin/options.php:18 wpf-includes/wpf-hooks.php:1682
+#: wpf-includes/wpf-phrases.php:178
+msgid "Members"
+msgstr "Medlemmar"
+
+#: wpf-admin/admin.php:33 wpf-admin/usergroup.php:8
+#: wpf-includes/wpf-hooks.php:1691
+msgid "Usergroups"
+msgstr "Användargrupper"
+
+#: wpf-admin/admin.php:34 wpf-includes/wpf-hooks.php:1707
+#: wpf-includes/wpf-phrases.php:600
+msgid "Phrases"
+msgstr "Fraser"
+
+#: wpf-admin/admin.php:35 wpf-includes/wpf-hooks.php:1723
+#: wpf-includes/wpf-phrases.php:601
+msgid "Themes"
+msgstr "Teman"
+
+#: wpf-admin/admin.php:36 wpf-admin/options.php:23
+#: wpf-includes/wpf-hooks.php:1732 wpf-includes/wpf-phrases.php:25
+msgid "Addons"
+msgstr "Tillägg"
+
+#: wpf-admin/dashboard.php:9 wpf-includes/wpf-phrases.php:409
+msgid "wpForo Dashboard"
+msgstr "wpForo instrumentpanel"
+
+#: wpf-admin/dashboard.php:25 wpf-includes/wpf-phrases.php:362
+msgid "Welcome Message"
+msgstr "Välkomstmeddelande"
+
+#: wpf-admin/dashboard.php:31
+msgid ""
+"Thank you for using wpForo! wpForo is a professional bulletin board for "
+"WorPress, and the only forum software which comes with Multi-layout template "
+"system.\n"
+"                                    The \"Extended\", \"Simplified\" and "
+"\"Question &amp Answer\" layouts fit almost all type of discussions needs. "
+"You can use wpForo for small and extremely large communities. \n"
+"                                    <br />If you found some issue or bug "
+"please open a support topic in plugin page or in our support forum at "
+"gVectors.com. If you liked wpForo please leave some good review for this "
+"plugin. We really need your good reviews. \n"
+"                                    If you didn't like wpForo please leave a "
+"list of issues and requirements you'd like us to fix and add in near future. "
+"We're here to help you and improve wpForo as much as possible."
+msgstr ""
+"Tack för att du använder wpForo! wpForo är en professionell anslagstavla för "
+"Worpress, och det enda forum programvara som levereras med Multi-layout "
+"mallsystem. \\ n\n"
+"                                    De \"Extended\", \"förenklad\" och "
+"\"Frågor och amp Svar\" layouter passar nästan alla typer av diskussioner "
+"behov. Du kan använda wpForo för små och mycket stora grupper. \\ n\n"
+"                                    <br /> Om du hittade några problem eller "
+"buggar vänligen öppna ett stöd ämne i plugin sida eller i vårt supportforum "
+"på gVectors.com. Om du gillade wpForo lämna några bra recension för denna "
+"plugin. Vi behöver verkligen dina goda recensioner. \\ n\n"
+"                                    Om du inte gillar wpForo lämna en "
+"förteckning över frågor och krav som du vill att vi ska fixa och lägga i en "
+"nära framtid. Vi är här för att hjälpa dig och förbättra wpForo så mycket "
+"som möjligt."
+
+#: wpf-admin/dashboard.php:60 wpf-includes/wpf-phrases.php:130
+msgid "General Information"
+msgstr "Allmän information"
+
+#: wpf-admin/dashboard.php:64 wpf-includes/wpf-phrases.php:369
+msgid "You are currently running"
+msgstr "Du kör för närvarande"
+
+#: wpf-admin/dashboard.php:65 wpf-includes/wpf-phrases.php:18
+msgid "Active Theme"
+msgstr "Aktivt tema"
+
+#: wpf-admin/dashboard.php:66 wpf-includes/wpf-phrases.php:414
+msgid "wpForo Website"
+msgstr "wpForo hemsida"
+
+#: wpf-admin/dashboard.php:67 wpf-includes/wpf-phrases.php:320
+msgid "Support Forum"
+msgstr "Supportforum"
+
+#: wpf-admin/dashboard.php:78 wpf-includes/wpf-phrases.php:290
+msgid "Server Information"
+msgstr "Serverinformation"
+
+#: wpf-admin/dashboard.php:112 wpf-includes/wpf-phrases.php:46
+msgid "Available"
+msgstr "Tillgänglig"
+
+#: wpf-admin/dashboard.php:112 wpf-includes/wpf-phrases.php:209
+msgid "Not available"
+msgstr "Uppgifter saknas"
+
+#: wpf-admin/dashboard.php:132 wpf-includes/wpf-phrases.php:49
+msgid "Board Statistic"
+msgstr "Styrelsen statistik"
+
+#: wpf-admin/dashboard.php:142 wpf-admin/options-tabs/styles.php:22
+#: wpf-includes/class-forums.php:600 wpf-includes/wpf-phrases.php:339
+msgid "Topics"
+msgstr "Ämnen"
+
+#: wpf-admin/dashboard.php:146 wpf-includes/class-forums.php:600
+#: wpf-includes/wpf-phrases.php:233
+msgid "Posts"
+msgstr "Inlägg"
+
+#: wpf-admin/dashboard.php:154 wpf-includes/wpf-phrases.php:179
+msgid "Members Online"
+msgstr "Medlemmar Online"
+
+#: wpf-admin/dashboard.php:164
+msgid "Avatars Size"
+msgstr "Avatarstorlek"
+
+#: wpf-admin/dashboard.php:168
+msgid "Default Attachments Size"
+msgstr "Standardstorleken för bilagor"
+
+#: wpf-admin/dashboard.php:174
+msgid "Advanced Attachments"
+msgstr "Avancerade bilagor"
+
+#: wpf-admin/dashboard.php:175
+msgid "file(s)"
+msgstr "fil(er)"
+
+#: wpf-admin/dashboard.php:178
+msgid "Advanced Attachments Size"
+msgstr "Avancerade bilagor storlek"
+
+#: wpf-admin/dashboard.php:183
+msgid "Total Size"
+msgstr "Total storlek"
+
+#: wpf-admin/dashboard.php:191 wpf-includes/wpf-phrases.php:611
+msgid "Forum Maintenance"
+msgstr "Forum underhåll"
+
+#: wpf-admin/dashboard.php:193
+msgid ""
+"This process may take a few seconds or dozens of minutes, please be patient "
+"and don't close this page. If you got 500 Server Error please don't worry, "
+"the data updating process is still working in MySQL server."
+msgstr ""
+"Denna process kan ta några sekunder eller tiotals minuter, vänligen ha "
+"tålamod och stäng inte sidan. Om du fick 500 serverfel, oroa dig inte, "
+"datauppdateringesprocessen arbetar fortfarande i MySQL server."
+
+#: wpf-admin/dashboard.php:202
+msgid "Delete All Caches"
+msgstr ""
+
+#: wpf-admin/dashboard.php:203 wpf-includes/wpf-phrases.php:613
+msgid "Update Forums Statistic"
+msgstr "Uppdatera forum statistik"
+
+#: wpf-admin/dashboard.php:204 wpf-includes/wpf-phrases.php:614
+msgid "Update Users Statistic"
+msgstr "Uppdatera användarstatistik"
+
+#: wpf-admin/dashboard.php:205 wpf-includes/wpf-phrases.php:615
+msgid "Delete Phrase Cache"
+msgstr "Ta bort frasen Cache"
+
+#: wpf-admin/dashboard.php:206 wpf-includes/wpf-phrases.php:636
+msgid "Delete User Cache"
+msgstr "Ta bort Cache för användare"
+
+#: wpf-admin/forum.php:13 wpf-includes/functions.php:767
+#: wpf-includes/wpf-phrases.php:302
+msgid "Show on screen"
+msgstr "Visa på skärm"
+
+#: wpf-admin/forum.php:15 wpf-admin/forum.php:119
+#: wpf-includes/wpf-phrases.php:113
+msgid "Forum Options"
+msgstr "Forum Alternativ"
+
+#: wpf-admin/forum.php:16 wpf-includes/wpf-phrases.php:224
+msgid "Permissions"
+msgstr "Behörigheter"
+
+#: wpf-admin/forum.php:17 wpf-includes/wpf-phrases.php:307
+msgid "Slug"
+msgstr "Permalänk"
+
+#: wpf-admin/forum.php:18 wpf-includes/wpf-phrases.php:112
+msgid "Forum Meta"
+msgstr "Forum Meta"
+
+#: wpf-admin/forum.php:21 wpf-includes/wpf-phrases.php:274
+msgid "Screen Layout"
+msgstr "Visningslayout"
+
+#: wpf-admin/forum.php:22 wpf-includes/wpf-phrases.php:210
+msgid "Number of Columns"
+msgstr "Antal kolumner"
+
+#: wpf-admin/forum.php:32 wpf-includes/functions.php:781
+#: wpf-includes/wpf-phrases.php:275
+msgid "Screen Options"
+msgstr "Skärmalternativ"
+
+#: wpf-admin/forum.php:43 wpf-includes/wpf-phrases.php:51
+msgid "Categories and Forums"
+msgstr "Kategorier och forum"
+
+#: wpf-admin/forum.php:44 wpf-admin/options-tabs/general.php:75
+#: wpf-admin/themes.php:10 wpf-admin/usergroup.php:8
+#: wpf-includes/wpf-phrases.php:20
+msgid "Add New"
+msgstr "Lägg till ny"
+
+#: wpf-admin/forum.php:55
+msgid "Important Tips"
+msgstr "Viktiga Tips"
+
+#: wpf-admin/forum.php:56 wpf-includes/wpf-phrases.php:226
+msgid "Please drag and drop forum panels to set parent-child hierarchy."
+msgstr ""
+"Vänligen dra och släpp forum paneler för att ange överordnad-underordnad "
+"hierarki."
+
+#: wpf-admin/forum.php:57
+msgid ""
+"If a category (blue panels) does not have forums (grey panels) it will not "
+"be displayed on front-end. Each category should contain at least one forum."
+msgstr ""
+"Om en kategori (blå paneler) saknar forum (grå paneler) visas det inte på "
+"front-end. Varje kategori bör innehålla minst ett forum."
+
+#: wpf-admin/forum.php:58
+msgid ""
+"Forums can be displayed with different layouts (Extended, Simplified, Q&A), "
+"just edit the top (blue panels) category and set the layout you want. Child "
+"forums' layout depends on the top category (blue panels) layout. They cannot "
+"have a different layout."
+msgstr ""
+"Forum kan visas med olika layouter (Extended, förenklad, Q&A), bara redigera "
+"kategorin top (blå paneler) och ställa in önskad layout. Underforum: layout "
+"beror på layouten översta kategorin (blå paneler). De kan inte ha en annan "
+"layout."
+
+#: wpf-admin/forum.php:74 wpf-includes/wpf-phrases.php:273
+msgid "Save forums order and hierarchy"
+msgstr "Spara forum ordning och hierarki"
+
+#: wpf-admin/forum.php:101 wpf-includes/wpf-phrases.php:87
+msgid "Enter forum title here"
+msgstr "Ange forum titel här"
+
+#: wpf-admin/forum.php:106 wpf-includes/wpf-phrases.php:86
+msgid "Enter description here . . ."
+msgstr "Ange beskrivning här..."
+
+#: wpf-admin/forum.php:107 wpf-includes/wpf-phrases.php:330
+msgid ""
+"This is a forum description. This content will be displayed under forum "
+"title on the forum list."
+msgstr ""
+"Detta är ett forum beskrivning. Detta innehåll kommer att visas under forum "
+"titel på listan forum."
+
+#: wpf-admin/forum.php:122 wpf-includes/wpf-phrases.php:222
+msgid "Parent Forum"
+msgstr "Överordnade Forum"
+
+#: wpf-admin/forum.php:125 wpf-includes/wpf-phrases.php:205
+msgid "No parent"
+msgstr "Ingen överordnad"
+
+#: wpf-admin/forum.php:130 wpf-includes/wpf-phrases.php:347
+msgid "Use as Category"
+msgstr "Användning som kategori"
+
+#: wpf-admin/forum.php:132 wpf-includes/wpf-phrases.php:52
+msgid "Category Layout"
+msgstr "Kategori Layout"
+
+#: wpf-admin/forum.php:140 wpf-includes/wpf-phrases.php:203
+msgid "No layout found."
+msgstr "Ingen layout hittad."
+
+#: wpf-admin/forum.php:149 wpf-admin/forum.php:156
+#: wpf-includes/wpf-phrases.php:235
+msgid "Publish"
+msgstr "Publicerad"
+
+#: wpf-admin/forum.php:153 wpf-includes/wpf-phrases.php:37
+msgid "Are you sure you want to delete this forum?"
+msgstr "Är du säker du vill ta bort detta forum?"
+
+#: wpf-admin/forum.php:153 wpf-admin/themes.php:73
+#: wpf-admin/tools-tabs/antispam.php:138 wpf-admin/usergroup.php:37
+#: wpf-admin/usergroup.php:133 wpf-includes/wpf-hooks.php:1058
+#: wpf-includes/wpf-phrases.php:66
+msgid "Delete"
+msgstr "Ta bort"
+
+#: wpf-admin/forum.php:154 wpf-admin/usergroup.php:39
+#: wpf-includes/class-forums.php:606 wpf-includes/wpf-phrases.php:356
+msgid "View"
+msgstr "Visa"
+
+#: wpf-admin/forum.php:224 wpf-includes/wpf-phrases.php:118
+msgid "Forum Slug"
+msgstr "Permalänk till forum"
+
+#: wpf-admin/forum.php:227 wpf-includes/wpf-phrases.php:323
+msgid ""
+"The \"slug\" is the URL-friendly version of the name. It is usually all "
+"lowercase and contains only letters, numbers, and hyphens."
+msgstr ""
+"En ”slug\" är den URL-vänliga versionen av namnet. Består oftast av gemena "
+"bokstäver och innehåller bara bokstäver, siffror och bindestreck."
+
+#: wpf-admin/forum.php:233
+msgid "Forum Icon"
+msgstr "Forum-ikon"
+
+#: wpf-admin/forum.php:236
+msgid "Font-awesome Icon"
+msgstr "Font Toppen Ikon"
+
+#: wpf-admin/forum.php:238
+msgid "You can find all icons"
+msgstr "Du kan hitta alla ikoner"
+
+#: wpf-admin/forum.php:238
+msgid "here"
+msgstr "här"
+
+#: wpf-admin/forum.php:238
+msgid ""
+"Make sure you insert a class of font-awesome icon, it should start with fa- "
+"prefix like &quot;fa-comments&quot;."
+msgstr ""
+"Kontrollera att du infogar en klass av teckensnitt-awesome ikon, det bör "
+"börja med fa-prefix som \"fa-kommentarer\"."
+
+#: wpf-admin/forum.php:245 wpf-includes/wpf-phrases.php:116
+msgid "Forum SEO"
+msgstr "Forum SEO"
+
+#: wpf-admin/forum.php:248 wpf-includes/wpf-phrases.php:184
+msgid "Meta Description"
+msgstr "Metabeskrivning"
+
+#: wpf-admin/forum.php:277 wpf-includes/wpf-phrases.php:329
+msgid "This action will also delete all sub-forums, topics and replies."
+msgstr "Denna åtgärd raderas även alla underforum, frågor och svar."
+
+#: wpf-admin/forum.php:285 wpf-includes/wpf-phrases.php:137
+msgid ""
+"If you want to delete this forum and keep its sub-forums, topics and "
+"replies, please select a new target forum in dropdown below"
+msgstr ""
+"Om du vill ta bort detta forum och behålla dess Underforum, Välj frågor och "
+"svar, vänligen ett nytt mål forum i listrutan nedan"
+
+#: wpf-admin/forum.php:294 wpf-includes/wpf-phrases.php:26
+msgid ""
+"All sub-forums, topics and replies will be attached to selected forum. "
+"Layout will be inherited from this forum."
+msgstr ""
+"Alla underforum, frågor och svar kommer att bifogas valda forum. Layout "
+"kommer att ärvas från detta forum."
+
+#: wpf-admin/moderation.php:10
+msgid "Topic and Post Moderation"
+msgstr ""
+
+#: wpf-admin/options-tabs/accesses.php:9 wpf-includes/wpf-phrases.php:21
+msgid "Add New Forum Access"
+msgstr "Lägga till nya Forum tillgång"
+
+#: wpf-admin/options-tabs/accesses.php:13 wpf-includes/wpf-phrases.php:15
+msgid "Access names"
+msgstr "Tillgång till namn"
+
+#: wpf-admin/options-tabs/accesses.php:26
+#: wpf-admin/options-tabs/accesses.php:27
+#: wpf-admin/options-tabs/accesses.php:28
+msgid "This access is usually used for "
+msgstr "Denna tillgång används vanligtvis för"
+
+#: wpf-admin/options-tabs/accesses.php:26
+msgid "Guests"
+msgstr "Gäster"
+
+#: wpf-admin/options-tabs/accesses.php:26
+#: wpf-admin/options-tabs/accesses.php:27
+#: wpf-admin/options-tabs/accesses.php:28
+msgid "usergroup"
+msgstr "användargrupp"
+
+#: wpf-admin/options-tabs/accesses.php:27 wpf-includes/wpf-phrases.php:623
+msgid "Registered"
+msgstr "Registrerad"
+
+#: wpf-admin/options-tabs/accesses.php:28 wpf-includes/wpf-phrases.php:621
+msgid "Admin"
+msgstr "Admin"
+
+#: wpf-admin/options-tabs/accesses.php:32 wpf-includes/class-forums.php:602
+#: wpf-includes/functions.php:599 wpf-includes/wpf-phrases.php:382
+msgid "edit"
+msgstr "Ändra"
+
+#: wpf-admin/options-tabs/accesses.php:34 wpf-includes/wpf-phrases.php:39
+msgid ""
+"Are you sure you want to remove this access set? Usergroups which attached "
+"to this access will lost all forum permissions."
+msgstr ""
+"Är du säker du vill ta bort denna tillgång uppsättning? Användargrupper som "
+"bifogas denna tillgång kommer förlorat alla forum behörigheter."
+
+#: wpf-admin/options-tabs/accesses.php:34 wpf-includes/class-forums.php:604
+#: wpf-includes/functions.php:617 wpf-includes/functions.php:627
+#: wpf-includes/wpf-phrases.php:381
+msgid "delete"
+msgstr "radera"
+
+#: wpf-admin/options-tabs/accesses.php:49 wpf-includes/wpf-phrases.php:14
+msgid "Access name"
+msgstr "Åtkomstnamn"
+
+#: wpf-admin/options-tabs/accesses.php:69 wpf-includes/wpf-phrases.php:271
+msgid "Save"
+msgstr "Spara"
+
+#: wpf-admin/options-tabs/accesses.php:69 wpf-includes/wpf-phrases.php:344
+msgid "Update"
+msgstr "Uppdatera"
+
+#: wpf-admin/options-tabs/emails.php:13
+msgid "FROM Name"
+msgstr "Från namn"
+
+#: wpf-admin/options-tabs/emails.php:17
+msgid "FROM Email Address"
+msgstr "Från E-post"
+
+#: wpf-admin/options-tabs/emails.php:22
+msgid "Forum Admins email addresses"
+msgstr "Forum Admins e-postadresser"
+
+#: wpf-admin/options-tabs/emails.php:23 wpf-includes/wpf-phrases.php:57
+msgid ""
+"Comma separated email addresses of forum administrators to get forum "
+"notifications. For example post report messages."
+msgstr ""
+"Kommaavgränsade e-postadresser till forum administratörer att få forum "
+"meddelanden. Till exempel bokföra rapportmeddelanden."
+
+#: wpf-admin/options-tabs/emails.php:29
+msgid "Notify Admins via email on new Topic"
+msgstr "Meddela administratörer via e-post på nytt ämne"
+
+#: wpf-admin/options-tabs/emails.php:30
+msgid ""
+"Send Notification emails to all email addresses (comma separated ) of forum "
+"administrators when a new Topic is created."
+msgstr ""
+"Skicka aviseringsmeddelanden till alla e-postadresser (kommaavgränsad) forum "
+"administratörer när ett nytt ämne skapas."
+
+#: wpf-admin/options-tabs/emails.php:34 wpf-admin/options-tabs/emails.php:46
+#: wpf-admin/options-tabs/features.php:60 wpf-admin/tools-tabs/antispam.php:31
+#: wpf-admin/tools-tabs/antispam.php:40 wpf-admin/tools-tabs/antispam.php:49
+#: wpf-admin/tools-tabs/cleanup.php:39 wpf-includes/wpf-phrases.php:367
+msgid "Yes"
+msgstr "Ja"
+
+#: wpf-admin/options-tabs/emails.php:35 wpf-admin/options-tabs/emails.php:47
+#: wpf-admin/options-tabs/features.php:61 wpf-admin/tools-tabs/antispam.php:32
+#: wpf-admin/tools-tabs/antispam.php:41 wpf-admin/tools-tabs/antispam.php:50
+#: wpf-admin/tools-tabs/cleanup.php:40 wpf-includes/wpf-phrases.php:197
+msgid "No"
+msgstr "Nej"
+
+#: wpf-admin/options-tabs/emails.php:41
+msgid "Notify Admins via email on new Post"
+msgstr "Meddela administratörer via e-post om nya inlägg"
+
+#: wpf-admin/options-tabs/emails.php:42
+msgid ""
+"Send Notification emails to all email addresses (comma separated ) of forum "
+"administrators when a new Reply is created."
+msgstr ""
+"Skicka aviseringsmeddelanden till alla e-postadresser (kommaavgränsad) forum "
+"administratörer när ett nytt svar skapas."
+
+#: wpf-admin/options-tabs/emails.php:53 wpf-includes/wpf-phrases.php:318
+msgid "Subscription Emails"
+msgstr "Prenumeration e-post"
+
+#: wpf-admin/options-tabs/emails.php:57 wpf-includes/wpf-phrases.php:315
+msgid "Subscribe confirmation email subject"
+msgstr "Ämne för bekräftelsemail"
+
+#: wpf-admin/options-tabs/emails.php:61 wpf-includes/wpf-phrases.php:314
+msgid "Subscribe confirmation email message"
+msgstr "Meddelande för E-postmeddelande"
+
+#: wpf-admin/options-tabs/emails.php:65 wpf-includes/wpf-phrases.php:196
+msgid "New topic notification email subject"
+msgstr "Nytt ämne notis E-post ämne"
+
+#: wpf-admin/options-tabs/emails.php:69 wpf-includes/wpf-phrases.php:195
+msgid "New topic notification email message"
+msgstr "Nya avsnittet e-postmeddelande"
+
+#: wpf-admin/options-tabs/emails.php:73 wpf-includes/wpf-phrases.php:194
+msgid "New reply notification email subject"
+msgstr "Nya svar notis E-post ämne"
+
+#: wpf-admin/options-tabs/emails.php:77 wpf-includes/wpf-phrases.php:193
+msgid "New reply notification email message"
+msgstr "Nya svar e-postmeddelande"
+
+#: wpf-admin/options-tabs/emails.php:82 wpf-includes/wpf-phrases.php:228
+msgid "Post Reporting Emails"
+msgstr "Inlägg rapportera e-postmeddelanden"
+
+#: wpf-admin/options-tabs/emails.php:83 wpf-includes/wpf-phrases.php:332
+msgid "This message comes from post reporting pop-up form."
+msgstr "Detta meddelande kommer från post rapportering popup-formulär."
+
+#: wpf-admin/options-tabs/emails.php:88 wpf-includes/wpf-phrases.php:267
+msgid "Report message subject"
+msgstr "Rapporera meddelandeämne"
+
+#: wpf-admin/options-tabs/emails.php:93 wpf-includes/wpf-phrases.php:266
+msgid "Report message body"
+msgstr "Anledning till rapportering"
+
+#: wpf-admin/options-tabs/emails.php:99 wpf-admin/options-tabs/features.php:71
+#: wpf-admin/options-tabs/forums.php:16 wpf-admin/options-tabs/general.php:82
+#: wpf-admin/options-tabs/members.php:128 wpf-admin/options-tabs/posts.php:67
+#: wpf-admin/options-tabs/styles.php:93 wpf-admin/tools-tabs/antispam.php:179
+#: wpf-admin/tools-tabs/cleanup.php:49 wpf-includes/wpf-phrases.php:345
+msgid "Update Options"
+msgstr "Uppdatera Inställningar"
+
+#: wpf-admin/options-tabs/features.php:9 wpf-includes/wpf-phrases.php:295
+msgid "Show Admin Bar for Members"
+msgstr "Visa adminmeny för Medlemmar"
+
+#: wpf-admin/options-tabs/features.php:9 wpf-includes/wpf-phrases.php:333
+msgid "This option doesn't affect website admins."
+msgstr "Detta alternativ påverkar inte webbplats administratörer."
+
+#: wpf-admin/options-tabs/features.php:10 wpf-includes/wpf-phrases.php:297
+msgid "Show Forum Page Title"
+msgstr "Visa sidtiteln på forum"
+
+#: wpf-admin/options-tabs/features.php:11 wpf-includes/wpf-phrases.php:300
+msgid "Show Top/Menu Bar"
+msgstr "Visa Top/Menu Bar"
+
+#: wpf-admin/options-tabs/features.php:12 wpf-includes/wpf-phrases.php:299
+msgid "Show Top Search"
+msgstr "Visa topp Sök"
+
+#: wpf-admin/options-tabs/features.php:13 wpf-includes/wpf-phrases.php:296
+msgid "Show Breadcrumb"
+msgstr "Visa Breadcrumb"
+
+#: wpf-admin/options-tabs/features.php:14 wpf-includes/wpf-phrases.php:298
+msgid "Show Forum Statistic"
+msgstr "Visa Forum statistik"
+
+#: wpf-admin/options-tabs/features.php:15 wpf-includes/wpf-phrases.php:258
+msgid "Replace Author Link to Forum Profile"
+msgstr "Länka författare-Länk till Forum-profil"
+
+#: wpf-admin/options-tabs/features.php:16 wpf-includes/wpf-phrases.php:259
+msgid "Replace Comment Author Link to Forum Profile"
+msgstr "Ersätta kommentar författare länk till Forum profil"
+
+#: wpf-admin/options-tabs/features.php:17 wpf-includes/wpf-phrases.php:633
+msgid "Enable User Registration"
+msgstr "Aktivera användarregistrering"
+
+#: wpf-admin/options-tabs/features.php:17 wpf-includes/wpf-phrases.php:634
+msgid ""
+"This option is not synced with WordPress \"Anyone can register\" option in "
+"Dashboard > Settings > General admin page. If this option is enabled new "
+"users will always be able to register."
+msgstr ""
+"Detta alternativ är inte synkroniserad med WordPress \"Vem som helst kan "
+"registrera\" alternativet i Dashboard > Inställningar > General admin sida. "
+"Om detta alternativ är aktiverat nya kommer användare alltid att kunna "
+"registrera."
+
+#: wpf-admin/options-tabs/features.php:18
+msgid "Enable User Registration email confirmation"
+msgstr "Aktivera användarregistrering e-postbekräftelse"
+
+#: wpf-admin/options-tabs/features.php:18
+msgid ""
+"If you have enabled this option, after registering, user can not login "
+"without confirming the email."
+msgstr ""
+"Om du har aktiverat det här alternativet, efter registrering, kan användaren "
+"inte logga in utan att bekräfta e-post."
+
+#: wpf-admin/options-tabs/features.php:19 wpf-includes/wpf-phrases.php:261
+msgid "Replace Registration Page URL to Forum URL"
+msgstr "Ersätta registreringen sida URL till Forum URL"
+
+#: wpf-admin/options-tabs/features.php:20 wpf-includes/wpf-phrases.php:260
+msgid "Replace Login Page URL to Forum URL"
+msgstr "Ersätta Login sida URL till Forum URL"
+
+#: wpf-admin/options-tabs/features.php:21 wpf-includes/wpf-phrases.php:257
+msgid "Replace Author Avatar with Forum Profile Avatar"
+msgstr "Ersätta författare Avatar med Forum profil Avatar"
+
+#: wpf-admin/options-tabs/features.php:22 wpf-includes/wpf-phrases.php:77
+msgid "Enable Avatars"
+msgstr "Aktivera avatarer"
+
+#: wpf-admin/options-tabs/features.php:23 wpf-includes/wpf-phrases.php:78
+msgid "Enable Custom Avatars"
+msgstr "Aktivera anpassade avatarer"
+
+#: wpf-admin/options-tabs/features.php:24 wpf-includes/wpf-phrases.php:31
+msgid "Allow Member Signature"
+msgstr "Tillåta medlems-signatur"
+
+#: wpf-admin/options-tabs/features.php:25 wpf-includes/wpf-phrases.php:80
+msgid "Enable Member Rating"
+msgstr "Aktivera medlem värdering"
+
+#: wpf-admin/options-tabs/features.php:26 wpf-includes/wpf-phrases.php:81
+msgid "Enable Member Rating Titles"
+msgstr "Aktivera medlem Rating titlar"
+
+#: wpf-admin/options-tabs/features.php:27 wpf-includes/wpf-phrases.php:79
+msgid "Enable Member Cache"
+msgstr "Aktivera medlem Cache"
+
+#: wpf-admin/options-tabs/features.php:28
+msgid "Enable Object Cache"
+msgstr ""
+
+#: wpf-admin/options-tabs/features.php:29
+msgid "Enable HTML Cache"
+msgstr ""
+
+#: wpf-admin/options-tabs/features.php:30
+msgid "Enable Memory Cache"
+msgstr ""
+
+#: wpf-admin/options-tabs/features.php:31 wpf-includes/wpf-phrases.php:84
+msgid "Enable wpForo SEO for Meta Titles"
+msgstr "Aktivera wpForo SEO för Meta titlar"
+
+#: wpf-admin/options-tabs/features.php:32 wpf-includes/wpf-phrases.php:83
+msgid "Enable wpForo SEO for Meta Tags"
+msgstr "Aktivera wpForo SEO för Meta-Taggar"
+
+#: wpf-admin/options-tabs/features.php:33
+msgid "Enable User Profile Page indexing"
+msgstr ""
+
+#: wpf-admin/options-tabs/features.php:34 wpf-includes/wpf-phrases.php:82
+msgid "Enable wpForo Font-Awesome Lib"
+msgstr "Aktivera wpForo Font-Awesome Lib"
+
+#: wpf-admin/options-tabs/features.php:35
+msgid "Turn Off User Syncing Note"
+msgstr ""
+
+#: wpf-admin/options-tabs/features.php:36 wpf-includes/wpf-phrases.php:85
+msgid "Enable Output Buffer"
+msgstr "Aktivera utdatabuffert"
+
+#: wpf-admin/options-tabs/features.php:36 wpf-includes/wpf-phrases.php:331
+msgid ""
+"This feature is useful if you're adding content before or after [wpforo] "
+"shortcode in page content. Also it useful if forum is loaded before website "
+"header, on top of the front-end."
+msgstr ""
+"Denna funktion är användbar om du lägger till innehåll före eller efter "
+"[wpforo] kortkod i sidans innehåll. Det är också användbart om forum är "
+"laddad innan webbplats header, ovanpå front-end."
+
+#: wpf-admin/options-tabs/features.php:37
+msgid "Enable WordPress Date/Time Format"
+msgstr "Aktivera WordPress datum-/ tidsformat"
+
+#: wpf-admin/options-tabs/features.php:37 wpf-includes/wpf-phrases.php:598
+msgid ""
+"You can manage WordPress date and time format in WordPress Settings > "
+"General admin page."
+msgstr ""
+"Du kan hantera WordPress datum- och tidsformat i WordPress inställningar > "
+"General admin sida."
+
+#: wpf-admin/options-tabs/features.php:38 wpf-includes/wpf-phrases.php:609
+msgid "Enable Subscription Confirmation"
+msgstr "Aktivera prenumeration bekräftelse"
+
+#: wpf-admin/options-tabs/features.php:38 wpf-includes/wpf-phrases.php:610
+msgid "Forum and Topic subscription with double opt-in/confirmation system."
+msgstr "Forum och ämnet prenumeration med dubbel opt-i/bekräftelse system."
+
+#: wpf-admin/options-tabs/features.php:39
+msgid "Topic subscription option on post editor"
+msgstr "Ämne prenumerationsalternativ på inläggs-editor"
+
+#: wpf-admin/options-tabs/features.php:39
+msgid ""
+"This option adds topic subscription checkbox next to new topic and post "
+"submit button."
+msgstr ""
+"Detta alternativ lägger till avsnittet prenumeration kryssrutan bredvid nytt "
+"ämne och post Skicka-knapp."
+
+#: wpf-admin/options-tabs/features.php:40
+msgid "Topic subscription option on post editor - checked/enabled"
+msgstr "Ämne prenumerationsalternativet på inläggs-editor/påslagen"
+
+#: wpf-admin/options-tabs/features.php:40
+msgid ""
+"Enable this option if you want the topic subscription checkbox to be checked "
+"by default."
+msgstr ""
+"Aktivera det här alternativet om du vill att ämnet prenumeration kryssrutan "
+"ska vara markerad som standard."
+
+#: wpf-admin/options-tabs/features.php:41 wpf-includes/wpf-phrases.php:637
+msgid "Insert Forum Attachments to Media Library"
+msgstr "Infoga Forum bilagor till mediebiblioteket"
+
+#: wpf-admin/options-tabs/features.php:41 wpf-includes/wpf-phrases.php:638
+msgid ""
+"Enable this option to be able manage forum attachments in Dashboard > Media "
+"> Library admin page."
+msgstr ""
+"Aktivera alternativet för att kunna hantera forum bilagor i Dashboard > "
+"Media > bibliotek administrationssida."
+
+#: wpf-admin/options-tabs/features.php:42 wpf-includes/wpf-phrases.php:602
+msgid "Enable Debug Mode"
+msgstr "Aktivera Debug-läge"
+
+#: wpf-admin/options-tabs/features.php:42 wpf-includes/wpf-phrases.php:603
+msgid ""
+"If you got some issue with wpForo, please enable this option before asking "
+"for support, this outputs hidden important information to help us debug your "
+"issue."
+msgstr ""
+"Om du har några problem med wpForo, Vänligen aktivera detta alternativ innan "
+"du kontaktar support, detta synliggör dold viktig information som hjälper "
+"oss att felsöka ditt problem."
+
+#: wpf-admin/options-tabs/features.php:43 wpf-includes/wpf-phrases.php:134
+msgid "Help wpForo to grow, show plugin info"
+msgstr "Hjälp wpForo att växa, visa plugin info"
+
+#: wpf-admin/options-tabs/features.php:43 wpf-includes/wpf-phrases.php:227
+msgid ""
+"Please enable this option to help wpForo get more popularity as your thank "
+"to the hard work we do for you totally free. This option adds a very small "
+"icon in forum footer, which will allow your site visitors recognize the name "
+"of forum solution you use."
+msgstr ""
+"Vänligen aktivera detta alternativ för att hjälpa wpForo få mer popularitet "
+"som din tacka för det hårda arbete vi gör för dig helt gratis. Detta "
+"alternativ lägger till en mycket liten ikon i forum sidfot, vilket gör att "
+"dina besökare känner igen namnet forum-lösning som du använder."
+
+#: wpf-admin/options-tabs/general.php:15 wpf-includes/wpf-phrases.php:107
+msgid "Forum Base URL"
+msgstr "Forum bas-URL"
+
+#: wpf-admin/options-tabs/general.php:24 wpf-includes/wpf-phrases.php:647
+msgid "Turn WordPress to wpForo"
+msgstr "Slå WordPress till wpForo"
+
+#: wpf-admin/options-tabs/general.php:25
+msgid ""
+"This option will disable WordPress on front-end. Only forum pages and "
+"excluded post/pages will be available. wpForo will look like as a stand-"
+"alone forum."
+msgstr ""
+"Detta alternativ kommer att inaktivera WordPress på front-end. Enda forum "
+"sidor och uteslutna inlägg/sidor kommer att vara tillgängliga. wpForo kommer "
+"att se ut som ett fristående forum."
+
+#: wpf-admin/options-tabs/general.php:28
+msgid "Exclude page URLs"
+msgstr "Utesluta sid-URL"
+
+#: wpf-admin/options-tabs/general.php:28
+msgid "one URL per line"
+msgstr "en webbadress per rad"
+
+#: wpf-admin/options-tabs/general.php:38
+msgid "Visit Forum"
+msgstr "Besök Forumet"
+
+#: wpf-admin/options-tabs/general.php:41
+msgid ""
+"wpForo PageID doesn't exist. Forums will not be loaded, please read this"
+msgstr "wpForo PageID existerar inte. Forum kommer inte att laddas, Läs detta"
+
+#: wpf-admin/options-tabs/general.php:41
+msgid "suppor topic"
+msgstr "suppor ämne"
+
+#: wpf-admin/options-tabs/general.php:43
+msgid "Forum Page ID"
+msgstr "Forum sida ID"
+
+#: wpf-admin/options-tabs/general.php:48 wpf-includes/wpf-phrases.php:121
+msgid "Forum Title"
+msgstr "Forum Titel"
+
+#: wpf-admin/options-tabs/general.php:52 wpf-includes/wpf-phrases.php:108
+msgid "Forum Description"
+msgstr "Forumbeskrivning:"
+
+#: wpf-admin/options-tabs/general.php:57 wpf-includes/wpf-phrases.php:64
+msgid "Dashboard Menu Position"
+msgstr "Instrumentpanelen meny Position"
+
+#: wpf-admin/options-tabs/general.php:58 wpf-includes/wpf-phrases.php:324
+msgid "The position in the menu order wpForo should appear."
+msgstr "Positionen i den menyn ordning wpForo ska visas."
+
+#: wpf-admin/options-tabs/general.php:59 wpf-includes/wpf-phrases.php:349
+msgid ""
+"Use greater than 5 - below Posts, 10 - below Media, 15 - below Links, 20 - "
+"below Pages, 25 - below comments, 60 - below first separator, 65 - below "
+"Plugins, 70 - below Users, 75 - below Tools, 80 - below Settings, 100 - "
+"below second separator"
+msgstr ""
+"Använd större än 5 - under inlägg, 10 - under Media, 15 - under länkar, 20 - "
+"under sidor, 25 - under kommentarer, 60 - under första separator, 65 - under "
+"Plugins, 70 - under Användare 75 - under Verktyg, 80 - under Inställningar, "
+"100 - nedan andra separator"
+
+#: wpf-admin/options-tabs/general.php:68 wpf-includes/wpf-phrases.php:110
+msgid "Forum Language"
+msgstr "Forum språk"
+
+#: wpf-admin/options-tabs/general.php:69
+msgid ""
+"This option is only related to XML language files. You should upload a "
+"translation XML file to have a new language option in this drop-down. If you "
+"are using PO/MO translation files you should change WordPress Language in "
+"Dashboard > Settings admin page to load according translation for wpForo."
+msgstr ""
+"Detta alternativ är bara relaterat till XML-språkfiler. Du bör ladda upp en "
+"översättning XML-fil för att få ett nytt språkalternativ i den här "
+"listrutan. Om du använder PO/MO översättningsfiler bör du ändra WordPress "
+"språk i Dashboard > Inställningar admin sidan laddas enligt översättning för "
+"wpForo."
+
+#: wpf-admin/options-tabs/general.php:94 wpf-includes/wpf-phrases.php:144
+msgid "Language XML file"
+msgstr "Språk XML-fil"
+
+#: wpf-admin/options-tabs/general.php:103 wpf-includes/wpf-phrases.php:22
+msgid "Add New Language"
+msgstr "Lägg till nytt Språk"
+
+#: wpf-admin/options-tabs/members.php:13 wpf-includes/wpf-phrases.php:218
+msgid "Online status timeout"
+msgstr "Onlinestatus timeout"
+
+#: wpf-admin/options-tabs/members.php:16 wpf-admin/options-tabs/posts.php:19
+#: wpf-admin/options-tabs/posts.php:23 wpf-admin/options-tabs/posts.php:31
+#: wpf-admin/options-tabs/posts.php:35 wpf-includes/wpf-phrases.php:391
+msgid "minutes"
+msgstr "minuter"
+
+#: wpf-admin/options-tabs/members.php:20 wpf-includes/wpf-phrases.php:180
+msgid "Members URL structure"
+msgstr "Medlemmar URL-struktur"
+
+#: wpf-admin/options-tabs/members.php:30 wpf-includes/wpf-phrases.php:62
+msgid "Custom Authorization URLs"
+msgstr "Anpassad auktorisering webbadresser"
+
+#: wpf-admin/options-tabs/members.php:32
+msgid ""
+"Use this option only if you have set other pages for authorization. \n"
+"                        wpForo doesn't change its own URLs, these options "
+"are only for other plugin compatibility. \n"
+"                        For example, if you use BuddyPress or Ultimate "
+"Member plugin you can set these values:"
+msgstr ""
+"Använd detta alternativ endast om du har ställt in andra sidor för "
+"auktorisering. \n"
+"                        wpForo ändrar inte sin egen webbadresser, dessa "
+"alternativ är endast för andra plugin kompatibilitet. \n"
+"                        Till exempel om du använder BuddyPress eller "
+"Ultimate Member plugin kan du ange dessa värden:"
+
+#: wpf-admin/options-tabs/members.php:35 wpf-admin/options-tabs/members.php:41
+#: wpf-includes/wpf-phrases.php:162
+msgid "Login URL"
+msgstr "Inloggnings-URL"
+
+#: wpf-admin/options-tabs/members.php:36 wpf-admin/options-tabs/members.php:42
+#: wpf-includes/wpf-phrases.php:253
+msgid "Register URL"
+msgstr "Registrera URL"
+
+#: wpf-admin/options-tabs/members.php:43 wpf-includes/wpf-phrases.php:164
+msgid "Lost Password URL"
+msgstr "Glömt lösenordet URL"
+
+#: wpf-admin/options-tabs/members.php:49 wpf-includes/wpf-phrases.php:175
+msgid "Member Reputation and Titles"
+msgstr ""
+
+#: wpf-admin/options-tabs/members.php:57 wpf-includes/wpf-phrases.php:248
+msgid "Rating Level"
+msgstr "Klassningsnivå"
+
+#: wpf-admin/options-tabs/members.php:58 wpf-includes/wpf-phrases.php:185
+msgid "Min Number of Posts"
+msgstr "Minimum Antal inlägg"
+
+#: wpf-admin/options-tabs/members.php:59 wpf-includes/wpf-phrases.php:176
+msgid "Member Title"
+msgstr "Medlem Titel"
+
+#: wpf-admin/options-tabs/members.php:60 wpf-includes/wpf-phrases.php:294
+msgid "Short Badge"
+msgstr "Kort Emblem"
+
+#: wpf-admin/options-tabs/members.php:61 wpf-includes/wpf-phrases.php:128
+msgid "Full Badge"
+msgstr "Fullt Emblem"
+
+#: wpf-admin/options-tabs/members.php:62 wpf-includes/wpf-phrases.php:246
+msgid "Rating Color"
+msgstr "Betygsfärg"
+
+#: wpf-admin/options-tabs/members.php:63 wpf-includes/wpf-phrases.php:247
+msgid "Rating Icon"
+msgstr "Värdering-ikon"
+
+#: wpf-admin/options-tabs/members.php:63 wpf-includes/wpf-phrases.php:187
+msgid "More"
+msgstr "Mer"
+
+#: wpf-admin/options-tabs/members.php:68 wpf-includes/wpf-phrases.php:158
+msgid "Level"
+msgstr "Nivå"
+
+#: wpf-admin/options-tabs/members.php:69 wpf-includes/wpf-phrases.php:212
+msgid "Number of Posts"
+msgstr "Antal inlägg"
+
+#: wpf-admin/options-tabs/members.php:70 wpf-includes/wpf-phrases.php:63
+msgid "Custom Title"
+msgstr "Anpassad titel"
+
+#: wpf-admin/options-tabs/members.php:73 wpf-includes/wpf-phrases.php:56
+msgid "Color"
+msgstr "Färg"
+
+#: wpf-admin/options-tabs/members.php:74 wpf-includes/wpf-phrases.php:48
+msgid "Badge Icon"
+msgstr "Emblem ikon"
+
+#: wpf-admin/options-tabs/members.php:80
+msgid "Enable Reputation Titles for selected usergroups"
+msgstr "Aktivera rykte titlar för valda användargrupper"
+
+#: wpf-admin/options-tabs/members.php:81
+msgid ""
+"This option depends on \"Enable Member Rating Titles\" parent option, witch "
+"located in wpForo Settings > Features Tab"
+msgstr ""
+"Det här alternativet beror på \"Aktivera medlem Rating titlar\" förälder "
+"alternativ, som ligger i wpForo inställningar > funktioner fliken"
+
+#: wpf-admin/options-tabs/members.php:94
+msgid "Enable Reputation Badges for selected usergroups"
+msgstr "Aktivera rykte emblem för valda användargrupper"
+
+#: wpf-admin/options-tabs/members.php:95
+msgid ""
+"This option depends on \"Enable Member Rating\" parent option, witch located "
+"in wpForo Settings > Features Tab"
+msgstr ""
+"Det här alternativet beror på \"Aktivera medlem Rating\" förälder "
+"alternativ, häxa som ligger i wpForo inställningar > funktioner fliken"
+
+#: wpf-admin/options-tabs/members.php:108
+msgid "Display Usergroup under Post Author Avatar"
+msgstr ""
+
+#: wpf-admin/options-tabs/plugins.php:9
+msgid ""
+"Thank you for using wpForo. wpForo is a premium forum plugin which will "
+"always be available for free. There will never be paid and pro versions of "
+"this forum board. However this is a very large and hard project so we also "
+"develop paid addons (extensions), which will financially help us to keep "
+"improving and adding new features to the free wpForo plugin. Forum addons "
+"will also be actively developed. The first addons \"Advanced Media Uploader"
+"\", \"Polls\", \"Private Messages\" and \"Ad Manager\" will be available "
+"very soon. Once you got some addon and activated that, you will find "
+"settings in vertical subTabs here."
+msgstr ""
+"Tack för att du använder wpForo. wpForo är en premie forum plugin som alltid "
+"kommer att finnas tillgänglig för gratis. Det kommer aldrig att betalas och "
+"pro versioner av detta forum ombord. Men detta är en mycket stor och hård "
+"projekt så vi också utveckla betalda addons (tillägg), som ekonomiskt kommer "
+"att hjälpa oss att fortsätta att förbättra och lägga till nya funktioner "
+"till den fria wpForo plugin. Forum addons kommer också att utvecklas aktivt. "
+"De första addons \"Advanced Media Uploader\", \"omröstningar\", \"Privata "
+"meddelanden\" och \"Ad Manager\" kommer att finnas tillgänglig inom kort. "
+"När du fått några addon och aktiveras som hittar du inställningarna i "
+"vertikala flikar här."
+
+#: wpf-admin/options-tabs/posts.php:14 wpf-includes/wpf-phrases.php:214
+msgid "Number of Topics per Page"
+msgstr "Antal ämnen per sida"
+
+#: wpf-admin/options-tabs/posts.php:18 wpf-includes/wpf-phrases.php:30
+msgid "Allow Edit Own Topic for"
+msgstr "Tillåta redigera egna ämne för"
+
+#: wpf-admin/options-tabs/posts.php:22 wpf-includes/wpf-phrases.php:27
+msgid "Allow Delete Own Topic for"
+msgstr "Tillåt att ta bort eget ämne för"
+
+#: wpf-admin/options-tabs/posts.php:26 wpf-includes/wpf-phrases.php:213
+msgid "Number of Posts per Page"
+msgstr "Antal inlägg per sida"
+
+#: wpf-admin/options-tabs/posts.php:30 wpf-includes/wpf-phrases.php:29
+msgid "Allow Edit Own Post for"
+msgstr "Tillåta redigera egna inlägg för"
+
+#: wpf-admin/options-tabs/posts.php:34 wpf-includes/wpf-phrases.php:28
+msgid "Allow Delete Own post for"
+msgstr "Att ta bort egna inlägg för"
+
+#: wpf-admin/options-tabs/posts.php:40 wpf-includes/wpf-phrases.php:169
+msgid "Maximum upload file size"
+msgstr "Max filstorlek vid uppladdning"
+
+#: wpf-admin/options-tabs/posts.php:41 wpf-includes/wpf-phrases.php:371
+msgid ""
+"You can not set this value more than \"upload_max_filesize\" and "
+"\"post_max_size\". If you want to increase server parameters please contact "
+"to your hosting service support."
+msgstr ""
+"Du kan inte ange detta värde mer än \"upload_max_filesize\" och "
+"\"post_max_size\". Om du vill öka server parametrar vänligen kontakta din "
+"hosting service support."
+
+#: wpf-admin/options-tabs/posts.php:44 wpf-includes/wpf-phrases.php:166
+msgid "MB"
+msgstr "MB"
+
+#: wpf-admin/options-tabs/posts.php:47 wpf-includes/wpf-phrases.php:289
+msgid "Server \"upload_max_filesize\" is "
+msgstr "Server \"upload_max_filesize\" är"
+
+#: wpf-admin/options-tabs/posts.php:48 wpf-includes/wpf-phrases.php:288
+msgid "Server \"post_max_size\" is "
+msgstr "Server \"post_max_size\" är"
+
+#: wpf-admin/options-tabs/posts.php:56
+msgid "Attachment click - message for non-permitted users"
+msgstr "Bifogad fil Klick - meddelande för icke tillåtna användare"
+
+#: wpf-admin/options-tabs/posts.php:57
+msgid ""
+"This message will be displayed when a non-permitted forum member clicks on "
+"attached file link in topic and posts."
+msgstr ""
+"Detta meddelande visas när en icke tillåtna forummedlem klickar på bifogad "
+"fillänk i ämnet och inlägg."
+
+#: wpf-admin/options-tabs/styles.php:13
+msgid "Font Sizes"
+msgstr "Teckenstorlekar"
+
+#: wpf-admin/options-tabs/styles.php:28 wpf-includes/wpf-phrases.php:481
+msgid "Post Content"
+msgstr "Inläggets Innehåll"
+
+#: wpf-admin/options-tabs/styles.php:36 wpf-includes/wpf-phrases.php:61
+msgid "Custom CSS Code"
+msgstr "Anpassad CSS kod"
+
+#: wpf-admin/options-tabs/styles.php:43
+msgid "Forum Color Styles"
+msgstr "Forum färgstilar"
+
+#: wpf-admin/options.php:8 wpf-includes/wpf-phrases.php:117
+msgid "Forum Settings"
+msgstr "Forum-inställningar"
+
+#: wpf-admin/options.php:14 wpf-includes/wpf-phrases.php:129
+msgid "General"
+msgstr "Allmänt"
+
+#: wpf-admin/options.php:16 wpf-includes/wpf-phrases.php:105
+msgid "Forum Accesses"
+msgstr "Forum tillgång"
+
+#: wpf-admin/options.php:17 wpf-includes/wpf-phrases.php:340
+msgid "Topics &amp; Posts"
+msgstr "Ämnen &amp; inlägg"
+
+#: wpf-admin/options.php:19 wpf-includes/wpf-phrases.php:76
+msgid "Emails"
+msgstr "E-postmeddelanden"
+
+#: wpf-admin/options.php:20 wpf-includes/wpf-phrases.php:96
+msgid "Features"
+msgstr "Funktioner"
+
+#: wpf-admin/options.php:22 wpf-includes/wpf-phrases.php:312
+msgid "Styles"
+msgstr "Stilar"
+
+#: wpf-admin/phrase.php:10 wpf-includes/wpf-phrases.php:127
+msgid "Front-end Phrases"
+msgstr "Front fraser"
+
+#: wpf-admin/themes.php:9 wpf-includes/wpf-phrases.php:120
+msgid "Forum Themes"
+msgstr "Forum teman"
+
+#: wpf-admin/themes.php:46 wpf-includes/wpf-phrases.php:60
+msgid "Current active theme"
+msgstr "Aktivt tema"
+
+#: wpf-admin/themes.php:48 wpf-includes/wpf-phrases.php:138
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: wpf-admin/themes.php:52 wpf-includes/wpf-phrases.php:143
+msgid "LAYOUTS"
+msgstr "Layouter"
+
+#: wpf-admin/themes.php:68 wpf-includes/wpf-phrases.php:17
+msgid "Activate"
+msgstr "Aktiv"
+
+#: wpf-admin/themes.php:69 wpf-includes/wpf-phrases.php:124
+msgid "Fresh Installation"
+msgstr "Ny Installation"
+
+#: wpf-admin/themes.php:71 wpf-includes/wpf-phrases.php:140
+msgid "Install"
+msgstr "Installera"
+
+#: wpf-admin/themes.php:73 wpf-includes/wpf-phrases.php:38
+msgid "Are you sure you want to delete this theme files?"
+msgstr "Är du säker du vill ta bort dessa Temafiler?"
+
+#: wpf-admin/themes.php:76 wpf-includes/wpf-phrases.php:40
+msgid ""
+"Are you sure you want to reset all settings and style colors to default?"
+msgstr ""
+"Är du säker du vill återställa alla inställningar och stil färger till "
+"standard?"
+
+#: wpf-admin/themes.php:76 wpf-includes/wpf-phrases.php:269
+msgid "Reset Settings"
+msgstr "Återställ inställningar"
+
+#: wpf-admin/themes.php:96 wpf-includes/wpf-phrases.php:202
+msgid "No layout found"
+msgstr "Ingen layout hittad"
+
+#: wpf-admin/themes.php:107 wpf-includes/wpf-phrases.php:207
+msgid "No theme found"
+msgstr "Inget tema hittade"
+
+#: wpf-admin/tools-tabs/antispam.php:11
+msgid ""
+"is not installed! For an advanced Spam Control please install Akismet "
+"antispam plugin, it works well with wpForo Spam Control system. Akismet is "
+"already integrated with wpForo. It'll help to filter posts and protect forum "
+"against spam attacks."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:21
+msgid "Spam Control"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:22
+msgid ""
+"Some useful options to limit just registered users and minimize spam. This "
+"control don't affect users whose Usergroup has \"Can edit member\" and \"Can "
+"pass moderation\" permissions."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:28
+msgid "Enable wpForo Spam Control"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:37
+msgid "Ban user when spam is suspicted"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:46
+msgid "Notify via email when new user is banned"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:55
+msgid "Spam Suspicion Level for Topics"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:59
+msgid "Spam Suspicion Level for Posts"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:64
+msgid " is enabled"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:73
+msgid "New Registered User"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:74
+msgid ""
+"Some useful options to limit just registered users and minimize spam. These "
+"options don't affect users whose Usergroup has \"Can edit member\" and \"Can "
+"pass moderation\" permissions."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:81
+msgid "User is New (under hard spam control) during"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:83
+msgid "first"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:83
+msgid "posts"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:86
+msgid "Min number of posts to be able attach files"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:90
+msgid "Min number of posts to be able post links"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:95
+msgid "Do not allow to attach files with following extensions:"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:109
+msgid "Possible Spam Attachments"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:110
+msgid ""
+"This tool is designed to find attachment which have been uploaded by "
+"spammers. The tool checks most common spammer filenames and suggest to "
+"delete but you should check one by one and make sure those are spam files "
+"before deleting."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:112
+msgid "Directory"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:138
+msgid "Delete this file"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:138
+msgid "Are you sure you want to permanently delete this file?"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:149
+msgid "Click to delete Blue marked files"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:150
+msgid ""
+"Are you sure you want to delete all BLUE marked files listed here. Please "
+"download Wordpress /wp-content/uploads/wpforo/ folder to your local computer "
+"before deleting files, this is not undoable."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:151 wpf-admin/tools-tabs/antispam.php:157
+#: wpf-admin/tools-tabs/antispam.php:163 wpf-admin/tools-tabs/antispam.php:169
+msgid "Delete All"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:154
+msgid "Click to delete Orange marked files"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:156
+msgid ""
+"Are you sure you want to delete all ORANGE marked files listed here. Please "
+"download Wordpress /wp-content/uploads/wpforo/ folder to your local computer "
+"before deleting files, this is not undoable."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:160
+msgid "Click to delete Red marked files"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:162
+msgid ""
+"Are you sure you want to delete all RED marked files listed here. Please "
+"download Wordpress /wp-content/uploads/wpforo/ folder to your local computer "
+"before deleting files, this is not undoable."
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:166
+msgid "Click to delete Dark Red marked files"
+msgstr ""
+
+#: wpf-admin/tools-tabs/antispam.php:168
+msgid ""
+"Are you sure you want to delete all DARK RED marked files listed here. "
+"Please download Wordpress /wp-content/uploads/wpforo/ folder to your local "
+"computer before deleting files, this is not undoable."
+msgstr ""
+
+#: wpf-admin/tools-tabs/cleanup.php:12
+msgid "Delete Inactive Users"
+msgstr ""
+
+#: wpf-admin/tools-tabs/cleanup.php:13
+#, php-format
+msgid ""
+"Inactive users are the account owners who have no topics, posts, comments "
+"and subscriptions for new content. In 99% cases this kind of accounts are "
+"being registered by Spammers. This tool allows you to only keep active and "
+"known inactive users."
+msgstr ""
+
+#: wpf-admin/tools-tabs/cleanup.php:19
+msgid "Inactive users who have been registered more than"
+msgstr ""
+
+#: wpf-admin/tools-tabs/cleanup.php:20
+msgid "days ago"
+msgstr ""
+
+#: wpf-admin/tools-tabs/cleanup.php:25
+msgid "Filter by Usergroups"
+msgstr ""
+
+#: wpf-admin/tools-tabs/cleanup.php:36
+msgid "Enable Auto-cleanup of inactive users"
+msgstr ""
+
+#: wpf-admin/tools.php:8
+msgid "Forum Tools"
+msgstr ""
+
+#: wpf-admin/tools.php:14
+msgid "Antispam"
+msgstr ""
+
+#: wpf-admin/tools.php:15
+msgid "Cleanup"
+msgstr ""
+
+#: wpf-admin/usergroup.php:18 wpf-admin/usergroup.php:30
+#: wpf-admin/usergroup.php:62
+msgid "Usergroup Name"
+msgstr "Användargrupp namn"
+
+#: wpf-admin/usergroup.php:19
+msgid "Users Count"
+msgstr "Användare räknas"
+
+#: wpf-admin/usergroup.php:36
+msgid "Edit this usergroup"
+msgstr "Redigera denna användargrupp"
+
+#: wpf-admin/usergroup.php:36 wpf-includes/wpf-phrases.php:73
+msgid "Edit"
+msgstr "Redigera"
+
+#: wpf-admin/usergroup.php:37
+msgid "Delete this usergroup"
+msgstr "Ta bort denna användargrupp"
+
+#: wpf-admin/usergroup.php:39
+msgid "View users list in this usergroup"
+msgstr "Visa användare lista i denna användargrupp"
+
+#: wpf-admin/usergroup.php:43
+msgid "Count of users in this usergroup"
+msgstr "Antal användare i denna användargrupp"
+
+#: wpf-admin/usergroup.php:62 wpf-includes/wpf-phrases.php:133
+msgid "Guest"
+msgstr "Gäst"
+
+#: wpf-admin/usergroup.php:85 wpf-includes/wpf-phrases.php:375
+msgid "add"
+msgstr "lägg till"
+
+#: wpf-admin/usergroup.php:85
+msgid "save"
+msgstr "spara"
+
+#: wpf-admin/usergroup.php:106
+msgid "Delete Chosen Usergroup And Users"
+msgstr "Ta bort valt användargrupp och användare"
+
+#: wpf-admin/usergroup.php:116
+msgid "Delete Chosen Usergroup And Join Users To Other Usergroup"
+msgstr ""
+"Ta bort valt användargrupp och ansluta användare till andra användargrupper"
+
+#: wpf-admin/usergroup.php:128
+msgid "Users will be join this usergroup"
+msgstr "Användare kommer att gå med denna användargrupp"
+
+#: wpf-includes/class-forums.php:601
+msgid "Add a new SubForum"
+msgstr "Lägga till ett nytt underforum"
+
+#: wpf-includes/class-forums.php:601
+msgid "Add a new Forum in this Category"
+msgstr "Lägga till ett nytt Forum i denna kategori"
+
+#: wpf-includes/class-members.php:160
+msgid "<strong>ERROR</strong>: Please enter a username."
+msgstr "<strong>FEL</strong>: Vänligen ange ett användarnamn."
+
+#: wpf-includes/class-members.php:164
+msgid ""
+"<strong>ERROR</strong>: This username is invalid because it uses illegal "
+"characters. Please enter a valid username."
+msgstr ""
+"<strong>FEL</strong>: Användarnamnet är ogiltigt eftersom du använder "
+"otillåtna tecken. Ange ett giltigt användarnamn."
+
+#: wpf-includes/class-members.php:173
+msgid ""
+"<strong>ERROR</strong>: This username is already registered. Please choose "
+"another one."
+msgstr "<strong>Fel</strong>: Detta användarnamn är upptaget. Välj ett nytt."
+
+#: wpf-includes/class-members.php:177
+msgid "<strong>ERROR</strong>: Sorry, that username is not allowed."
+msgstr "<strong>Fel</strong>: Tyvärr, det användarnamnet är inte tillåtet."
+
+#: wpf-includes/class-members.php:181
+msgid "<strong>ERROR</strong>: Please type your email address."
+msgstr "<strong>Fel</strong>: Skriv in din e-postadress."
+
+#: wpf-includes/class-members.php:185
+msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
+msgstr "<strong>FEL:</strong> E-postadressen är inte i rätt format."
+
+#: wpf-includes/class-members.php:190
+msgid ""
+"<strong>ERROR</strong>: This email is already registered, please choose "
+"another one."
+msgstr ""
+"<strong>FEL:</strong> Den här e-postadressen är redan registrerad, välj en "
+"annan."
+
+#: wpf-includes/class-members.php:1128
+msgid "What should be done with wpForo content owned by this user?"
+msgstr "Vad bör göras med wpForo innehåll ägs av denna användare?"
+
+#: wpf-includes/class-members.php:1130
+msgid "What should be done with wpForo content owned by these users?"
+msgstr "Vad bör göras med wpForo innehåll ägt av dessa användare?"
+
+#: wpf-includes/class-members.php:1134
+msgid "Delete all wpForo content."
+msgstr "Radera alla wpForo innehåll."
+
+#: wpf-includes/class-members.php:1136
+msgid "Attribute all content to:"
+msgstr "Tillskriva allt innehåll för:"
+
+#: wpf-includes/class-moderation.php:164
+#, php-format
+msgid ""
+"Probably spam file attachments have been detected by wpForo Spam Control. "
+"Please moderate suspected files here %s"
+msgstr ""
+
+#: wpf-includes/class-notices.php:136 wpf-includes/wpf-phrases.php:69
+msgid "Dismiss this notice."
+msgstr "Avfärda denna notis."
+
+#: wpf-includes/class-notices.php:152
+msgid "New Addons for Your Forum!"
+msgstr "Nya Addons för ditt Forum!"
+
+#: wpf-includes/class-notices.php:152
+msgid "Extend your forum with wpForo addons"
+msgstr "Utöka ditt forum med wpForo addons"
+
+#: wpf-includes/class-notices.php:165
+msgid "View all Addons"
+msgstr "Visa alla Addons"
+
+#: wpf-includes/class-permissions.php:129 wpf-includes/wpf-phrases.php:421
+#, php-format
+msgid "%s access successfully added"
+msgstr "%s tillgång har framgångrikt lagts till"
+
+#: wpf-includes/class-permissions.php:154 wpf-includes/wpf-phrases.php:422
+#, php-format
+msgid "%s access successfully edited"
+msgstr "%s tillgång har framgångsrikt redigeras"
+
+#: wpf-includes/class-phrases.php:172 wpf-includes/wpf-phrases.php:7
+msgid " Forum"
+msgstr "Forum"
+
+#: wpf-includes/class-phrases.php:173 wpf-includes/wpf-phrases.php:6
+msgid " Discussion Board"
+msgstr "Diskussionstavlan"
+
+#: wpf-includes/class-template.php:32
+msgid "Insert link"
+msgstr "Infoga länk"
+
+#: wpf-includes/class-template.php:33
+msgid "Link Text"
+msgstr "Länktext"
+
+#: wpf-includes/class-template.php:34
+msgid "Open link in a new tab"
+msgstr "Öppna länk i ny flik"
+
+#: wpf-includes/class-template.php:1085 wpf-includes/wpf-phrases.php:328
+msgid "Theme file not readable"
+msgstr "Tema-fil inte läsbar"
+
+#: wpf-includes/functions-installation.php:54 wpf-includes/wpf-phrases.php:101
+msgid "Forum"
+msgstr "Forum"
+
+#: wpf-includes/functions-installation.php:55
+msgid "Discussion Board"
+msgstr "Diskussionstavlan"
+
+#: wpf-includes/functions-installation.php:85
+msgid "You are not permitted to view this attachment"
+msgstr "Du tillåts inte visa denna bilaga"
+
+#: wpf-includes/functions-installation.php:807
+msgid "Start Profile Synchronization"
+msgstr ""
+
+#: wpf-includes/functions-installation.php:807
+msgid "Continue Synchronization"
+msgstr ""
+
+#: wpf-includes/functions-installation.php:810
+msgid ""
+"This process may take a few seconds or dozens of minutes, please be patient "
+"and don't close this page."
+msgstr ""
+
+#: wpf-includes/functions-installation.php:811
+msgid ""
+"You can permanently disable this message in Dashboard > Forums > Features "
+"admin page."
+msgstr ""
+
+#: wpf-includes/functions-installation.php:813
+msgid "wpForo Forum Installation | "
+msgstr ""
+
+#: wpf-includes/functions-installation.php:814
+msgid ""
+"Forum users' profile data are not synchronized yet, this step is required! "
+"Please click the button below to complete installation."
+msgstr ""
+
+#: wpf-includes/functions-template.php:7
+msgid "wpForo Menu"
+msgstr "wpForo meny"
+
+#: wpf-includes/functions-template.php:157 wpf-includes/wpf-phrases.php:411
+msgid "wpForo Sidebar"
+msgstr "wpForo sidofält"
+
+#: wpf-includes/functions-template.php:158 wpf-includes/wpf-phrases.php:192
+msgid ""
+"NOTE: If you're going to add widgets in this sidebar, please use 'Full "
+"Width' template for wpForo index page to avoid sidebar duplication."
+msgstr ""
+"Obs: Om du ska lägga till widgets i detta sidofält, Använd 'Full bredd' mall "
+"för wpForo indexsida undvika sidofältet dubbelarbete."
+
+#: wpf-includes/functions-template.php:197
+#: wpf-includes/functions-template.php:304
+#: wpf-includes/functions-template.php:367
+#: wpf-includes/functions-template.php:442
+#: wpf-includes/functions-template.php:519
+#: wpf-includes/functions-template.php:566 wpf-includes/wpf-phrases.php:335
+msgid "Title"
+msgstr "Titel"
+
+#: wpf-includes/functions-template.php:370
+#: wpf-includes/functions-template.php:445
+#: wpf-includes/functions-template.php:522 wpf-includes/wpf-phrases.php:211
+msgid "Number of Items"
+msgstr "Antal poster"
+
+#: wpf-includes/functions-template.php:375 wpf-includes/wpf-phrases.php:70
+msgid "Display Avatars"
+msgstr "Visa avatarer"
+
+#: wpf-includes/functions-template.php:449
+#: wpf-includes/functions-template.php:526 wpf-includes/wpf-phrases.php:72
+msgid "Display with Avatars"
+msgstr "Visa med avatarer"
+
+#: wpf-includes/functions.php:364
+msgid "Unapproved"
+msgstr ""
+
+#: wpf-includes/functions.php:365
+msgid "Published"
+msgstr ""
+
+#: wpf-includes/functions.php:374 wpf-includes/wpf-phrases.php:594
+msgid "Active"
+msgstr "Aktiv"
+
+#: wpf-includes/functions.php:375
+msgid "Banned"
+msgstr ""
+
+#: wpf-includes/functions.php:388 wpf-includes/functions.php:686
+#: wpf-includes/wpf-phrases.php:50
+msgid "Bulk Actions"
+msgstr "Massåtgärder"
+
+#: wpf-includes/functions.php:393 wpf-includes/functions.php:772
+#: wpf-includes/wpf-phrases.php:36
+msgid "Apply"
+msgstr "Applicera"
+
+#: wpf-includes/functions.php:402 wpf-includes/wpf-phrases.php:301
+msgid "Show all forums"
+msgstr "Visa alla forum"
+
+#: wpf-includes/functions.php:415 wpf-includes/wpf-phrases.php:351
+msgid "filter by group"
+msgstr "Filtrera efter grupp"
+
+#: wpf-includes/functions.php:427
+msgid "filter by status"
+msgstr "Filtrera på status"
+
+#: wpf-includes/functions.php:443
+msgid "filter by package"
+msgstr "Filtrera efter paket"
+
+#: wpf-includes/functions.php:472
+msgid "filter by user"
+msgstr ""
+
+#: wpf-includes/functions.php:492 wpf-includes/functions.php:694
+#: wpf-includes/wpf-phrases.php:386
+msgid "item"
+msgstr "post"
+
+#: wpf-includes/functions.php:525 wpf-includes/functions.php:541
+#: wpf-includes/wpf-phrases.php:285
+msgid "Select All"
+msgstr "Markera allt"
+
+#: wpf-includes/functions.php:530 wpf-includes/functions.php:546
+msgid "Type"
+msgstr ""
+
+#: wpf-includes/functions.php:603 wpf-includes/wpf-phrases.php:384
+msgid "edit user"
+msgstr "redigera användare"
+
+#: wpf-includes/functions.php:607 wpf-includes/wpf-phrases.php:383
+msgid "edit profile"
+msgstr "redigera profil"
+
+#: wpf-includes/functions.php:612
+msgid "unban user"
+msgstr "ta bort spärr från användaren"
+
+#: wpf-includes/functions.php:612
+msgid "ban user"
+msgstr "spärra användare"
+
+#: wpf-includes/functions.php:612
+msgid "Are you sure, you want to unban this user?"
+msgstr "Är du säker, du vill avspärra denna användare?"
+
+#: wpf-includes/functions.php:612
+msgid "Are you sure, you want to ban this user?"
+msgstr "Är du säker på att du vill spärra denna användare?"
+
+#: wpf-includes/functions.php:617 wpf-includes/functions.php:627
+#: wpf-includes/wpf-phrases.php:67
+msgid "Delete this item"
+msgstr "Ta bort detta objekt"
+
+#: wpf-includes/functions.php:617 wpf-includes/functions.php:627
+#: wpf-includes/wpf-phrases.php:41
+msgid "Are you sure you whant to DELETE this item?"
+msgstr "Är du säker på att du vill radera detta objekt?"
+
+#: wpf-includes/functions.php:622
+msgid "unapprove this item"
+msgstr ""
+
+#: wpf-includes/functions.php:622
+msgid "Approve this item"
+msgstr ""
+
+#: wpf-includes/functions.php:622
+msgid "unapprove"
+msgstr ""
+
+#: wpf-includes/functions.php:622
+msgid "approve"
+msgstr ""
+
+#: wpf-includes/functions.php:644 wpf-includes/functions.php:645
+#: wpf-includes/wpf-phrases.php:405
+msgid "view"
+msgstr "Visa"
+
+#: wpf-includes/functions.php:665
+msgid "Topic"
+msgstr ""
+
+#: wpf-includes/functions.php:665
+msgid "Post"
+msgstr ""
+
+#: wpf-includes/functions.php:678 wpf-includes/wpf-phrases.php:201
+msgid "No items found"
+msgstr "Inget hittades"
+
+#: wpf-includes/functions.php:771 wpf-includes/wpf-phrases.php:141
+msgid "Items"
+msgstr "poster"
+
+#: wpf-includes/functions.php:1065
+#, php-format
+msgid "Could not write file %s"
+msgstr "Kunde inte skriva filen %s"
+
+#: wpf-includes/wpf-hooks.php:20 wpf-includes/wpf-phrases.php:136
+msgid ""
+"IMPORTANT! Uninstall is not a simple deactivation action. This action will "
+"permanently remove all forum data (forums, topics, replies, attachments...) "
+"from database. Please backup database before this action, you may need this "
+"forum data in future. If you are sure that you want to delete all forum data "
+"please confirm. If not, just cancel it, then you can deactivate this plugin, "
+"that will not remove forum data."
+msgstr ""
+"VIKTIGT! Avinstallera är inte är en enkel avaktiveringsåtgärd. Denna åtgärd "
+"tar permanent bort alla data som forum (forum, frågor, svar, bilagor...) "
+"från databasen.  Vänligen säkerhetskopiera databasen innan den här åtgärden "
+"kan du behöva detta forum data i framtiden. Om du är säker på att du vill ta "
+"bort alla forum data Vänligen bekräfta. Om inte, avbryta bara det, sedan kan "
+"du avaktivera denna plugin, som inte tar bort forum data."
+
+#: wpf-includes/wpf-hooks.php:20
+msgid "Uninstall"
+msgstr "Avinstallera"
+
+#: wpf-includes/wpf-hooks.php:1057 wpf-includes/wpf-phrases.php:188
+msgid "Move"
+msgstr "Flytta"
+
+#: wpf-includes/wpf-hooks.php:1092
+msgid "Clear"
+msgstr "Rensa"
+
+#: wpf-includes/wpf-hooks.php:1092
+msgid "Default"
+msgstr "Standardvärde"
+
+#: wpf-includes/wpf-hooks.php:1092
+msgid "Select Color"
+msgstr "Välj färg"
+
+#: wpf-includes/wpf-hooks.php:1115
+msgid ""
+"IMPORTANT: wpForo can't work with default permalink, please change permalink "
+"structure"
+msgstr ""
+"VIKTIGT: wpForo fungerar inte med standard permalink, vänligen ändra "
+"permalink struktur"
+
+#: wpf-includes/wpf-hooks.php:1136 wpf-includes/wpf-phrases.php:413
+msgid "wpForo Usergroup"
+msgstr "wpForo användargrupp"
+
+#: wpf-includes/wpf-hooks.php:1144 wpf-includes/wpf-phrases.php:412
+msgid "wpForo User Timezone"
+msgstr "wpForo användaren Tidszon"
+
+#: wpf-includes/wpf-hooks.php:1333 wpf-includes/wpf-hooks.php:1422
+msgid "Please Moderate: "
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1334
+msgid ""
+"This topic is currently unapproved. You can approve topics in Dashboard "
+"&raquo; Forums &raquo; Moderation admin page."
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1423
+msgid ""
+"This post is currently unapproved. You can approve posts in Dashboard "
+"&raquo; Forums &raquo; Moderation admin page."
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1600 wpf-includes/wpf-hooks.php:1646
+msgid "New Forum"
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1608
+msgid "New User Group"
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1616 wpf-includes/wpf-hooks.php:1714
+msgid "New Phrase"
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1631
+msgid "Community"
+msgstr ""
+
+#: wpf-includes/wpf-hooks.php:1698
+msgid "New UserGroup"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:8
+#, php-format
+msgid "%s and %s liked"
+msgstr "%s och %s gillade"
+
+#: wpf-includes/wpf-phrases.php:9
+#, php-format
+msgid "%s liked"
+msgstr "%s gillade"
+
+#: wpf-includes/wpf-phrases.php:10
+#, php-format
+msgid "%s, %s and %s liked"
+msgstr "%s, %s och %s gillade"
+
+#: wpf-includes/wpf-phrases.php:11
+#, php-format
+msgid "%s, %s, %s and %d people liked"
+msgstr "%s, %s, %s och %d personer gillade"
+
+#: wpf-includes/wpf-phrases.php:12
+msgid "AOL IM"
+msgstr "AOL IM"
+
+#: wpf-includes/wpf-phrases.php:13
+msgid "About Me"
+msgstr "Om Mig"
+
+#: wpf-includes/wpf-phrases.php:16
+msgid "Account"
+msgstr "Konto"
+
+#: wpf-includes/wpf-phrases.php:19
+msgid "Activity"
+msgstr "Aktivitet"
+
+#: wpf-includes/wpf-phrases.php:23
+msgid "Add a comment"
+msgstr "Lägg till en kommentar"
+
+#: wpf-includes/wpf-phrases.php:24
+msgid "Add topic"
+msgstr "Nytt ämne"
+
+#: wpf-includes/wpf-phrases.php:32
+msgid "Answer"
+msgstr "Svar"
+
+#: wpf-includes/wpf-phrases.php:33
+msgid "Answer to"
+msgstr "Svar till"
+
+#: wpf-includes/wpf-phrases.php:34
+msgid "Answers"
+msgstr "Svar"
+
+#: wpf-includes/wpf-phrases.php:35
+msgid "Any Date"
+msgstr "Alla datum"
+
+#: wpf-includes/wpf-phrases.php:42
+msgid "Ascending order"
+msgstr "Stigande ordning"
+
+#: wpf-includes/wpf-phrases.php:43
+msgid "Attach file:"
+msgstr "Lägg till fil:"
+
+#: wpf-includes/wpf-phrases.php:44
+msgid "Attachments"
+msgstr "Bilagor"
+
+#: wpf-includes/wpf-phrases.php:45
+msgid "Attachments Size"
+msgstr "Storlek bilagor"
+
+#: wpf-includes/wpf-phrases.php:47
+msgid "Avatar"
+msgstr "Avatar"
+
+#: wpf-includes/wpf-phrases.php:53
+msgid "Change password"
+msgstr "Ändra lösenord"
+
+#: wpf-includes/wpf-phrases.php:54
+msgid "Choose target forum"
+msgstr "Välja målforum"
+
+#: wpf-includes/wpf-phrases.php:55 wpf-themes/classic/functions.php:44
+#: wpf-themes/classic/functions.php:65 wpf-themes/classic/functions.php:94
+msgid "Collapsed"
+msgstr "Fäll ihop"
+
+#: wpf-includes/wpf-phrases.php:58
+msgid "Comments"
+msgstr "Kommentarer"
+
+#: wpf-includes/wpf-phrases.php:59
+msgid "Confirm my subscription"
+msgstr "Bekräfta min prenumeration"
+
+#: wpf-includes/wpf-phrases.php:65
+msgid "Date"
+msgstr "Datum"
+
+#: wpf-includes/wpf-phrases.php:68
+msgid "Descending order"
+msgstr "Fallande ordning"
+
+#: wpf-includes/wpf-phrases.php:71
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#: wpf-includes/wpf-phrases.php:74
+msgid "Edited: "
+msgstr "Redigerad:"
+
+#: wpf-includes/wpf-phrases.php:75
+msgid "Email"
+msgstr "E-post"
+
+#: wpf-includes/wpf-phrases.php:88
+msgid "Enter title here"
+msgstr "Ange titel här"
+
+#: wpf-includes/wpf-phrases.php:89 wpf-themes/classic/functions.php:43
+#: wpf-themes/classic/functions.php:64 wpf-themes/classic/functions.php:93
+msgid "Expanded"
+msgstr "Öppnad"
+
+#: wpf-includes/wpf-phrases.php:90 wpf-themes/classic/functions.php:90
+msgid "Extended Layout - Intro posts"
+msgstr "Utökad Layout -  Intro inlägg"
+
+#: wpf-includes/wpf-phrases.php:91 wpf-themes/classic/functions.php:40
+msgid "Extended Layout - Intro topics"
+msgstr "Utökad Layout - Intro ämnen"
+
+#: wpf-includes/wpf-phrases.php:92 wpf-themes/classic/functions.php:100
+msgid "Extended Layout - Number of intro posts"
+msgstr "Utökad Layout - antal intro inlägg"
+
+#: wpf-includes/wpf-phrases.php:93 wpf-themes/classic/functions.php:49
+msgid "Extended Layout - Number of intro topics"
+msgstr "Utökad Layout - antal intro ämnen"
+
+#: wpf-includes/wpf-phrases.php:94
+msgid "Facebook"
+msgstr "Facebook"
+
+#: wpf-includes/wpf-phrases.php:95
+msgid "Failed to write file to disk"
+msgstr "Misslyckades skriva filen till disken."
+
+#: wpf-includes/wpf-phrases.php:97
+msgid "File upload stopped by extension"
+msgstr "Filuppladdningen stoppades av ett tillägg"
+
+#: wpf-includes/wpf-phrases.php:98
+msgid "Find Posts by User"
+msgstr "Hitta inlägg av användaren"
+
+#: wpf-includes/wpf-phrases.php:99
+msgid "Find Topics Started by User"
+msgstr "Hitta ämnen startade av användaren"
+
+#: wpf-includes/wpf-phrases.php:100
+msgid "First post and replies"
+msgstr "Första inlägg och svar"
+
+#: wpf-includes/wpf-phrases.php:102
+msgid "Forum - Login"
+msgstr "Forum - logga in"
+
+#: wpf-includes/wpf-phrases.php:103
+msgid "Forum - Page Not Found"
+msgstr "Forum - Sidan hittades inte"
+
+#: wpf-includes/wpf-phrases.php:104
+msgid "Forum - Registration"
+msgstr "Forum - registrering"
+
+#: wpf-includes/wpf-phrases.php:106
+msgid "Forum Admin Email Addresses"
+msgstr "Forum Admin e-postadresser"
+
+#: wpf-includes/wpf-phrases.php:109
+msgid "Forum Home"
+msgstr "Forum Hem"
+
+#: wpf-includes/wpf-phrases.php:111
+msgid "Forum Members"
+msgstr "Forummedlemmar"
+
+#: wpf-includes/wpf-phrases.php:114
+msgid "Forum Profile"
+msgstr "Forum Profil"
+
+#: wpf-includes/wpf-phrases.php:115
+msgid "Forum RSS Feed"
+msgstr "Forum RSS Feed"
+
+#: wpf-includes/wpf-phrases.php:119
+msgid "Forum Statistics"
+msgstr "forumstatistik"
+
+#: wpf-includes/wpf-phrases.php:122
+msgid "Forum is empty"
+msgstr "Forumet är tomt"
+
+#: wpf-includes/wpf-phrases.php:125
+msgid "From Email Address"
+msgstr "Från e-postadress"
+
+#: wpf-includes/wpf-phrases.php:126
+msgid "From Name"
+msgstr "Från namn"
+
+#: wpf-includes/wpf-phrases.php:131
+msgid "Group"
+msgstr "Grupp"
+
+#: wpf-includes/wpf-phrases.php:132
+msgid "Google+"
+msgstr "Google+"
+
+#: wpf-includes/wpf-phrases.php:135
+msgid "ICQ"
+msgstr "ICQ"
+
+#: wpf-includes/wpf-phrases.php:139
+msgid "Insert member name or email"
+msgstr "Infoga medlemsnamn eller e-post"
+
+#: wpf-includes/wpf-phrases.php:142
+msgid "Joined"
+msgstr "Har gått med"
+
+#: wpf-includes/wpf-phrases.php:145
+msgid "Last 24 hours"
+msgstr "Senaste 24 timmarna"
+
+#: wpf-includes/wpf-phrases.php:146
+msgid "Last 3 Months"
+msgstr "Senaste 3 månaderna"
+
+#: wpf-includes/wpf-phrases.php:147
+msgid "Last 6 Months"
+msgstr "Senaste 6 månaderna"
+
+#: wpf-includes/wpf-phrases.php:148
+msgid "Last Active"
+msgstr "Senast aktiv"
+
+#: wpf-includes/wpf-phrases.php:149
+msgid "Last Month"
+msgstr "Senaste månaden"
+
+#: wpf-includes/wpf-phrases.php:150
+msgid "Last Post"
+msgstr "Senaste inlägg"
+
+#: wpf-includes/wpf-phrases.php:151
+msgid "Last Post Info"
+msgstr "Senaste inläggsinfo"
+
+#: wpf-includes/wpf-phrases.php:152
+msgid "Last Week"
+msgstr "Senaste veckan"
+
+#: wpf-includes/wpf-phrases.php:153
+msgid "Last Year ago"
+msgstr "Förra året"
+
+#: wpf-includes/wpf-phrases.php:154
+#, php-format
+msgid "Last post by %s"
+msgstr "Senaste inlägget av %s"
+
+#: wpf-includes/wpf-phrases.php:155
+msgid "Latest Post"
+msgstr "Senaste inlägget"
+
+#: wpf-includes/wpf-phrases.php:156
+msgid "Leave a reply"
+msgstr "Lämna ett svar"
+
+#: wpf-includes/wpf-phrases.php:157
+msgid "Length must be between 3 characters and 30 characters."
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:159
+msgid "Liked"
+msgstr "Gillade"
+
+#: wpf-includes/wpf-phrases.php:160
+msgid "Location"
+msgstr "Plats"
+
+#: wpf-includes/wpf-phrases.php:161
+msgid "Login"
+msgstr "Logga in"
+
+#: wpf-includes/wpf-phrases.php:163
+msgid "Logout"
+msgstr "Logga ut"
+
+#: wpf-includes/wpf-phrases.php:165
+msgid "Lost your password?"
+msgstr "Glömt ditt lösenord?"
+
+#: wpf-includes/wpf-phrases.php:167
+msgid "MSN"
+msgstr "MSN"
+
+#: wpf-includes/wpf-phrases.php:168
+msgid "Maximum allowed file size is"
+msgstr "Maximala tillåtna filstorleken är"
+
+#: wpf-includes/wpf-phrases.php:170
+msgid "Member Activity"
+msgstr "Medlem Aktivitet"
+
+#: wpf-includes/wpf-phrases.php:171
+msgid "Member Information"
+msgstr "Medlems information"
+
+#: wpf-includes/wpf-phrases.php:172
+msgid "Member Rating"
+msgstr "Medlem Betyg"
+
+#: wpf-includes/wpf-phrases.php:173
+msgid "Member Rating Badge"
+msgstr "Medlem Betyg Emblem"
+
+#: wpf-includes/wpf-phrases.php:174
+msgid "Member Reputation"
+msgstr "Medlem rykte"
+
+#: wpf-includes/wpf-phrases.php:177
+msgid "Member information"
+msgstr "Information om medlem"
+
+#: wpf-includes/wpf-phrases.php:181
+msgid "Members not found"
+msgstr "Medlemmar hittades inte"
+
+#: wpf-includes/wpf-phrases.php:182
+msgid ""
+"You have been banned. Please contact to forum administrators for more "
+"information."
+msgstr "Du har blivit avstängd. Kontakta administratören för mer information."
+
+#: wpf-includes/wpf-phrases.php:183
+msgid "Messages"
+msgstr "Meddelanden"
+
+#: wpf-includes/wpf-phrases.php:186
+msgid "Missing a temporary folder"
+msgstr "Det saknas en tillfällig mapp."
+
+#: wpf-includes/wpf-phrases.php:189
+msgid "Move topic"
+msgstr "Flytta ämne"
+
+#: wpf-includes/wpf-phrases.php:190
+msgid "Must be minimum 6 characters."
+msgstr "Måste vara minst 6 tecken."
+
+#: wpf-includes/wpf-phrases.php:191
+msgid "My Profile"
+msgstr "Min profil"
+
+#: wpf-includes/wpf-phrases.php:198
+msgid "No activity found for this member."
+msgstr "Ingen aktivitet hittades för denna medlem."
+
+#: wpf-includes/wpf-phrases.php:199
+msgid "No file was uploaded"
+msgstr "Ingen fil laddades upp"
+
+#: wpf-includes/wpf-phrases.php:200
+msgid "No forums were found here."
+msgstr "Inget forum hittades här."
+
+#: wpf-includes/wpf-phrases.php:204
+msgid "No online members at the moment"
+msgstr "Inga medlemmar är online just nu"
+
+#: wpf-includes/wpf-phrases.php:206
+msgid "No subscriptions found for this member."
+msgstr "Inga prenumerationer hittades för denna medlem."
+
+#: wpf-includes/wpf-phrases.php:208
+msgid "No topics were found here"
+msgstr "Inga ämnen hittades här"
+
+#: wpf-includes/wpf-phrases.php:215
+msgid "Occupation"
+msgstr "Sysselsättning"
+
+#: wpf-includes/wpf-phrases.php:216
+msgid "Offline"
+msgstr "Offline"
+
+#: wpf-includes/wpf-phrases.php:217
+msgid "Online"
+msgstr "Online"
+
+#: wpf-includes/wpf-phrases.php:219
+msgid "Oops! The page you requested was not found!"
+msgstr "Oops! Den begärda sidan hittades inte!"
+
+#: wpf-includes/wpf-phrases.php:220
+msgid "Our newest member"
+msgstr "Vår nyaste medlem"
+
+#: wpf-includes/wpf-phrases.php:221
+msgid "Page"
+msgstr "Sida"
+
+#: wpf-includes/wpf-phrases.php:223
+msgid "Password"
+msgstr "Lösenord"
+
+#: wpf-includes/wpf-phrases.php:225
+#, php-format
+msgid "Please %s or %s"
+msgstr "Vänligen %s eller %s"
+
+#: wpf-includes/wpf-phrases.php:229
+msgid "Post Title"
+msgstr "Inläggets titel"
+
+#: wpf-includes/wpf-phrases.php:230
+msgid "Post link"
+msgstr "Inläggslänk"
+
+#: wpf-includes/wpf-phrases.php:231
+msgid "Posted"
+msgstr "Postad"
+
+#: wpf-includes/wpf-phrases.php:232
+msgid "Posted by"
+msgstr "Postad av"
+
+#: wpf-includes/wpf-phrases.php:234
+msgid "Powered by"
+msgstr "Drivs med"
+
+#: wpf-includes/wpf-phrases.php:236 wpf-themes/classic/functions.php:70
+msgid "Q&A Layout - Number of intro topics"
+msgstr "Q&A Layout - antal intro ämnen"
+
+#: wpf-includes/wpf-phrases.php:237 wpf-themes/classic/functions.php:61
+msgid "Q&A layout - Intro topics"
+msgstr "Q&A layout - Intro ämnen"
+
+#: wpf-includes/wpf-phrases.php:238
+msgid "Question Comments"
+msgstr "frågekommentarer"
+
+#: wpf-includes/wpf-phrases.php:239
+msgid "Questions"
+msgstr "Frågor"
+
+#: wpf-includes/wpf-phrases.php:240
+msgid "Quote"
+msgstr "Citera"
+
+#: wpf-includes/wpf-phrases.php:241
+msgid "RE"
+msgstr "Ang:"
+
+#: wpf-includes/wpf-phrases.php:242
+msgid "REPLY:"
+msgstr "Svara:"
+
+#: wpf-includes/wpf-phrases.php:243
+msgid "RSS"
+msgstr "RSS"
+
+#: wpf-includes/wpf-phrases.php:244
+msgid "Rating"
+msgstr "Betyg"
+
+#: wpf-includes/wpf-phrases.php:245
+msgid "Rating Badge"
+msgstr "Betyg Emblem"
+
+#: wpf-includes/wpf-phrases.php:249
+msgid "Received Likes"
+msgstr "Mottagna gillar"
+
+#: wpf-includes/wpf-phrases.php:250
+msgid "Recent Questions"
+msgstr "Senaste frågorna"
+
+#: wpf-includes/wpf-phrases.php:251
+msgid "Recent Topics"
+msgstr "Senaste ämnen"
+
+#: wpf-includes/wpf-phrases.php:252
+msgid "Register"
+msgstr "Registrera dig"
+
+#: wpf-includes/wpf-phrases.php:254
+msgid "Registered date"
+msgstr "Registrerad Datum:"
+
+#: wpf-includes/wpf-phrases.php:255
+msgid "Relevancy"
+msgstr "Relevans"
+
+#: wpf-includes/wpf-phrases.php:256
+msgid "Remember Me"
+msgstr "Kom ihåg mig"
+
+#: wpf-includes/wpf-phrases.php:262
+msgid "Replies"
+msgstr "Svar"
+
+#: wpf-includes/wpf-phrases.php:263
+msgid "Replies not found"
+msgstr "Svar hittades inte"
+
+#: wpf-includes/wpf-phrases.php:264
+msgid "Reply"
+msgstr "Svara"
+
+#: wpf-includes/wpf-phrases.php:265
+msgid "Report"
+msgstr "Rapportera"
+
+#: wpf-includes/wpf-phrases.php:268
+msgid "Report to Administration"
+msgstr "Rapportera till Administratör"
+
+#: wpf-includes/wpf-phrases.php:270
+msgid "Result Info"
+msgstr "Resultat info"
+
+#: wpf-includes/wpf-phrases.php:272
+msgid "Save Changes"
+msgstr "Spara ändringar"
+
+#: wpf-includes/wpf-phrases.php:276
+msgid "Search"
+msgstr "Sök"
+
+#: wpf-includes/wpf-phrases.php:277
+msgid "Search Entire Posts"
+msgstr "Sök hela inlägg"
+
+#: wpf-includes/wpf-phrases.php:278
+msgid "Search Phrase"
+msgstr "Sökfras"
+
+#: wpf-includes/wpf-phrases.php:279
+msgid "Search Titles Only"
+msgstr "Sök endast rubriker"
+
+#: wpf-includes/wpf-phrases.php:280
+msgid "Search Type"
+msgstr "Sök inläggstyp"
+
+#: wpf-includes/wpf-phrases.php:281
+msgid "Search in Forums"
+msgstr "Sök i forum"
+
+#: wpf-includes/wpf-phrases.php:282
+msgid "Search in date period"
+msgstr "Sök i datum"
+
+#: wpf-includes/wpf-phrases.php:283
+msgid "Search result for"
+msgstr "Sökresultat för"
+
+#: wpf-includes/wpf-phrases.php:284
+msgid "Search..."
+msgstr "Sök…"
+
+#: wpf-includes/wpf-phrases.php:286
+msgid "Select Page"
+msgstr "Välj en sida"
+
+#: wpf-includes/wpf-phrases.php:287
+msgid "Send Report"
+msgstr "Sänd rapport"
+
+#: wpf-includes/wpf-phrases.php:291
+msgid "Set Topic Sticky"
+msgstr "Ange ämne Sticky"
+
+#: wpf-includes/wpf-phrases.php:292 wpf-themes/classic/functions.php:101
+msgid ""
+"Set this option value 0 if you want to show all posts under topic intro area."
+msgstr ""
+"Ange alternativvärdet 0 om du vill visa alla inlägg under intro ämnesområde."
+
+#: wpf-includes/wpf-phrases.php:293
+msgid "Shop Account"
+msgstr "Butikskonto"
+
+#: wpf-includes/wpf-phrases.php:303
+msgid "Sign In"
+msgstr "Logga In"
+
+#: wpf-includes/wpf-phrases.php:304
+msgid "Signature"
+msgstr "Underskrift"
+
+#: wpf-includes/wpf-phrases.php:305
+msgid "Site Profile"
+msgstr "Webbplatsprofil"
+
+#: wpf-includes/wpf-phrases.php:306
+msgid "Skype"
+msgstr "Skype"
+
+#: wpf-includes/wpf-phrases.php:308
+msgid "Social Networks"
+msgstr "Sociala nätverk"
+
+#: wpf-includes/wpf-phrases.php:309
+msgid "Sorry, something wrong with your data."
+msgstr "Tyvärr, någonting är fel med dina data."
+
+#: wpf-includes/wpf-phrases.php:310
+msgid "Sort Search Results by"
+msgstr "Sortera sökresultat efter"
+
+#: wpf-includes/wpf-phrases.php:311
+msgid "Specify avatar by URL"
+msgstr "Ange avatar av URL"
+
+#: wpf-includes/wpf-phrases.php:313
+msgid "Subforums"
+msgstr "Underforum"
+
+#: wpf-includes/wpf-phrases.php:316
+msgid "Subscribe for new replies"
+msgstr "Prenumerera på svar"
+
+#: wpf-includes/wpf-phrases.php:317
+msgid "Subscribe for new topics"
+msgstr "Prenumerera på nya ämnen"
+
+#: wpf-includes/wpf-phrases.php:319
+msgid "Subscriptions"
+msgstr "Prenumeration"
+
+#: wpf-includes/wpf-phrases.php:321
+msgid ""
+"Thank you for using wpForo! wpForo is a professional bulletin board for "
+"WorPress, and the only forum software which comes with Multi-layout template "
+"system. The \"Extended"
+msgstr ""
+"Tack för att använda wpForo! wpForo är en professionell anslagstavla för "
+"WorPress, och den enda forum programvara som kommer med flera layout "
+"mallsystem. Den \"utökade"
+
+#: wpf-includes/wpf-phrases.php:322
+msgid ""
+"Thank you for using wpForo. wpForo is a premium forum plugin which will "
+"always be available for free. There will never be paid and pro versions of "
+"this forum board. However this is a very large and hard project so we also "
+"develop paid addons (extensions), which will financially help us to keep "
+"improving and adding new features to the free wpForo plugin. Forum addons "
+"will also be actively developed. The first addons \"Advanced Media Uploader"
+msgstr ""
+"Tack för att du använder wpForo. wpForo är en premie forum plugin som alltid "
+"kommer att finnas tillgänglig för gratis. Det kommer aldrig att betalas och "
+"pro versioner av detta forum ombord. Men detta är en mycket stor och hård "
+"projekt så vi också utveckla betalda addons (tillägg), som ekonomiskt kommer "
+"att hjälpa oss att fortsätta att förbättra och lägga till nya funktioner "
+"till den fria wpForo plugin. Forum addons kommer också att utvecklas aktivt. "
+"De första addons \"Advanced Media Uploader"
+
+#: wpf-includes/wpf-phrases.php:325
+msgid ""
+"The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in "
+"the HTML form"
+msgstr ""
+"Den uppladdade filen överstiger MAX_FILE_SIZE som angavs i HTML-formuläret"
+
+#: wpf-includes/wpf-phrases.php:326
+msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini"
+msgstr ""
+"Den uppladdade filen överstiger den maximalt tillåtna storleken i php.ini"
+
+#: wpf-includes/wpf-phrases.php:327
+msgid "The uploaded file was only partially uploaded"
+msgstr "Den uppladdade filen laddades bara delvis upp"
+
+#: wpf-includes/wpf-phrases.php:334
+msgid "Timezone"
+msgstr "Tidszon"
+
+#: wpf-includes/wpf-phrases.php:336
+msgid "Topic RSS Feed"
+msgstr "Ämne RSS-flöde"
+
+#: wpf-includes/wpf-phrases.php:337
+msgid "Topic Title"
+msgstr "Ämnestitel"
+
+#: wpf-includes/wpf-phrases.php:338
+msgid "Topic title"
+msgstr "Ämnestitle"
+
+#: wpf-includes/wpf-phrases.php:341
+msgid "Twitter"
+msgstr "Twitter"
+
+#: wpf-includes/wpf-phrases.php:342
+msgid "Unknown upload error"
+msgstr "Okänt uppladdningsfel"
+
+#: wpf-includes/wpf-phrases.php:343
+msgid "Unsubscribe"
+msgstr "Sluta prenumerera"
+
+#: wpf-includes/wpf-phrases.php:346
+msgid "Upload an avatar"
+msgstr "Ladda upp en avatar"
+
+#: wpf-includes/wpf-phrases.php:348
+msgid ""
+"Use comments to ask for more information or suggest improvements. Avoid "
+"answering questions in comments."
+msgstr ""
+"Använd kommentarer för att fråga om mer information eller lämna förslag på "
+"förbättringar. Undvik att svara på frågor under kommentarer. "
+
+#: wpf-includes/wpf-phrases.php:350
+msgid "User"
+msgstr "Användare"
+
+#: wpf-includes/wpf-phrases.php:352
+msgid "User Group"
+msgstr "Användargrupp"
+
+#: wpf-includes/wpf-phrases.php:353
+msgid "Usergroup has been successfully deleted."
+msgstr "Användargruppen har raderats."
+
+#: wpf-includes/wpf-phrases.php:354
+msgid ""
+"Usergroup has been successfully deleted. All users of this usergroup have "
+"been moved to the usergroup you've chosen"
+msgstr ""
+"Användargruppen har raderats. Alla användare av denna användargrupp har "
+"flyttats till den användargrupp som du har valt"
+
+#: wpf-includes/wpf-phrases.php:355
+msgid "Username"
+msgstr "Användarnamn"
+
+#: wpf-includes/wpf-phrases.php:357
+msgid "View entire post"
+msgstr "Visa hela inlägget"
+
+#: wpf-includes/wpf-phrases.php:358
+msgid "View the latest post"
+msgstr "Visa det senaste inlägget"
+
+#: wpf-includes/wpf-phrases.php:359
+msgid "Views"
+msgstr "Visningar"
+
+#: wpf-includes/wpf-phrases.php:360
+msgid "Votes"
+msgstr "Röster"
+
+#: wpf-includes/wpf-phrases.php:361
+msgid "Website"
+msgstr "Hemsida"
+
+#: wpf-includes/wpf-phrases.php:363
+msgid "Wordpress avatar system"
+msgstr "WordPress avatar system"
+
+#: wpf-includes/wpf-phrases.php:364
+msgid "Working"
+msgstr "bearbetning"
+
+#: wpf-includes/wpf-phrases.php:365
+msgid "Write message"
+msgstr "Skriv meddelande"
+
+#: wpf-includes/wpf-phrases.php:366
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#: wpf-includes/wpf-phrases.php:368
+msgid "You"
+msgstr "Du"
+
+#: wpf-includes/wpf-phrases.php:370
+#, php-format
+msgid "You can go to %s page or Search here"
+msgstr "Du kan gå till %s sida eller Sök här"
+
+#: wpf-includes/wpf-phrases.php:372
+msgid "Your Answer"
+msgstr "Ditt Svar"
+
+#: wpf-includes/wpf-phrases.php:373
+msgid "account"
+msgstr "konto"
+
+#: wpf-includes/wpf-phrases.php:374
+msgid "activity"
+msgstr "aktivitet"
+
+#: wpf-includes/wpf-phrases.php:376
+msgid "add_new"
+msgstr "Lägg till ny"
+
+#: wpf-includes/wpf-phrases.php:377
+#, php-format
+msgid "%s ago"
+msgstr "%s sedan"
+
+#: wpf-includes/wpf-phrases.php:378
+msgid "by"
+msgstr "av"
+
+#: wpf-includes/wpf-phrases.php:379
+#, php-format
+msgid "by %s"
+msgstr "av %s"
+
+#: wpf-includes/wpf-phrases.php:380
+msgid "confirm password"
+msgstr "Ange det nya lösenordet en gång till"
+
+#: wpf-includes/wpf-phrases.php:385
+msgid "forums"
+msgstr "forum"
+
+#: wpf-includes/wpf-phrases.php:387
+msgid "login"
+msgstr "Logga in"
+
+#: wpf-includes/wpf-phrases.php:388
+msgid "logout"
+msgstr "logga ut"
+
+#: wpf-includes/wpf-phrases.php:389
+msgid "matches"
+msgstr "Träffar"
+
+#: wpf-includes/wpf-phrases.php:390
+msgid "members"
+msgstr "medlemmar"
+
+#: wpf-includes/wpf-phrases.php:392
+msgid "my profile"
+msgstr "Min profil"
+
+#: wpf-includes/wpf-phrases.php:393
+msgid "new password"
+msgstr "Nytt lösenord"
+
+#: wpf-includes/wpf-phrases.php:394
+msgid "new password again"
+msgstr "nytt lösenord igen"
+
+#: wpf-includes/wpf-phrases.php:395
+msgid "next"
+msgstr "nästa"
+
+#: wpf-includes/wpf-phrases.php:396
+msgid "old password"
+msgstr "Gammalt lösenord"
+
+#: wpf-includes/wpf-phrases.php:397
+msgid "phrase_key"
+msgstr "phrase_key"
+
+#: wpf-includes/wpf-phrases.php:398
+msgid "phrase_value"
+msgstr "phrase_value"
+
+#: wpf-includes/wpf-phrases.php:399
+msgid "posted"
+msgstr "Postad"
+
+#: wpf-includes/wpf-phrases.php:400
+msgid "prev"
+msgstr "föreg"
+
+#: wpf-includes/wpf-phrases.php:401
+msgid "register"
+msgstr "registrera"
+
+#: wpf-includes/wpf-phrases.php:402
+msgid "replies"
+msgstr "svar"
+
+#: wpf-includes/wpf-phrases.php:403
+msgid "subscriptions"
+msgstr "prenumerationer"
+
+#: wpf-includes/wpf-phrases.php:404
+msgid "update"
+msgstr "uppdatera"
+
+#: wpf-includes/wpf-phrases.php:406
+msgid "view all posts"
+msgstr "Visa alla inlägg"
+
+#: wpf-includes/wpf-phrases.php:407
+msgid "view all questions"
+msgstr "Visa alla frågor"
+
+#: wpf-includes/wpf-phrases.php:408
+msgid "view all topics"
+msgstr "Visa alla ämnen"
+
+#: wpf-includes/wpf-phrases.php:410
+msgid "wpForo Navigation"
+msgstr "wpForo navigering"
+
+#: wpf-includes/wpf-phrases.php:415
+msgid "{number}B"
+msgstr "{nummer} B"
+
+#: wpf-includes/wpf-phrases.php:416
+msgid "{number}K"
+msgstr "{nummer} K"
+
+#: wpf-includes/wpf-phrases.php:417
+msgid "{number}M"
+msgstr "{nummer} M"
+
+#: wpf-includes/wpf-phrases.php:418
+msgid "{number}T"
+msgstr "{nummer} T"
+
+#: wpf-includes/wpf-phrases.php:423
+msgid "Access add error"
+msgstr "Tillgång lätt till fel"
+
+#: wpf-includes/wpf-phrases.php:424
+msgid "Access delete error"
+msgstr "Tillgång ta bort fel"
+
+#: wpf-includes/wpf-phrases.php:425
+msgid "Access edit error"
+msgstr "Tillgång ändra fel"
+
+#: wpf-includes/wpf-phrases.php:426
+msgid "Access successfully deleted"
+msgstr "Tillgång har tagits bort"
+
+#: wpf-includes/wpf-phrases.php:427
+msgid "Add Topic error: No forum selected"
+msgstr "Lägga till ämne fel: inget forum har valts"
+
+#: wpf-includes/wpf-phrases.php:428
+msgid "All Checked topics successfully deleted"
+msgstr "Alla markerade ämnen har tagits bort"
+
+#: wpf-includes/wpf-phrases.php:429
+msgid "Can't add forum"
+msgstr "Kan inte lägga till forum"
+
+#: wpf-includes/wpf-phrases.php:430
+msgid "Can't add new language"
+msgstr "Kan inte lägga till nya språk"
+
+#: wpf-includes/wpf-phrases.php:431
+msgid "Can't delete this Usergroup"
+msgstr "Kan inte ta bort denna användargrupp"
+
+#: wpf-includes/wpf-phrases.php:432
+msgid "Can't send confirmation email"
+msgstr "Kan inte skicka e-postbekräftelse"
+
+#: wpf-includes/wpf-phrases.php:433
+msgid "Can't send report email"
+msgstr "Kan inte skicka rapport E-mail"
+
+#: wpf-includes/wpf-phrases.php:434
+msgid "Can't subscribe to this item"
+msgstr "Kan inte prenumerera på denna punkt"
+
+#: wpf-includes/wpf-phrases.php:435
+msgid "Can't write a post: This topic is closed"
+msgstr "Kan inte skriva ett inlägg: detta ämne är stängt"
+
+#: wpf-includes/wpf-phrases.php:436
+msgid "Can`t upload file"
+msgstr "Kan inte ladda upp fil"
+
+#: wpf-includes/wpf-phrases.php:437
+msgid "Cannot update forum hierarchy"
+msgstr "Kan inte uppdatera forum hierarki"
+
+#: wpf-includes/wpf-phrases.php:438
+msgid "Cannot update post data"
+msgstr "Kan inte uppdatera inläggsdata"
+
+#: wpf-includes/wpf-phrases.php:439
+msgid "Could not be unsubscribe from this item"
+msgstr "Kunde inte avprenumerera på detta objekt"
+
+#: wpf-includes/wpf-phrases.php:440
+msgid "Email address exists. Please insert another."
+msgstr "E-postadressen existerar. Sätt in en annan."
+
+#: wpf-includes/wpf-phrases.php:441
+msgid "Error: Forum is not found"
+msgstr "Fel: Forum hittades inte"
+
+#: wpf-includes/wpf-phrases.php:442
+msgid "Error: No topic selected"
+msgstr "Fel: Inget ämne markerat"
+
+#: wpf-includes/wpf-phrases.php:443
+msgid "Error: Topic is not found"
+msgstr "Fel: Ämnet hittades inte"
+
+#: wpf-includes/wpf-phrases.php:444
+msgid "Error: please inset some text to report."
+msgstr "Fel: Vänligen lägg till text till rapport."
+
+#: wpf-includes/wpf-phrases.php:445
+msgid "Features successfully updated"
+msgstr "Funktioner har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:446
+msgid "Features successfully updated, but previous value not changed"
+msgstr "Funktioner som har uppdaterats, men tidigare värde ändrades inte."
+
+#: wpf-includes/wpf-phrases.php:447
+msgid "File type is not allowed"
+msgstr "Filtyp inte tillåten."
+
+#: wpf-includes/wpf-phrases.php:448
+msgid "Forum Base URL successfully updated"
+msgstr "Forum bas-URL har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:449
+msgid "Forum deleting error"
+msgstr "Forum ta bort fel"
+
+#: wpf-includes/wpf-phrases.php:450
+msgid "Forum hierarchy successfully updated"
+msgstr "Forum hierarki har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:451
+msgid "Forum is successfully merged"
+msgstr "Forum har slagits ihop"
+
+#: wpf-includes/wpf-phrases.php:452
+msgid "Forum merging error"
+msgstr "Forum sammanslagning fel"
+
+#: wpf-includes/wpf-phrases.php:453
+msgid "Forum options successfully updated"
+msgstr "Forum alternativ har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:454
+msgid "Forum options successfully updated, but previous value not changed"
+msgstr "Forum alternativ har uppdaterats, men tidigare värde har inte ändras"
+
+#: wpf-includes/wpf-phrases.php:455
+msgid "Forum successfully updated"
+msgstr "Forumet uppdaterat"
+
+#: wpf-includes/wpf-phrases.php:456
+msgid "Forum update error"
+msgstr "Forum uppdateringsfel"
+
+#: wpf-includes/wpf-phrases.php:457
+msgid "General options successfully updated"
+msgstr "Allmänna alternativ har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:458
+msgid "Illegal character in username."
+msgstr "Ogiltigt tecken i användarnamn."
+
+#: wpf-includes/wpf-phrases.php:459
+msgid "Insert your Email address."
+msgstr "Infoga din e-postadress."
+
+#: wpf-includes/wpf-phrases.php:460
+msgid "Invalid Email address"
+msgstr "Ogiltig e-postadress"
+
+#: wpf-includes/wpf-phrases.php:461
+msgid "Invalid request!"
+msgstr "Ogiltig förfrågan!"
+
+#: wpf-includes/wpf-phrases.php:462
+msgid "Member options successfully updated"
+msgstr "Medlemsalternativ har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:463
+msgid "Member options successfully updated, but previous value not changed"
+msgstr "Medlemsalternativ har uppdaterats, men tidigare värde har inte ändras"
+
+#: wpf-includes/wpf-phrases.php:464
+msgid "Message has been sent"
+msgstr "Meddelandet har skickats"
+
+#: wpf-includes/wpf-phrases.php:465
+msgid ""
+"New language successfully added and changed  wpforo language to new language"
+msgstr ""
+"Nya språket har framgångsrikt lagts till och ändrat wpforo språk till nya "
+"språket"
+
+#: wpf-includes/wpf-phrases.php:466
+msgid "No Posts found for update"
+msgstr "Inga inlägg hittades för uppdatering"
+
+#: wpf-includes/wpf-phrases.php:467
+msgid "Password length must be between 6 characters and 20 characters."
+msgstr "Längd på lösenord måste vara mellan 6 och 20 tecken."
+
+#: wpf-includes/wpf-phrases.php:468
+msgid "Password mismatch."
+msgstr "Lösenord matchar inte"
+
+#: wpf-includes/wpf-phrases.php:469
+msgid "Permission denied"
+msgstr "Åtkomst nekas"
+
+#: wpf-includes/wpf-phrases.php:470
+msgid "Permission denied for add forum"
+msgstr "Åtkomst nekad för Lägg till forum"
+
+#: wpf-includes/wpf-phrases.php:471
+msgid "Permission denied for delete forum"
+msgstr "Åtkomst nekad för Ta bort forum"
+
+#: wpf-includes/wpf-phrases.php:472
+msgid "Permission denied for edit forum"
+msgstr "Åtkomst nekad för Redigera forum"
+
+#: wpf-includes/wpf-phrases.php:473
+msgid "Permission denied for this action"
+msgstr "Åtkomst nekad för den här åtgärden"
+
+#: wpf-includes/wpf-phrases.php:474
+msgid "Phrase add error"
+msgstr "Fras lägga till fel"
+
+#: wpf-includes/wpf-phrases.php:475
+msgid "Phrase adding error"
+msgstr "Frasen att lägga till fel"
+
+#: wpf-includes/wpf-phrases.php:476
+msgid "Phrase successfully added"
+msgstr "Frasen har framgångsrikt lagts till"
+
+#: wpf-includes/wpf-phrases.php:477
+msgid "Phrase successfully updates"
+msgstr "Fras uppdateringar framgångsrikt"
+
+#: wpf-includes/wpf-phrases.php:478
+msgid "Phrase update error"
+msgstr "Fras uppdateringsfel"
+
+#: wpf-includes/wpf-phrases.php:479
+msgid "Please insert required fields!"
+msgstr "Ange obligatoriska fält!"
+
+#: wpf-includes/wpf-phrases.php:480
+msgid "Post delete error"
+msgstr "Ta bort post fel"
+
+#: wpf-includes/wpf-phrases.php:482
+msgid "Post options successfully updated"
+msgstr "Postalternativ har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:483
+msgid "Post options successfully updated, but previous value not changed"
+msgstr "Postalternativ har uppdaterats men tidigare värden ändrades inte"
+
+#: wpf-includes/wpf-phrases.php:484
+msgid "Registration Error"
+msgstr "Registreringsfel"
+
+#: wpf-includes/wpf-phrases.php:485
+msgid "Reply request error"
+msgstr "Svar begäran fel"
+
+#: wpf-includes/wpf-phrases.php:486
+msgid "Something wrong with profile data."
+msgstr "Något fel med profildata."
+
+#: wpf-includes/wpf-phrases.php:487
+msgid "Subscribe options successfully updated"
+msgstr "Prenumerationsalternativ har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:488
+msgid "Subscribe options successfully updated, but previous value not changed"
+msgstr ""
+"Prenumerationsalternativ har uppdaterats men tidigare värden har inte ändrats"
+
+#: wpf-includes/wpf-phrases.php:489
+msgid "Success! Thank you Dear Friend"
+msgstr "Framgång! Tack kära vän"
+
+#: wpf-includes/wpf-phrases.php:490
+msgid ""
+"Success! Thank you. Please check your email and click confirmation link "
+"below to complete this step."
+msgstr ""
+"Framgång! Tack. Kontrollera din e-postadress och klicka på bekräftelselänken "
+"nedan för att slutföra det här steget."
+
+#: wpf-includes/wpf-phrases.php:491
+msgid "Successfully updated"
+msgstr "Uppdateringen lyckades"
+
+#: wpf-includes/wpf-phrases.php:492
+msgid "Successfully voted"
+msgstr "Röstning lyckades"
+
+#: wpf-includes/wpf-phrases.php:493
+msgid "The uploaded file size is too big"
+msgstr "Storleken på uppladdade filen är för stor"
+
+#: wpf-includes/wpf-phrases.php:494
+msgid "Theme options successfully updated"
+msgstr "Temainställningar uppdaterade"
+
+#: wpf-includes/wpf-phrases.php:495
+msgid "This email address is already registered. Please insert another."
+msgstr "Denna e-postadress är redan registrerad. Fyll i en annan."
+
+#: wpf-includes/wpf-phrases.php:496
+msgid "This post successfully deleted"
+msgstr "Detta inlägg har raderats"
+
+#: wpf-includes/wpf-phrases.php:497
+msgid "This post successfully edited"
+msgstr "Detta inlägg har framgångsrikt redigeras"
+
+#: wpf-includes/wpf-phrases.php:498
+msgid "This topic successfully deleted"
+msgstr "Detta ämne har tagits bort"
+
+#: wpf-includes/wpf-phrases.php:499
+msgid "Topic Move Error"
+msgstr "Ämnet flytta fel"
+
+#: wpf-includes/wpf-phrases.php:500
+msgid "Topic add error"
+msgstr "Avsnittet lägga till fel"
+
+#: wpf-includes/wpf-phrases.php:501
+msgid "Topic delete error"
+msgstr "Avsnittet Ta bort fel"
+
+#: wpf-includes/wpf-phrases.php:502
+msgid "Topic edit error"
+msgstr "Ämne redigera fel"
+
+#: wpf-includes/wpf-phrases.php:503
+msgid "Topic not found."
+msgstr "Ämnet hittades inte"
+
+#: wpf-includes/wpf-phrases.php:504
+msgid "Topic successfully moved"
+msgstr "Ämnet har flyttats"
+
+#: wpf-includes/wpf-phrases.php:505
+msgid "Topic successfully updated"
+msgstr "Ämnet har uppdaterats"
+
+#: wpf-includes/wpf-phrases.php:506
+msgid "Topics delete error"
+msgstr "Ämnen ta bort fel"
+
+#: wpf-includes/wpf-phrases.php:507
+msgid "User delete error"
+msgstr "Borttagning av användare fel"
+
+#: wpf-includes/wpf-phrases.php:508
+msgid "User group add error"
+msgstr "Användargruppen lägga till fel"
+
+#: wpf-includes/wpf-phrases.php:509
+msgid "User group edit error"
+msgstr "Användargruppen ändra fel"
+
+#: wpf-includes/wpf-phrases.php:510
+msgid "User group successfully added"
+msgstr "Användargruppen har lagts till"
+
+#: wpf-includes/wpf-phrases.php:511
+msgid "User group successfully edited"
+msgstr "Användargruppen har framgångsrikt redigerats"
+
+#: wpf-includes/wpf-phrases.php:512
+msgid "User successfully deleted from wpforo"
+msgstr "Användaren har tagits bort från wpforo"
+
+#: wpf-includes/wpf-phrases.php:513
+msgid "Username exists. Please insert another."
+msgstr "Användarnamn existerar. Sätt in en annan."
+
+#: wpf-includes/wpf-phrases.php:514
+msgid "Username is missed."
+msgstr "Användarnamnet är missat."
+
+#: wpf-includes/wpf-phrases.php:515
+msgid "Username length must be between 3 characters and 30 characters."
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:516
+msgid "Welcome to our Community!"
+msgstr "Välkommen till vår gemenskap!"
+
+#: wpf-includes/wpf-phrases.php:517
+msgid "Wrong post data"
+msgstr "Fel post-data"
+
+#: wpf-includes/wpf-phrases.php:518
+msgid "You are already voted this post"
+msgstr "Du har redan röstat på detta inlägg"
+
+#: wpf-includes/wpf-phrases.php:519
+msgid "You have been successfully subscribed"
+msgstr "Du har börjat prenumerera!"
+
+#: wpf-includes/wpf-phrases.php:520
+msgid "You have been successfully unsubscribed"
+msgstr "Du har nu avslutat din prenumeration!"
+
+#: wpf-includes/wpf-phrases.php:521
+msgid "You have no permission to edit this topic"
+msgstr "Du har ingen behörighet att redigera detta ämne"
+
+#: wpf-includes/wpf-phrases.php:522
+msgid "You haven't permission to create post into this forum"
+msgstr "Du har inte behörighet att skapa inlägg i detta forum"
+
+#: wpf-includes/wpf-phrases.php:523
+msgid "You haven't permission to create topic into this forum"
+msgstr "Du har inte behörighet att skapa ämne i detta forum"
+
+#: wpf-includes/wpf-phrases.php:524
+msgid "You haven't permission to delete post from this forum"
+msgstr "Du har inte behörighet att ta bort inlägget från detta forum"
+
+#: wpf-includes/wpf-phrases.php:525
+msgid "You haven't permission to delete topic from this forum"
+msgstr "Du har inte behörighet att ta bort ämnet från detta forum"
+
+#: wpf-includes/wpf-phrases.php:526
+msgid "You haven't permission to edit post from this forum"
+msgstr "Du har inte behörighet att redigera inlägget från detta forum"
+
+#: wpf-includes/wpf-phrases.php:527
+msgid "You successfully replied"
+msgstr "Du har svarat"
+
+#: wpf-includes/wpf-phrases.php:528
+msgid "Your forum successfully added"
+msgstr "Ditt forum har lagts till"
+
+#: wpf-includes/wpf-phrases.php:529
+msgid "Your forum successfully deleted"
+msgstr "Ditt forum har tagits bort"
+
+#: wpf-includes/wpf-phrases.php:530
+msgid "Your profile data have been successfully updated."
+msgstr "Din profildata har uppdaterats."
+
+#: wpf-includes/wpf-phrases.php:531
+msgid "Your subscription for this item could not be confirmed"
+msgstr "Din prenumeration för det här objektet kunde inte bekräftas"
+
+#: wpf-includes/wpf-phrases.php:532
+msgid "Your topic successfully added"
+msgstr "Ditt ämne har lagts till"
+
+#: wpf-includes/wpf-phrases.php:534
+msgid "Dashboard - Can create forum"
+msgstr "Dashboard - kan skapa forum"
+
+#: wpf-includes/wpf-phrases.php:535
+msgid "Dashboard - Can edit forum"
+msgstr "Dashboard - kan redigera forum"
+
+#: wpf-includes/wpf-phrases.php:536
+msgid "Dashboard - Can delete forum"
+msgstr "Dashboard - Kan ta bort forum"
+
+#: wpf-includes/wpf-phrases.php:537
+msgid "Dashboard - Members Menu"
+msgstr "Dashboard - Medlemmar menyn"
+
+#: wpf-includes/wpf-phrases.php:538
+msgid "Dashboard - Can edit member"
+msgstr "Dashboard - Kan redigera medlem"
+
+#: wpf-includes/wpf-phrases.php:539
+msgid "Dashboard - Can delete member"
+msgstr "Dashboard - Kan radera medlem"
+
+#: wpf-includes/wpf-phrases.php:540
+msgid "Dashboard - Usergroup Menu"
+msgstr "Dashboard - Användargrupp menyn"
+
+#: wpf-includes/wpf-phrases.php:541
+msgid "Front - Can view members"
+msgstr "Fram - Kan visa medlemmar"
+
+#: wpf-includes/wpf-phrases.php:542
+msgid "Front - Can view profiles"
+msgstr "Fram - Kan visa profiler"
+
+#: wpf-includes/wpf-phrases.php:543
+msgid "Front - Can upload avatar"
+msgstr "Fram - Kan ladda upp en avatar"
+
+#: wpf-includes/wpf-phrases.php:544
+msgid "Front - Can have signatur"
+msgstr "Fram - Kan ha en sigantur"
+
+#: wpf-includes/wpf-phrases.php:545
+msgid "Front - Can view avatars"
+msgstr "Fram - kan visa avatarer"
+
+#: wpf-includes/wpf-phrases.php:546
+msgid "Front - Can view member username"
+msgstr "Fram - Kan visa medlemmars användarnamn"
+
+#: wpf-includes/wpf-phrases.php:547
+msgid "Front - Can view member email"
+msgstr "Fram - Kan visa medlemars e-post"
+
+#: wpf-includes/wpf-phrases.php:548
+msgid "Front - Can view member title"
+msgstr "Fram - Kan visa medlemstitel"
+
+#: wpf-includes/wpf-phrases.php:549
+msgid "Front - Can view member custom title"
+msgstr "Fram - Kan visa medlemars anpassade titel"
+
+#: wpf-includes/wpf-phrases.php:550
+msgid "Front - Can view member reputation"
+msgstr "Fram - kan visa medlemars rykte"
+
+#: wpf-includes/wpf-phrases.php:551
+msgid "Front - Can view member website"
+msgstr "Fram - Kan visa medlemars webbplats"
+
+#: wpf-includes/wpf-phrases.php:552
+msgid "Front - Can view member social networks"
+msgstr "Fram - Kan visa medlemars sociala nätverk"
+
+#: wpf-includes/wpf-phrases.php:553
+msgid "Front - Can view member reg. date"
+msgstr "Fram - Kan visa medlem reg. datum"
+
+#: wpf-includes/wpf-phrases.php:554
+msgid "Front - Can view member last active date"
+msgstr "Fram - Kan visa medlem sista aktiva datum"
+
+#: wpf-includes/wpf-phrases.php:555
+msgid "Front - Can view member ip address"
+msgstr "Fram - Kan visa medlemars IP-adress"
+
+#: wpf-includes/wpf-phrases.php:556
+msgid "Front - Can view member location"
+msgstr "Fram - Kan visa medlem läge"
+
+#: wpf-includes/wpf-phrases.php:557
+msgid "Front - Can view member ocumpation"
+msgstr "Fram - Kan visa medlem ocumpation"
+
+#: wpf-includes/wpf-phrases.php:558
+msgid "Front - Can view member signatur"
+msgstr "Fram - Kan visa medlemars signatur"
+
+#: wpf-includes/wpf-phrases.php:559
+msgid "Front - Can view member about me"
+msgstr "Fram - Kan visa medlem om mig"
+
+#: wpf-includes/wpf-phrases.php:560
+msgid "Front - Can view member phone number"
+msgstr "Fram - Kan visa medlemars telefonnummer"
+
+#: wpf-includes/wpf-phrases.php:561
+msgid "Front - Can write PM"
+msgstr "Fram - Kan skriva PM"
+
+#: wpf-includes/wpf-phrases.php:562
+msgid "Can view forum"
+msgstr "Kan visa forum"
+
+#: wpf-includes/wpf-phrases.php:563
+msgid "Can create topic"
+msgstr "Kan skapa ämne"
+
+#: wpf-includes/wpf-phrases.php:564
+msgid "Can view topic"
+msgstr "Kan visa ämne"
+
+#: wpf-includes/wpf-phrases.php:565
+msgid "Can edit topic"
+msgstr "Kan redigera ämne"
+
+#: wpf-includes/wpf-phrases.php:566
+msgid "Can delete topic"
+msgstr "Kan radera Ämne"
+
+#: wpf-includes/wpf-phrases.php:567
+msgid "Can post reply"
+msgstr "Kan posta svar"
+
+#: wpf-includes/wpf-phrases.php:568
+msgid "Can view replies"
+msgstr "Kan visa svar"
+
+#: wpf-includes/wpf-phrases.php:569
+msgid "Can edit replies"
+msgstr "Kan redigera svar"
+
+#: wpf-includes/wpf-phrases.php:570
+msgid "Can delete replies"
+msgstr "Kan ta bort svar"
+
+#: wpf-includes/wpf-phrases.php:571
+msgid "Can edit own topic"
+msgstr "Kan redigera egna ämne"
+
+#: wpf-includes/wpf-phrases.php:572
+msgid "Can edit own replay"
+msgstr "Kan redigera egna svar"
+
+#: wpf-includes/wpf-phrases.php:573
+msgid "Can delete own topic"
+msgstr "Kan radera egna ämne"
+
+#: wpf-includes/wpf-phrases.php:574
+msgid "Can delete own replay"
+msgstr "Kan radera egna svar"
+
+#: wpf-includes/wpf-phrases.php:575
+msgid "Can like"
+msgstr "Kan gilla"
+
+#: wpf-includes/wpf-phrases.php:576
+msgid "Can report"
+msgstr "Kan rapportera"
+
+#: wpf-includes/wpf-phrases.php:577
+msgid "Can set topic sticky"
+msgstr "Kan ange ämne klibbiga"
+
+#: wpf-includes/wpf-phrases.php:578 wpf-includes/wpf-phrases.php:651
+msgid "Can set topic private"
+msgstr "Kan ange ämnen privata"
+
+#: wpf-includes/wpf-phrases.php:579
+msgid "Can vote"
+msgstr "Kan rösta"
+
+#: wpf-includes/wpf-phrases.php:580
+msgid "Can Attach File"
+msgstr "Kan bifoga fil"
+
+#: wpf-includes/wpf-phrases.php:581
+msgid "Can set topic answered"
+msgstr "Kan ange ämne som svarade"
+
+#: wpf-includes/wpf-phrases.php:582
+msgid "Can set own topic answered"
+msgstr "Kan ställa in egna ämne som svarade"
+
+#: wpf-includes/wpf-phrases.php:583
+msgid "Can close topic"
+msgstr "Kan stänga ämne"
+
+#: wpf-includes/wpf-phrases.php:584
+msgid "Can move topic"
+msgstr "Kan flytta ämne"
+
+#: wpf-includes/wpf-phrases.php:585
+msgid "like"
+msgstr "gilla"
+
+#: wpf-includes/wpf-phrases.php:586
+msgid "unlike"
+msgstr "sluta gilla"
+
+#: wpf-includes/wpf-phrases.php:587
+msgid "sticky"
+msgstr "sticky"
+
+#: wpf-includes/wpf-phrases.php:588
+msgid "unsticky"
+msgstr "avsticky"
+
+#: wpf-includes/wpf-phrases.php:589
+msgid "close"
+msgstr "stäng"
+
+#: wpf-includes/wpf-phrases.php:590
+msgid "open"
+msgstr "öppen"
+
+#: wpf-includes/wpf-phrases.php:591
+msgid "Topic Icons"
+msgstr "Trådikoner"
+
+#: wpf-includes/wpf-phrases.php:592
+msgid "New"
+msgstr "Ny"
+
+#: wpf-includes/wpf-phrases.php:593
+msgid "Replied"
+msgstr "Svarat"
+
+#: wpf-includes/wpf-phrases.php:595
+msgid "Hot"
+msgstr "Het"
+
+#: wpf-includes/wpf-phrases.php:596
+msgid "Solved"
+msgstr "Löst"
+
+#: wpf-includes/wpf-phrases.php:597
+msgid "Unsolved"
+msgstr "Olöst"
+
+#: wpf-includes/wpf-phrases.php:605
+msgid "Can set topic solved"
+msgstr "Kan ange ämnet som löst"
+
+#: wpf-includes/wpf-phrases.php:606
+msgid "Can set own topic solved"
+msgstr "Kan ange ämnet som löst"
+
+#: wpf-includes/wpf-phrases.php:607
+msgid "Old password is wrong"
+msgstr "Gammalt lösenord är fel"
+
+#: wpf-includes/wpf-phrases.php:608
+msgid "New Passwords do not match"
+msgstr "Nya lösenord stämmer inte överens."
+
+#: wpf-includes/wpf-phrases.php:612
+msgid ""
+"This process may take a few seconds or dozens of minutes, it depends on "
+"database forum size and on server resources. Please be patient and don't "
+"close this page. If you got 500 Server Error please don't worry, the data "
+"updating process is still working in MySQL server."
+msgstr ""
+"Denna process kan ta några sekunder eller tiotals minuter, det beror på "
+"databas forum storlek och på serverresurser. Ha tålamod och inte stänga den "
+"här sidan. Om du har 500 Server Error du inte oroa dig, "
+"datauppdateringsprocessen arbetar fortfarande i MySQL-servern."
+
+#: wpf-includes/wpf-phrases.php:616
+msgid "Updated Successfully!"
+msgstr "Uppdatering lyckades!"
+
+#: wpf-includes/wpf-phrases.php:617
+msgid "Deleted Successfully!"
+msgstr "Är nu raderad!"
+
+#: wpf-includes/wpf-phrases.php:618
+msgid "Closed"
+msgstr "Stängt"
+
+#: wpf-includes/wpf-phrases.php:619
+msgid "Forum Members List"
+msgstr "Forum medlemslista"
+
+#: wpf-includes/wpf-phrases.php:620
+msgid "are you sure you want to delete?"
+msgstr "Är du säker på att du vill radera detta?"
+
+#: wpf-includes/wpf-phrases.php:622
+msgid "Moderator"
+msgstr "Moderator"
+
+#: wpf-includes/wpf-phrases.php:624
+msgid "Customer"
+msgstr "Kund"
+
+#: wpf-includes/wpf-phrases.php:625
+msgid "No access"
+msgstr "Ingen åtkomst"
+
+#: wpf-includes/wpf-phrases.php:626
+msgid "Read only access"
+msgstr "Skrivskyddad åtkomst"
+
+#: wpf-includes/wpf-phrases.php:627
+msgid "Standard access"
+msgstr "Standardåtkomst"
+
+#: wpf-includes/wpf-phrases.php:628
+msgid "Moderator access"
+msgstr "Moderatorn tillgång"
+
+#: wpf-includes/wpf-phrases.php:629
+msgid "Full access"
+msgstr "Full tillgång"
+
+#: wpf-includes/wpf-phrases.php:630
+msgid "Profile"
+msgstr "Profil"
+
+#: wpf-includes/wpf-phrases.php:632
+msgid "Incorrect file format. Allowed formats: jpeg, jpg, png, gif."
+msgstr "Felaktiga filformat. Tillåtna format: jpeg, jpg, png, gif."
+
+#: wpf-includes/wpf-phrases.php:635
+msgid "User registration is disabled"
+msgstr "Användarregistrering är inaktiverat"
+
+#: wpf-includes/wpf-phrases.php:639
+msgid "Attachment removed"
+msgstr "Den bifogade filen har tagits bort"
+
+#: wpf-includes/wpf-phrases.php:640
+msgid "Forum Posts"
+msgstr "foruminlägg"
+
+#: wpf-includes/wpf-phrases.php:641
+msgid "Blog Posts"
+msgstr "Blogginlägg"
+
+#: wpf-includes/wpf-phrases.php:642
+msgid "Blog Comments"
+msgstr "Bloggkommentarer"
+
+#: wpf-includes/wpf-phrases.php:643
+#, php-format
+msgid "Welcome back %s!"
+msgstr "Välkommen tillbaka%s!"
+
+#: wpf-includes/wpf-phrases.php:644
+msgid "Member Profile"
+msgstr "Medlemsprofil"
+
+#: wpf-includes/wpf-phrases.php:645
+msgid "Member"
+msgstr "Medlem"
+
+#: wpf-includes/wpf-phrases.php:646
+msgid "You have not permission to this page"
+msgstr "Du har inte behörighet till denna sida"
+
+#: wpf-includes/wpf-phrases.php:648
+msgid ""
+"This option will disable WordPress on front-end. Only forum pages will be "
+"available. wpForo will look like as a stand-alone forum."
+msgstr ""
+"Detta alternativ kommer att inaktivera WordPress på front-end. Endast forum "
+"sidor kommer att finnas. wpForo kommer att se ut som ett fristående forum."
+
+#: wpf-includes/wpf-phrases.php:652
+msgid "Can set own topic private"
+msgstr "Kan ange egna ämnen privata"
+
+#: wpf-includes/wpf-phrases.php:653
+msgid "Can view private topic"
+msgstr "Kan visa privat ämne"
+
+#: wpf-includes/wpf-phrases.php:654
+msgid "private"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:655
+msgid "public"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:656
+msgid "Private Topic"
+msgstr "Privat ämne"
+
+#: wpf-includes/wpf-phrases.php:657
+msgid "Only Admins and Moderators can see your private topics."
+msgstr "Endast administratörer och moderatorer kan se dina privata ämnen."
+
+#: wpf-includes/wpf-phrases.php:658
+msgid "Forum ID is not detected"
+msgstr "Forum-ID identifieras inte"
+
+#: wpf-includes/wpf-phrases.php:659
+msgid "You are not permitted to subscribe here"
+msgstr "Du tillåts inte att prenumerera här"
+
+#: wpf-includes/wpf-phrases.php:660
+msgid "Subscribe to this topic"
+msgstr "Prenumerera på detta ämne"
+
+#: wpf-includes/wpf-phrases.php:663
+msgid "Awaiting moderation"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:664
+msgid "Topic first post not found."
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:665
+msgid "Topic first post data not found."
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:666
+msgid "Settings successfully updated"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:667
+msgid "Done!"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:668
+msgid "unapproved"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:669
+msgid "You are not allowed to attach this file type"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:670
+msgid "Post is empty"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:671
+msgid "removed link"
+msgstr ""
+
+#: wpf-includes/wpf-phrases.php:672
+msgid "Submit"
+msgstr ""
+
+#: wpforo.php:401
+msgid ""
+"Provides a safe way to communicate directly with other members. Messages are "
+"private and can only be viewed by conversation participants."
+msgstr ""
+"Ger ett säkert sätt att kommunicera direkt med andra medlemmar. Meddelanden "
+"är privata och kan bara ses av konversationsdeltagare."
+
+#: wpforo.php:402
+msgid ""
+"Adds an advanced file attachment system to forum topics and posts. AJAX "
+"powered media uploading and displaying system with user specific library."
+msgstr ""
+"Lägger till en avancerad bifogad fil system forumämnen och inlägg. AJAX "
+"powered media uppladdning och visa systemet med användarspecifik bibliotek."
+
+#: wpforo.php:403
+msgid ""
+"Allows to embed hundreds of video, social network, audio and photo content "
+"providers in forum topics and posts."
+msgstr ""
+"Gör det möjligt att bädda in hundratals video, sociala nätverk, ljud och "
+"fotoinnehållsleverantörer i forumämnen och inlägg."
+
+#: wpforo.php:404
+msgid ""
+"Ads Manager is a powerful yet simple advertisement management system, that "
+"allows you to add adverting banners between forums, topics and posts."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Forum - wpForo"
+msgstr "Forum - wpForo"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wpforo.com"
+msgstr "http://wpforo.com"
+
+#. Description of the plugin/theme
+msgid ""
+"Forums wpForo is a new generation of forum plugins. It's full-fledged forum "
+"solution for your community. Comes with multiple modern forum layouts."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "gVectors Team (A. Chakhoyan, R. Hovhannisyan)"
+msgstr "gVectors Team (A. Chakhoyan, R. Hovhannisyan)"
+
+#. Author URI of the plugin/theme
+msgid "http://gvectors.com/"
+msgstr "http://gvectors.com/"
+
+#~ msgid "Length must be between 3 characters and 15 characters."
+#~ msgstr "Längden måste vara mellan 3 och 15 tecken."
+
+#~ msgid "Username length must be between 3 characters and 15 characters."
+#~ msgstr "Användarnamnets längd måste vara mellan 3 och 15 tecken."
+
+#~ msgid "Private"
+#~ msgstr "Privat"
+
+#~ msgid "Public"
+#~ msgstr "Offentligt"
+
+#~ msgid ""
+#~ "Next Generation of WordPress Forum Softwares. Everything you need to run "
+#~ "an efficient and professional community. Powerful and beautiful bulletin "
+#~ "board with unique features."
+#~ msgstr ""
+#~ "Nästa Generation av WordPress Forum mjukvaror. Allt du behöver för att "
+#~ "köra en effektiv och professionell gemenskap. Kraftfulla och vackra "
+#~ "anslagstavla med unika funktioner."

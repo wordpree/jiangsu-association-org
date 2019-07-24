@@ -1,0 +1,76 @@
+/* CSS Document */
+
+.header-widget-region {
+	background-color:#FBFBFB;
+}
+.header-widget-region .col-full{
+	max-width: 100%;
+	padding:10px 0;
+}
+.yee_slider_wrapper {
+	height: 325px;
+	background-color: #9A9A9A;
+	margin-top:10px;
+	margin-bottom:25px;
+}
+.slider_panel {
+	position: relative;
+	height: inherit;
+	overflow: hidden;
+
+}
+.container_1,.container_2{
+	position: absolute;
+	height: inherit;
+	width:100%;
+	left:0;
+	top:0;
+}
+ .container_1{
+	z-index: 101;
+}
+ .container_2{
+	z-index: 102;
+}
+
+.slider-image{
+	height: inherit;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100% 95%;
+}
+
+.caption {
+	text-align: center;
+}
+.caption h3 {
+	font-size: 25px;
+	padding: 5px 2px;
+	font-weight: bold;
+}
+
+.slider_nav {
+	position: absolute;
+	bottom: 15%;
+	left: 85%;
+	width:400px;
+	z-index: 103;
+}
+
+.slider_nav .dot_nav {
+	transition: background-color 0.6s;
+	border:2px solid #989898;
+	border-radius: 250px;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	margin-left:20px;
+	cursor: pointer;
+	z-index: 102;
+}
+.selected {
+	background-color:#111010;
+}
+.slider_nav .dot_nav:hover{
+	background-color: #623233;
+}

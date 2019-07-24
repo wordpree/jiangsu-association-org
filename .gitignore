@@ -1,0 +1,65 @@
+#ignore everything under the wp directory except wp-content folder 
+/*
+!wp-content/
+
+#ignore everything in wp-content folder other than plugins,themes
+wp-content/*
+!wp-content/plugins
+!wp-content/themes
+
+#ignore node modules and cash files
+wp-content/themes/workflow/node_modules 
+*.sass-cache
+
+#ignore specific themes
+wp-content/themes/twenty*
+
+#ignore maps folders under sass or js folders
+wp-content/themes/storefront-child/**/maps/
+wp-content/themes/storefront-child/**/*.map 
+wp-content/plugins/**/maps/
+wp-content/plugins/**/*.map
+
+#tracking gitignore and readme files
+!.gitignore
+!README.md
+
+#ignore os system files
+ethumbs.db
+.DS_Store
+Thumbs.db
+
+#ignore sublime files
+*.sublime-project
+*.sublime-workspace
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.phpintel
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ignore temperory snippet files
+
+snippet.php
